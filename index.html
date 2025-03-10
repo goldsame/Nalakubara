@@ -3,80 +3,160 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nalakubara - FreezeMova.Games</title>
+    <meta name="description" content="Play Nalakubara - The ultimate monster survival adventure game online. Battle legendary creatures and survive in dynamic environments.">
+    <meta name="keywords" content="Nalakubara, monster survivor, survival game, online action game, creature warfare">
+    <link rel="canonical" href="https://nalakubara.com">
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        .game-container {
-            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-            border-radius: 1.5rem;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        .game-frame {
+            aspect-ratio: 16/9;
+            background: linear-gradient(135deg, #f5f5f7 0%, #e2e2e9 100%);
+        }
+        @media (max-width: 768px) {
+            .game-frame {
+                aspect-ratio: 9/16;
+            }
         }
     </style>
+    <title>Nalakubara - Monster Survival Online Game</title>
 </head>
-<body class="bg-gray-50">
-    <!-- 游戏标题区 -->
-    <header class="text-center py-12">
-        <h1 class="text-5xl font-bold mb-4">
-            <span class="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-500">
-                Nalakubara
-            </span>
-        </h1>
-        <button class="px-8 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
-            PLAY NOW
-        </button>
-    </header>
+<body class="bg-gray-50 text-gray-900 font-[system-ui] antialiased">
+    <main class="container mx-auto px-4 py-8 max-w-6xl">
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4 tracking-tight">
+                <span class="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-500">
+                    Nalakubara
+                </span>
+            </h1>
+            <p class="text-xl text-gray-600 mb-8 font-medium">
+                Survive. Evolve. Conquer.
+            </p>
+        </header>
 
-    <!-- 游戏主体内容 -->
-    <main class="container mx-auto px-4 max-w-4xl">
-        <!-- 游戏介绍区块 -->
-        <section class="game-container p-8 mb-12">
-            <div class="prose prose-lg">
-                <h2 class="text-3xl font-bold">About The Game</h2>
-                <p class="text-gray-600">
-                    Nalakubara is a revolutionary survival game where players navigate dynamically generated ecosystems filled with mythical creatures. Experience real-time combat through our advanced physics engine and evolve DNA-based progression system.
-                </p>
-            </div>
-
-            <!-- 功能双栏布局 -->
-            <div class="grid md:grid-cols-2 gap-8 mt-12">
-                <div>
-                    <h3 class="text-2xl font-bold mb-4">Game Features</h3>
-                    <ul class="space-y-3 text-gray-600">
-                        <li>✓ Open world exploration</li>
-                        <li>✓ 100+ unique monster designs</li>
-                        <li>✓ Dynamic weather system</li>
-                        <li>✓ Multiplayer co-op mode</li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 class="text-2xl font-bold mb-4">System Requirements</h3>
-                    <ul class="space-y-3 text-gray-600">
-                        <li>🖥️ Windows 10+/macOS Monterey+</li>
-                        <li>🕹️ 4GB RAM minimum</li>
-                        <li>🌐 Broadband connection</li>
-                        <li>🖱️ Mouse & keyboard support</li>
-                    </ul>
-                </div>
-            </div>
+        <section class="rounded-xl shadow-2xl overflow-hidden mb-12 border-[14px] border-white bg-white">
+            <iframe 
+                src="https://cloud.onlinegames.io/games/2025/unity/monster-survivors/index-og.html" 
+                class="w-full game-frame"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+                title="Game Main Interface">
+            </iframe>
         </section>
 
-        <!-- 用户互动系统（新增） -->
-        <section class="bg-white rounded-xl p-8 shadow-lg mb-12">
-            <!-- 互动系统代码（保持原有实现） -->
+        <section class="prose prose-lg max-w-none mb-12">
+            <h2 class="text-3xl font-bold text-gray-900 mb-6">About The Game</h2>
+            <p class="text-gray-600 leading-relaxed">
+                Nalakubara is a revolutionary survival game where players navigate dynamically generated ecosystems filled with mythical creatures. Experience real-time combat through our advanced physics engine and evolve your character using a unique DNA-based progression system.
+            </p>
         </section>
+
+        <div class="grid md:grid-cols-2 gap-8 mb-12">
+            <section class="bg-white p-8 rounded-2xl shadow-lg">
+                <h2 class="text-2xl font-semibold text-gray-900 mb-4">Game Features</h2>
+                <ul class="space-y-3 text-gray-600">
+                    <li>✓ Open world exploration</li>
+                    <li>✓ 100+ unique monster designs</li>
+                    <li>✓ Dynamic weather system</li>
+                    <li>✓ Multiplayer co-op mode</li>
+                </ul>
+            </section>
+
+            <section class="bg-white p-8 rounded-2xl shadow-lg">
+                <h2 class="text-2xl font-semibold text-gray-900 mb-4">System Requirements</h2>
+                <ul class="space-y-3 text-gray-600">
+                    <li>🖥️ Windows 10+ / macOS Monterey+</li>
+                    <li>🕹️ 4GB RAM minimum</li>
+                    <li>🌐 Broadband internet connection</li>
+                    <li>🖱️ Mouse & keyboard or touch controls</li>
+                </ul>
+            </section>
+        </div>
     </main>
+<!-- 替换从</main>到</script>的全部内容 -->
+</main>
 
-    <!-- 页脚 -->
-    <footer class="bg-gray-100 py-6 text-center">
-        <p class="text-sm text-gray-600">
-            © 2024 Nalakubara. All rights reserved. 
-            <a href="/privacy" class="text-blue-600 hover:text-blue-800">Privacy Policy</a>
-        </p>
-    </footer>
+<section class="user-interaction-module">
+    <!-- 评分系统 -->
+    <div class="rating-system">
+        <h3>评分</h3>
+        <div class="stars">
+            <span class="star" data-value="5">★</span>
+            <span class="star" data-value="4">★</span>
+            <span class="star" data-value="3">★</span>
+            <span class="star" data-value="2">★</span>
+            <span class="star" data-value="1">★</span>
+        </div>
+        <p>当前评分：<span id="averageRating">0</span>/5</p>
+    </div>
 
-    <!-- 互动系统JS -->
-    <script>
-    // 保持原有逻辑不变
-    </script>
+    <!-- 评论系统 -->
+    <div class="comment-system">
+        <h3>发表评论</h3>
+        <textarea id="commentInput" placeholder="请输入您的评论..."></textarea>
+        <button onclick="submitComment()">提交评论</button>
+    </div>
+
+    <!-- 好评展示 -->
+    <div class="good-comments">
+        <h3>用户好评</h3>
+        <div id="commentsList"></div>
+    </div>
+</section>
+
+<script>
+// 修复后的JavaScript代码
+let comments = JSON.parse(localStorage.getItem('comments')) || [];
+let currentRating = 0;
+
+document.querySelectorAll('.star').forEach(star => {
+    star.addEventListener('click', () => {
+        currentRating = parseInt(star.dataset.value);
+        document.querySelectorAll('.star').forEach(s => 
+            s.classList.toggle('active', s.dataset.value <= currentRating)
+        );
+    });
+});
+
+function submitComment() {
+    const commentText = document.getElementById('commentInput').value;
+    if (commentText && currentRating > 0) {
+        const comment = {
+            text: commentText,
+            rating: currentRating,
+            date: new Date().toLocaleString()
+        };
+        comments.push(comment);
+        localStorage.setItem('comments', JSON.stringify(comments));
+        updateCommentsDisplay();
+        document.getElementById('commentInput').value = '';
+    }
+}
+
+function updateCommentsDisplay() {
+    const container = document.getElementById('commentsList');
+    container.innerHTML = comments
+        .filter(c => c.rating >= 4)
+        .map(c => `
+            <div class="comment-item">
+                <div>${c.text}</div>
+                <div>评分：${'★'.repeat(c.rating)} - ${c.date}</div>
+            </div>
+        `).join('');
+
+    const avg = comments.reduce((sum, c) => sum + c.rating, 0) / comments.length || 0;
+    document.getElementById('averageRating').textContent = avg.toFixed(1);
+}
+
+updateCommentsDisplay();
+</script>
+
+<footer>
+    ©️2024 Malakubara. All rights reserved. | Privacy Policy
+</footer>
+</body>
+</html>
+   
+</script>
 </body>
 </html>
