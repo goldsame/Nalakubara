@@ -73,29 +73,24 @@
             </section>
         </div>
 <!-- 替换从</main>到</script>的内容 -->
+<!-- 仅替换以下指定区域 -->
 </main>
 
 <section class="container mx-auto px-4 max-w-4xl py-8">
-    <div class="bg-white rounded-xl shadow-lg p-6">
-        <!-- 评分系统 -->
-        <div class="mb-8">
+    <div class="bg-white rounded-xl shadow-lg p-6 mb-8">
+        <div class="rating-system mb-8">
             <h3 class="text-2xl font-bold mb-4">游戏评分</h3>
-            <div class="flex items-center gap-3">
-                <div class="stars [&>*]:cursor-pointer">
-                    <span class="star text-3xl text-gray-300" data-value="5">★</span>
-                    <span class="star text-3xl text-gray-300" data-value="4">★</span>
-                    <span class="star text-3xl text-gray-300" data-value="3">★</span>
-                    <span class="star text-3xl text-gray-300" data-value="2">★</span>
-                    <span class="star text-3xl text-gray-300" data-value="1">★</span>
-                </div>
-                <span class="text-lg">
-                    当前评分：<span id="averageRating" class="font-bold text-blue-600">0.0</span>/5
-                </span>
+            <div class="flex gap-2 mb-3">
+                <span class="star text-3xl cursor-pointer" data-value="5">★</span>
+                <span class="star text-3xl cursor-pointer" data-value="4">★</span>
+                <span class="star text-3xl cursor-pointer" data-value="3">★</span>
+                <span class="star text-3xl cursor-pointer" data-value="2">★</span>
+                <span class="star text-3xl cursor-pointer" data-value="1">★</span>
             </div>
+            <p class="text-lg">当前评分：<span id="averageRating" class="text-blue-600 font-bold">0.0</span>/5</p>
         </div>
 
-        <!-- 评论输入 -->
-        <div class="mb-8">
+        <div class="comment-system mb-8">
             <h3 class="text-2xl font-bold mb-4">发表评论</h3>
             <textarea 
                 id="commentInput"
@@ -105,76 +100,87 @@
             ></textarea>
             <button 
                 onclick="submitComment()"
-                class="mt-3 px-5 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+                class="mt-3 px-5 py-2 bg-yellow-400 text-black rounded-lg hover:bg-yellow-500 transition-colors"
             >
                 提交评论
             </button>
         </div>
 
-        <!-- 好评展示 -->
-        <div>
+        <div class="good-comments">
             <h3 class="text-2xl font-bold mb-4">玩家评价</h3>
             <div id="commentsList" class="space-y-4">
-                <!-- 评论动态加载 -->
+                <!-- 动态加载好评 -->
             </div>
         </div>
     </div>
 </section>
 
 <script>
-// 互动系统逻辑
-let comments = JSON.parse(localStorage.getItem('comments')) || [];
-let currentRating = 0;
+// 精准匹配您界面风格的交互逻辑
+let comments = JSON.parse(localStorage.getItem('gameComments')) || [];
+let activeRating = 0;
 
-// 初始化评分
 document.querySelectorAll('.star').forEach(star => {
-    star.addEventListener('click', () => {
-        currentRating = parseInt(star.dataset.value);
-        document.querySelectorAll('.star').forEach(s => {
-            s.classList.toggle('text-yellow-400', s.dataset.value <= currentRating);
-            s.classList.remove('text-gray-300');
-            s.classList.add(s.dataset.value <= currentRating ? 'text-yellow-400' : 'text-gray-400');
+    star.style.color = '#ddd';
+    star.addEventListener('click', function() {
+        activeRating = parseInt(this.dataset.value);
+        document.querySelectorAll('.star').forEach((s, index) => {
+            s.style.color = index < 5 - (5 - activeRating) ? '#ffd700' : '#ddd';
         });
     });
 });
 
 function submitComment() {
     const input = document.getElementById('commentInput');
-    if (input.value.trim().length >= 10 && currentRating > 0) {
+    if (input.value.trim().length >= 15 && activeRating > 0) {
         comments.push({
             text: input.value,
-            rating: currentRating,
-            date: new Date().toLocaleDateString('zh-CN')
+            rating: activeRating,
+            date: new Date().toLocaleString('zh-CN', { 
+                year: 'numeric', 
+                month: '2-digit', 
+                day: '2-digit',
+                hour: '2-digit',
+                minute: '2-digit'
+            })
         });
-        localStorage.setItem('comments', JSON.stringify(comments));
-        updateDisplay();
+        localStorage.setItem('gameComments', JSON.stringify(comments));
+        refreshComments();
         input.value = '';
+        alert('提交成功！');
     } else {
-        alert('评论需至少10字且需选择评分');
+        alert('评论需至少15字且必须评分');
     }
 }
 
-function updateDisplay() {
+function refreshComments() {
     const container = document.getElementById('commentsList');
-    const avg = comments.length ? (comments.reduce((a,c) => a + c.rating, 0)/comments.length).toFixed(1) : 0;
+    const average = comments.reduce((acc, cur) => acc + cur.rating, 0) / comments.length || 0;
     
     container.innerHTML = comments
         .filter(c => c.rating >= 4)
         .map(c => `
             <div class="p-4 bg-gray-50 rounded-lg">
-                <p class="text-gray-800">${c.text}</p>
-                <div class="mt-2 flex justify-between items-center text-sm">
-                    <div class="text-yellow-400">${'★'.repeat(c.rating)}</div>
+                <p class="text-gray-800 mb-2">${c.text}</p>
+                <div class="flex justify-between items-center text-sm">
+                    <span class="text-yellow-500">${'★'.repeat(c.rating)}</span>
                     <span class="text-gray-500">${c.date}</span>
                 </div>
             </div>
         `).join('');
     
-    document.getElementById('averageRating').textContent = avg;
+    document.getElementById('averageRating').textContent = average.toFixed(1);
 }
 
-updateDisplay();
+refreshComments();
 </script>
+
+<footer class="bg-gray-100 py-6 text-center">
+    <p class="text-sm text-gray-600">
+        © 2024 Nalakubara. All rights reserved. 
+        <a href="/privacy" class="text-blue-600 hover:text-blue-800">Privacy Policy</a>
+    </p>
+</footer>
 
 <footer class="bg-gray-100 py-6 text-center">
     <p class="text-sm text-gray-600">
