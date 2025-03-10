@@ -82,5 +82,93 @@
             </p>
         </div>
     </footer>
+    <!-- 在页面中添加以下结构 -->
+<div class="interaction-module">
+    <!-- 评分系统 -->
+    <div class="rating-system">
+        <h3>评分</h3>
+        <div class="stars">
+            <span class="star" data-value="5">★</span>
+            <span class="star" data-value="4">★</span>
+            <span class="star" data-value="3">★</span>
+            <span class="star" data-value="2">★</span>
+            <span class="star" data-value="1">★</span>
+        </div>
+        <p>当前评分：<span id="averageRating">0</span>/5</p>
+    </div>
+
+    <!-- 评论系统 -->
+    <div class="comment-system">
+        <h3>发表评论</h3>
+        <textarea id="commentInput" placeholder="请输入您的评论..."></textarea>
+        <button onclick="submitComment()">提交评论</button>
+    </div>
+
+    <!-- 好评展示 -->
+    <div class="good-comments">
+        <h3>用户好评</h3>
+        <div id="commentsList"></div>
+    </div>
+</div>
+
+<style>
+.star { cursor: pointer; font-size: 24px; color: #ddd; }
+.star:hover, .star.active { color: #ffd700; }
+.comment-system { margin: 20px 0; }
+#commentInput { width: 300px; height: 80px; display: block; }
+.good-comments { background: #f5f5f5; padding: 15px; }
+.comment-item { margin: 10px 0; padding: 10px; border-bottom: 1px solid #eee; }
+</style>
+
+<script>
+let comments = JSON.parse(localStorage.getItem('comments')) || [];
+let currentRating = 0;
+
+// 初始化星级评分
+document.querySelectorAll('.star').forEach(star => {
+    star.addEventListener('click', () => {
+        currentRating = parseInt(star.dataset.value);
+        document.querySelectorAll('.star').forEach(s => 
+            s.classList.toggle('active', s.dataset.value <= currentRating)
+        );
+    });
+});
+
+// 提交评论
+function submitComment() {
+    const commentText = document.getElementById('commentInput').value;
+    if (commentText && currentRating > 0) {
+        const comment = {
+            text: commentText,
+            rating: currentRating,
+            date: new Date().toLocaleString()
+        };
+        comments.push(comment);
+        localStorage.setItem('comments', JSON.stringify(comments));
+        updateCommentsDisplay();
+        document.getElementById('commentInput').value = '';
+    }
+}
+
+// 显示评论
+function updateCommentsDisplay() {
+    const container = document.getElementById('commentsList');
+    container.innerHTML = comments
+        .filter(c => c.rating >= 4)
+        .map(c => `
+            <div class="comment-item">
+                <div>${c.text}</div>
+                <div>评分：${'★'.repeat(c.rating)} - ${c.date}</div>
+            </div>
+        `).join('');
+    
+    // 计算平均分
+    const avg = comments.reduce((sum, c) => sum + c.rating, 0) / comments.length || 0;
+    document.getElementById('averageRating').textContent = avg.toFixed(1);
+}
+
+// 初始化显示
+updateCommentsDisplay();
+</script>
 </body>
 </html>
