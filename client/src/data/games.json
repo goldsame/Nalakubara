@@ -165,5 +165,37 @@
   "isNew": true,
   "rating": 4.1,
   "plays": 5399
+},
+{
+  "id": "game_1742999918285_215",
+  "title": "Knock and Run: 100 Doors Escape",
+  "description": "Knock and Run: 100 Doors Escape is a fast-paced arcade game where you race through hotel corridors, ringing doorbells and pulling off hilarious pranks. But be careful—residents react unpredictably, and trouble is always around the corner. Outsmart everyone, stay on the move, and see if you can become the ultimate trickster without getting caught!\n\n",
+  "instructions": "Use WASD, arrow keys, or drag the screen to run\nSpace to start",
+  "category": "racing",
+  "imageUrl": "https://imgs.crazygames.com/knock-and-run_16x9/20250320160406/knock-and-run_16x9-cover?metadata=none&quality=70&width=615",
+  "gameUrl": "https://www.crazygames.com/embed/knock-and-run",
+  "embedUrl": "https://www.crazygames.com/embed/knock-and-run",
+  "isFeatured": false,
+  "isPopular": false,
+  "isNew": true,
+  "rating": "4.5",
+  "playCount": 2769,
+  "addedDate": "2025-03-26"
+},
+{
+  "id": "game_1742999968207_970",
+  "title": "Holey.io Battle Royale",
+  "description": "Holey.io is a battle royale game where you consume various items and opponents with smaller holes. You will grow bigger as you swallow! The map will continuously shrink, forcing players into a narrower environment until there is only one person left standing. Consume, grow, and become the last hole standing in the arena!\n\nOnce you've become the ultimate hole, check out some more popular .io games like Cubes 2048 and Agar.io!",
+  "instructions": "PC\nMove mouse = change direction\nHold left-click / space bar = speed up\nMobile\nDrag = move\nClick the on-screen button = speed up",
+  "category": "io",
+  "imageUrl": "https://imgs.crazygames.com/holey-io-battle-royale_16x9/20231023094206/holey-io-battle-royale_16x9-cover?metadata=none&quality=70&width=615",
+  "gameUrl": "https://www.crazygames.com/embed/holey-io-battle-royale",
+  "embedUrl": "https://www.crazygames.com/embed/holey-io-battle-royale",
+  "isFeatured": false,
+  "isPopular": false,
+  "isNew": true,
+  "rating": "4.7",
+  "playCount": 3858,
+  "addedDate": "2025-03-26"
 }
 ]

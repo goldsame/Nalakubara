@@ -2,11 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import './GamePage.css';
 import gamesData from '../../data/games.json';
+import { getGamePlayCount } from '../../utils/gameUtils';
 
 const GamePage = () => {
   const { gameId } = useParams();
   const [game, setGame] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [playCount, setPlayCount] = useState(0);
   const [iframeLoaded, setIframeLoaded] = useState(false);
 
   useEffect(() => {
@@ -17,6 +19,13 @@ const GamePage = () => {
         const foundGame = gamesData.find(g => g.id === gameId);
         console.log('找到游戏:', foundGame);
         setGame(foundGame || null);
+        
+        // 如果找到游戏，更新游玩次数
+        if (foundGame) {
+          // 使用统一的方式获取游玩次数，并增加计数
+          const count = getGamePlayCount(foundGame, true);
+          setPlayCount(count);
+        }
       } catch (error) {
         console.error('获取游戏数据失败:', error);
       } finally {
@@ -62,7 +71,7 @@ const GamePage = () => {
       <div className="game-info">
         <span className="game-category">{game.category}</span>
         <span className="game-rating">★ {game.rating}</span>
-        <span className="game-plays">{game.plays} 次游玩</span>
+        <span className="game-plays">{playCount} 次游玩</span>
       </div>
       
       <div className="game-container">

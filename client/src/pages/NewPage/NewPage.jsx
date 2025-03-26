@@ -12,8 +12,11 @@ const NewPage = () => {
     const loadNewGames = () => {
       setLoading(true);
       try {
+        // 反转数组，使最后添加的游戏排在最前面
+        const reversedGames = [...gamesData].reverse();
+        
         // 筛选新游戏
-        const newG = gamesData.filter(game => game.isNew);
+        const newG = reversedGames.filter(game => game.isNew);
         setNewGames(newG);
         setLoading(false);
       } catch (error) {

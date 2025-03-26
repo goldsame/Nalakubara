@@ -12,8 +12,11 @@ const FeaturedPage = () => {
     const loadFeaturedGames = () => {
       setLoading(true);
       try {
+        // 反转数组，使最后添加的游戏排在最前面
+        const reversedGames = [...gamesData].reverse();
+        
         // 筛选精选游戏
-        const featured = gamesData.filter(game => game.isFeatured);
+        const featured = reversedGames.filter(game => game.isFeatured);
         setFeaturedGames(featured);
         setLoading(false);
       } catch (error) {

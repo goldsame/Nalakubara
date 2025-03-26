@@ -1,377 +1,289 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './AddGamePage.css';
 
 const AddGamePage = () => {
-  // 游戏表单状态
-  const [gameForm, setGameForm] = useState({
-    id: '',
-    title: '',
-    description: '',
-    instructions: '',
-    category: 'action',
-    tags: [],
-    imageUrl: '',
-    gameUrl: '',
-    isFeatured: false,
-    isPopular: false,
-    isNew: true,
-    rating: 4.0,
-    plays: 0
-  });
+  const [gameTitle, setGameTitle] = useState('');
+  const [gameDescription, setGameDescription] = useState('');
+  const [gameInstructions, setGameInstructions] = useState('');
+  const [gameUrl, setGameUrl] = useState('');
+  const [category, setCategory] = useState('action');
+  const [thumbnailUrl, setThumbnailUrl] = useState('');
+  const [rating, setRating] = useState('');
+  const [playCount, setPlayCount] = useState('');
+  const [jsonOutput, setJsonOutput] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+  // 添加新的状态变量
+  const [isFeatured, setIsFeatured] = useState(false);
+  const [isPopular, setIsPopular] = useState(false);
 
-  // 批量JSON状态
-  const [bulkJson, setBulkJson] = useState('');
-  const [message, setMessage] = useState({ type: '', text: '' });
+  // 游戏分类列表 - 使用中文名称
+  const categories = [
+    { id: 'action', name: '动作' },
+    { id: 'adventure', name: '冒险' },
+    { id: 'arcade', name: '街机' },
+    { id: 'io', name: 'IO' },
+    { id: 'multiplayer', name: '多人' },
+    { id: 'puzzle', name: '解谜' },
+    { id: 'racing', name: '赛车' },
+    { id: 'sports', name: '体育' },
+    { id: 'shooting', name: '射击' },
+    { id: 'strategy', name: '策略' }
+  ];
 
-  // 自动识别游戏分类的函数
-  const detectGameCategory = (title, description = '') => {
-    const text = (title + ' ' + description).toLowerCase();
-    
-    // 分类关键词映射
-    const categoryKeywords = {
-      'action': ['动作', '射击', '格斗', 'action', 'shooting', 'fight', '战斗', '枪', 'gun'],
-      'adventure': ['冒险', '探索', 'adventure', 'explore', 'quest', '任务', '旅程'],
-      'arcade': ['街机', '经典', 'arcade', 'classic', 'retro', '复古', '老式'],
-      'io': ['io', '多人在线', 'multiplayer online', '竞技场', 'arena'],
-      'multiplayer': ['多人', '合作', 'multiplayer', 'coop', 'cooperative', '团队', 'team'],
-      'puzzle': ['益智', '解谜', '谜题', 'puzzle', 'brain', '脑力', '思维', '逻辑'],
-      'racing': ['赛车', '竞速', '驾驶', 'racing', 'drive', 'car', 'speed', '速度', '车'],
-      'sports': ['体育', '运动', '足球', '篮球', 'sports', 'football', 'basketball', 'soccer'],
-      'shooting': ['射击', '枪战', 'shooting', 'gun', 'sniper', '狙击', '射手'],
-      'strategy': ['策略', '塔防', '防御', '建造', 'strategy', 'tower defense', 'build', '战略']
-    };
-    
-    // 计算每个分类的匹配分数
-    const scores = {};
-    for (const [category, keywords] of Object.entries(categoryKeywords)) {
-      scores[category] = keywords.reduce((score, keyword) => {
-        return score + (text.includes(keyword) ? 1 : 0);
-      }, 0);
-    }
-    
-    // 找出得分最高的分类
-    let bestCategory = 'action'; // 默认分类
-    let highestScore = 0;
-    
-    for (const [category, score] of Object.entries(scores)) {
-      if (score > highestScore) {
-        highestScore = score;
-        bestCategory = category;
+  // 根据游戏标题和描述自动判断分类
+  useEffect(() => {
+    if (gameTitle && gameDescription) {
+      const text = (gameTitle + ' ' + gameDescription).toLowerCase();
+      
+      if (text.includes('射击') || text.includes('枪') || text.includes('shoot')) {
+        setCategory('shooting');
+      } else if (text.includes('赛车') || text.includes('驾驶') || text.includes('racing') || text.includes('car')) {
+        setCategory('racing');
+      } else if (text.includes('解谜') || text.includes('puzzle') || text.includes('谜题')) {
+        setCategory('puzzle');
+      } else if (text.includes('冒险') || text.includes('adventure')) {
+        setCategory('adventure');
+      } else if (text.includes('策略') || text.includes('strategy')) {
+        setCategory('strategy');
+      } else if (text.includes('多人') || text.includes('multiplayer') || text.includes('pvp')) {
+        setCategory('multiplayer');
+      } else if (text.includes('io') || text.includes('.io')) {
+        setCategory('io');
+      } else if (text.includes('运动') || text.includes('sports')) {
+        setCategory('sports');
+      } else if (text.includes('街机') || text.includes('arcade')) {
+        setCategory('arcade');
+      } else {
+        setCategory('action'); // 默认分类
       }
     }
-    
-    return bestCategory;
+  }, [gameTitle, gameDescription]);
+
+  // 生成随机评分和游玩次数
+  useEffect(() => {
+    if (gameTitle) {
+      // 生成4.0-5.0之间的随机评分
+      const randomRating = (4 + Math.random()).toFixed(1);
+      setRating(randomRating);
+      
+      // 生成100以上的随机游玩次数
+      const randomPlayCount = Math.floor(100 + Math.random() * 9900);
+      setPlayCount(randomPlayCount);
+    }
+  }, [gameTitle]);
+
+  // 从iframe中提取游戏URL
+  const extractGameUrl = (input) => {
+    if (input.includes('<iframe')) {
+      const srcMatch = input.match(/src="([^"]+)"/);
+      if (srcMatch && srcMatch[1]) {
+        return srcMatch[1];
+      }
+    }
+    return input;
   };
 
-  // 处理表单输入变化并自动检测分类
-  const handleInputChangeWithCategoryDetection = (e) => {
-    const { name, value, type, checked } = e.target;
+  // 处理游戏URL输入变化
+  const handleGameUrlChange = (e) => {
+    const input = e.target.value;
+    const extractedUrl = extractGameUrl(input);
+    setGameUrl(extractedUrl);
     
-    setGameForm(prev => {
-      const newForm = {
-        ...prev,
-        [name]: type === 'checkbox' ? checked : value
+    // 不再自动生成缩略图URL
+  };
+
+  // 生成唯一ID
+  const generateUniqueId = () => {
+    return 'game_' + Date.now() + '_' + Math.floor(Math.random() * 1000);
+  };
+
+  // 生成游戏JSON
+  const generateGameJson = () => {
+    if (!gameTitle || !gameDescription || !gameUrl || !thumbnailUrl) {
+      setError('请填写游戏标题、描述、URL和图片URL');
+      return;
+    }
+
+    setLoading(true);
+    setError('');
+
+    try {
+      const gameData = {
+        id: generateUniqueId(),
+        title: gameTitle,
+        description: gameDescription,
+        instructions: gameInstructions || '使用WASD或箭头键移动，空格键开始游戏',
+        category: category,
+        imageUrl: thumbnailUrl,
+        gameUrl: gameUrl,
+        embedUrl: gameUrl,
+        isFeatured: isFeatured,
+        isPopular: isPopular,
+        isNew: true,
+        rating: rating,
+        playCount: playCount,
+        addedDate: new Date().toISOString().split('T')[0]
       };
+
+      // 添加到现有JSON输出
+      const newJsonOutput = jsonOutput 
+        ? jsonOutput + ',\n' + JSON.stringify(gameData, null, 2)
+        : JSON.stringify(gameData, null, 2);
       
-      // 如果标题或描述发生变化，尝试自动检测分类
-      if ((name === 'title' || name === 'description') && value) {
-        newForm.category = detectGameCategory(
-          name === 'title' ? value : newForm.title, 
-          name === 'description' ? value : newForm.description
-        );
-      }
+      setJsonOutput(newJsonOutput);
       
-      return newForm;
+      // 重置表单但保留JSON输出
+      setGameTitle('');
+      setGameDescription('');
+      setGameInstructions('');
+      setGameUrl('');
+      setThumbnailUrl('');
+      
+      // 生成新的随机评分和游玩次数
+      setRating((4 + Math.random()).toFixed(1));
+      setPlayCount(Math.floor(100 + Math.random() * 9900));
+    } catch (err) {
+      setError('生成JSON失败: ' + err.message);
+    }
+
+    setLoading(false);
+  };
+
+  // 复制JSON到剪贴板
+  const copyJsonToClipboard = () => {
+    navigator.clipboard.writeText(jsonOutput).then(() => {
+      alert('JSON代码已复制到剪贴板');
+    }, (err) => {
+      console.error('无法复制: ', err);
     });
   };
 
-  // 将中文标点符号转换为英文标点符号
-  const convertChinesePunctuationToEnglish = (text) => {
-    if (!text) return text;
-    return text
-      .replace(/\uff0c/g, ',')  // 中文逗号
-      .replace(/\u3002/g, '.')  // 中文句号
-      .replace(/\uff1a/g, ':')  // 中文冒号
-      .replace(/\uff1b/g, ';')  // 中文分号
-      .replace(/\uff01/g, '!')  // 中文感叹号
-      .replace(/\uff1f/g, '?')  // 中文问号
-      .replace(/\uff08/g, '(')  // 中文左括号
-      .replace(/\uff09/g, ')')  // 中文右括号
-      .replace(/\u3010/g, '[')  // 中文左方括号
-      .replace(/\u3011/g, ']')  // 中文右方括号
-      .replace(/\u300c/g, '"')  // 中文左引号
-      .replace(/\u300d/g, '"')  // 中文右引号
-      .replace(/\u201c/g, '"')  // 中文左双引号
-      .replace(/\u201d/g, '"')  // 中文右双引号
-      .replace(/\u2018/g, "'")  // 中文左单引号
-      .replace(/\u2019/g, "'")  // 中文右单引号
-      .replace(/\u3001/g, ','); // 中文顿号
-  };
-
-  // 处理表单提交
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    
-    try {
-      // 生成唯一ID（如果没有提供）
-      const gameId = gameForm.id || gameForm.title.toLowerCase().replace(/\s+/g, '-');
-      
-      // 生成随机评分 (4.0-5.0)
-      const randomRating = (Math.random() * (5.0 - 4.0) + 4.0).toFixed(1);
-      
-      // 生成随机游玩次数 (100-100000)
-      const randomPlays = Math.floor(Math.random() * 99900) + 100;
-      
-      // 转换所有文本字段中的中文标点符号
-      const gameData = {
-        ...gameForm,
-        id: gameId,
-        title: convertChinesePunctuationToEnglish(gameForm.title),
-        description: convertChinesePunctuationToEnglish(gameForm.description),
-        instructions: convertChinesePunctuationToEnglish(gameForm.instructions),
-        rating: parseFloat(randomRating),
-        plays: randomPlays,
-        tags: gameForm.tags.map(tag => convertChinesePunctuationToEnglish(tag))
-      };
-      
-      // 这里应该有保存游戏数据的逻辑
-      console.log('游戏数据已提交:', gameData);
-      
-      // 生成游戏对象的JSON
-      const gameJson = JSON.stringify(gameData, null, 2);
-      
-      // 将新游戏数据添加到批量JSON中
-      if (bulkJson.trim()) {
-        // 简单地添加到现有内容后面，不尝试解析或修改结构
-        setBulkJson(bulkJson + ',\n' + gameJson);
-      } else {
-        setBulkJson(gameJson);
-      }
-      
-      // 显示成功消息
-      setMessage({ type: 'success', text: '游戏数据已添加' });
-    } catch (error) {
-      setMessage({ type: 'error', text: `添加游戏失败: ${error.message}` });
-    }
-  };
-  // 复制JSON到剪贴板
-  const handleCopyJson = () => {
-    navigator.clipboard.writeText(bulkJson)
-      .then(() => setMessage({ type: 'success', text: 'JSON已复制到剪贴板' }))
-      .catch(err => setMessage({ type: 'error', text: `复制失败: ${err.message}` }));
-  };
-
-  // 清空JSON
-  const handleClearJson = () => {
-    setBulkJson('');
-    setMessage({ type: 'success', text: 'JSON已清空' });
-  };
-
-  // 生成示例JSON模板
-  const generateTemplate = () => {
-    // 生成随机评分 (4.0-5.0)
-    const randomRating = (Math.random() * (5.0 - 4.0) + 4.0).toFixed(1);
-    
-    // 生成随机游玩次数 (100-100000)
-    const randomPlays = Math.floor(Math.random() * 99900) + 100;
-    
-    const template = {
-      "id": "game-id-example",
-      "title": "游戏标题",
-      "description": "游戏描述内容...",
-      "instructions": "游戏操作说明...",
-      "category": "action", // 使用英文分类名: action, adventure, arcade, io, multiplayer, puzzle, racing, sports, shooting, strategy
-      "tags": ["标签1", "标签2", "标签3"],
-      "imageUrl": "https://example.com/game-image.jpg",
-      "gameUrl": "https://example.com/embed/game",
-      "isFeatured": false,
-      "isPopular": false,
-      "isNew": true,
-      "rating": parseFloat(randomRating),
-      "plays": randomPlays
-    };
-    
-    setBulkJson(JSON.stringify(template, null, 2));
+  // 清空JSON输出
+  const clearJsonOutput = () => {
+    setJsonOutput('');
   };
 
   return (
     <div className="add-game-page">
-      <h1>添加游戏</h1>
-      
-      <div className="add-game-container">
-        {/* 单个游戏添加表单 */}
-        <section className="add-game-section">
-          <h2>输入游戏信息</h2>
-          <form className="add-game-form" onSubmit={handleSubmit}>
-            <div className="form-group">
-              <label htmlFor="title">游戏标题</label>
-              <input
-                type="text"
-                id="title"
-                name="title"
-                value={gameForm.title}
-                onChange={handleInputChangeWithCategoryDetection}
-                required
-              />
-            </div>
-            
-            <div className="form-group">
-              <label htmlFor="description">游戏描述</label>
-              <textarea
-                id="description"
-                name="description"
-                value={gameForm.description}
-                onChange={handleInputChangeWithCategoryDetection}
-                required
-              />
-            </div>
-            
-            <div className="form-group">
-              <label htmlFor="instructions">游戏操作说明</label>
-              <textarea
-                id="instructions"
-                name="instructions"
-                value={gameForm.instructions}
-                onChange={handleInputChangeWithCategoryDetection}
-              />
-            </div>
-            
-            <div className="form-group">
-              <label htmlFor="category">游戏分类 (自动检测)</label>
-              <select
-                id="category"
-                name="category"
-                value={gameForm.category}
-                onChange={handleInputChangeWithCategoryDetection}
-                required
-              >
-                <option value="action">动作</option>
-                <option value="adventure">冒险</option>
-                <option value="arcade">街机</option>
-                <option value="io">IO游戏</option>
-                <option value="multiplayer">多人</option>
-                <option value="puzzle">益智</option>
-                <option value="racing">赛车</option>
-                <option value="sports">体育</option>
-                <option value="shooting">射击</option>
-                <option value="strategy">策略</option>
-              </select>
-            </div>
-            
-            <div className="form-group">
-              <label htmlFor="imageUrl">游戏图片URL</label>
-              <input
-                type="url"
-                id="imageUrl"
-                name="imageUrl"
-                value={gameForm.imageUrl}
-                onChange={handleInputChangeWithCategoryDetection}
-                required
-              />
-            </div>
-            
-            <div className="form-group">
-              <label htmlFor="gameUrl">游戏URL</label>
-              <input
-                type="url"
-                id="gameUrl"
-                name="gameUrl"
-                value={gameForm.gameUrl}
-                onChange={handleInputChangeWithCategoryDetection}
-                required
-              />
-            </div>
-            
-            <div className="checkbox-group">
-              <div className="checkbox-item">
-                <input
-                  type="checkbox"
-                  id="isFeatured"
-                  name="isFeatured"
-                  checked={gameForm.isFeatured}
-                  onChange={handleInputChangeWithCategoryDetection}
-                />
-                <label htmlFor="isFeatured">精选游戏</label>
-              </div>
-              
-              <div className="checkbox-item">
-                <input
-                  type="checkbox"
-                  id="isPopular"
-                  name="isPopular"
-                  checked={gameForm.isPopular}
-                  onChange={handleInputChangeWithCategoryDetection}
-                />
-                <label htmlFor="isPopular">热门游戏</label>
-              </div>
-              
-              <div className="checkbox-item">
-                <input
-                  type="checkbox"
-                  id="isNew"
-                  name="isNew"
-                  checked={gameForm.isNew}
-                  onChange={handleInputChangeWithCategoryDetection}
-                />
-                <label htmlFor="isNew">新游戏</label>
-              </div>
-            </div>
-            
-            <div className="form-group">
-              <label htmlFor="rating">评分 (1-5)</label>
-              <input
-                type="number"
-                id="rating"
-                name="rating"
-                min="1"
-                max="5"
-                step="0.1"
-                value={gameForm.rating}
-                onChange={handleInputChangeWithCategoryDetection}
-              />
-            </div>
-            
-            <div className="form-group">
-              <label htmlFor="plays">游玩次数</label>
-              <input
-                type="number"
-                id="plays"
-                name="plays"
-                min="0"
-                value={gameForm.plays}
-                onChange={handleInputChangeWithCategoryDetection}
-              />
-            </div>
-            
-            <button type="submit" className="submit-button">添加游戏</button>
-          </form>
-        </section>
-        
-        {/* 批量JSON区域 */}
-        <section className="add-game-section">
-          <h2>批量游戏JSON</h2>
-          <div className="bulk-json-container">
-            <textarea
-              className="bulk-json-textarea"
-              value={bulkJson}
-              onChange={(e) => setBulkJson(e.target.value)}
-              placeholder="游戏数据将显示在这里..."
+      <div className="game-input-section">
+        <h2>输入游戏信息</h2>
+        <div className="game-form">
+          <div className="form-group">
+            <label>游戏标题</label>
+            <input
+              type="text"
+              value={gameTitle}
+              onChange={(e) => setGameTitle(e.target.value)}
+              placeholder="输入游戏名称"
             />
-            <div className="bulk-json-actions">
-              <button onClick={handleCopyJson} className="action-button">复制JSON</button>
-              <button onClick={handleClearJson} className="action-button">清空</button>
-              <button onClick={generateTemplate} className="action-button">生成模板</button>
+          </div>
+          
+          <div className="form-group">
+            <label>游戏描述</label>
+            <textarea
+              value={gameDescription}
+              onChange={(e) => setGameDescription(e.target.value)}
+              placeholder="描述这个游戏..."
+              rows="4"
+            />
+          </div>
+          
+          <div className="form-group">
+            <label>游戏操作说明</label>
+            <textarea
+              value={gameInstructions}
+              onChange={(e) => setGameInstructions(e.target.value)}
+              placeholder="例如: 使用WASD或箭头键移动，空格键开始游戏"
+              rows="3"
+            />
+          </div>
+          
+          <div className="form-group">
+            <label>游戏URL</label>
+            <input
+              type="text"
+              value={gameUrl}
+              onChange={handleGameUrlChange}
+              placeholder="粘贴游戏URL或iframe代码"
+            />
+          </div>
+          
+          <div className="form-group">
+            <label>游戏图片URL</label>
+            <input
+              type="text"
+              value={thumbnailUrl}
+              onChange={(e) => setThumbnailUrl(e.target.value)}
+              placeholder="游戏缩略图URL"
+            />
+          </div>
+          
+          <div className="form-group">
+            <label>游戏分类</label>
+            <select 
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+            >
+              {categories.map(cat => (
+                <option key={cat.id} value={cat.id}>
+                  {cat.name}
+                </option>
+              ))}
+            </select>
+          </div>
+          
+          {/* 添加精选和热门选项 */}
+          <div className="form-group checkbox-group">
+            <label>游戏特性</label>
+            <div className="checkbox-container">
+              <label className="checkbox-label">
+                <input
+                  type="checkbox"
+                  checked={isFeatured}
+                  onChange={(e) => setIsFeatured(e.target.checked)}
+                />
+                精选游戏
+              </label>
+              <label className="checkbox-label">
+                <input
+                  type="checkbox"
+                  checked={isPopular}
+                  onChange={(e) => setIsPopular(e.target.checked)}
+                />
+                热门游戏
+              </label>
             </div>
           </div>
-        </section>
+          
+          <button 
+            onClick={generateGameJson} 
+            className="generate-button"
+            disabled={loading}
+          >
+            {loading ? '处理中...' : '添加游戏'}
+          </button>
+          
+          {error && <div className="error-message">{error}</div>}
+        </div>
       </div>
       
-      {/* 消息提示 */}
-      {message.text && (
-        <div className={`message ${message.type}`}>
-          {message.text}
-        </div>
-      )}
+      <div className="json-output-section">
+        <h2>批量游戏JSON</h2>
+        {jsonOutput && (
+          <div className="json-output">
+            <pre>{jsonOutput}</pre>
+            <div className="json-actions">
+              <button onClick={copyJsonToClipboard} className="copy-button">
+                复制JSON代码
+              </button>
+              <button onClick={clearJsonOutput} className="clear-button">
+                清空
+              </button>
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 };

@@ -15,8 +15,11 @@ const CategoryPage = () => {
     const loadCategoryGames = () => {
       setLoading(true);
       try {
+        // 反转数组，使最后添加的游戏排在最前面
+        const reversedGames = [...gamesData].reverse();
+        
         // 筛选当前分类的游戏
-        const games = gamesData.filter(game => game.category === categoryId);
+        const games = reversedGames.filter(game => game.category === categoryId);
         setCategoryGames(games);
         
         // 设置分类名称

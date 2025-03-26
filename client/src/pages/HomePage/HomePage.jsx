@@ -30,9 +30,12 @@ const HomePage = () => {
       setLoading(true);
       try {
         // 筛选游戏
-        const featured = gamesData.filter(game => game.isFeatured);
-        const popular = gamesData.filter(game => game.isPopular);
-        const newG = gamesData.filter(game => game.isNew);
+        // 反转数组，使最后添加的游戏排在最前面
+        const reversedGames = [...gamesData].reverse();
+        
+        const featured = reversedGames.filter(game => game.isFeatured);
+        const popular = reversedGames.filter(game => game.isPopular);
+        const newG = reversedGames.filter(game => game.isNew);
         
         // 设置状态
         setFeaturedGames(featured.slice(0, 4));
