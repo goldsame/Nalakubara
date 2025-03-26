@@ -1,0 +1,123 @@
+.games-page {
+  padding: 20px;
+}
+
+.page-title {
+  font-size: 28px;
+  margin-bottom: 30px;
+  color: #fff;
+  text-align: center;
+}
+
+.featured-games {
+  margin-bottom: 40px;
+}
+
+.featured-game {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  height: 400px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.featured-game img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.featured-game-info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 30px;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+  color: white;
+}
+
+.featured-game-info h2 {
+  font-size: 32px;
+  margin-bottom: 10px;
+}
+
+.featured-game-info p {
+  font-size: 16px;
+  margin-bottom: 20px;
+  max-width: 600px;
+}
+
+.play-button {
+  display: inline-block;
+  background-color: #7b68ee;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 30px;
+  font-weight: bold;
+  text-transform: uppercase;
+  transition: background-color 0.3s;
+}
+
+.play-button:hover {
+  background-color: #6a5acd;
+}
+
+.games-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.shooting-icon {
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%237b68ee"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/></svg>');
+}
+
+.loading-spinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid rgba(123, 104, 238, 0.3);
+  border-radius: 50%;
+  border-top-color: #7b68ee;
+  animation: spin 1s ease-in-out infinite;
+  margin: 100px auto;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.error-message {
+  text-align: center;
+  padding: 40px;
+  font-size: 18px;
+  color: #ff6b6b;
+}
+
+.no-games {
+  text-align: center;
+  padding: 40px;
+  font-size: 18px;
+  color: #ccc;
+  grid-column: 1 / -1;
+}
+
+@media (max-width: 768px) {
+  .featured-game {
+    grid-template-columns: 1fr;
+  }
+  
+  .featured-game-image {
+    height: 200px;
+  }
+  
+  .games-grid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  }
+  
+  .categories-grid {
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  }
+}

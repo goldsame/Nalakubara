@@ -1,0 +1,175 @@
+.add-game-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.add-game-page h1 {
+  margin-bottom: 30px;
+  color: var(--text-primary, #e1e2ea);
+  text-align: center;
+}
+
+.add-game-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+
+.add-game-section {
+  flex: 1;
+  min-width: 300px;
+  background-color: var(--card-bg, #252736);
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.add-game-section h2 {
+  margin-bottom: 20px;
+  color: var(--text-primary, #e1e2ea);
+  font-size: 20px;
+}
+
+.add-game-form, .bulk-add-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.form-group label {
+  color: var(--text-primary, #e1e2ea);
+  font-size: 14px;
+}
+
+.form-group input, .form-group select, .form-group textarea {
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid var(--border-color, #3a3d4d);
+  background-color: var(--input-bg, #1e2030);
+  color: var(--text-primary, #e1e2ea);
+  font-size: 14px;
+}
+
+.form-group textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.checkbox-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.checkbox-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.checkbox-item input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+}
+
+.submit-button, .copy-button, .clear-button {
+  padding: 12px;
+  border-radius: 6px;
+  border: none;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.submit-button {
+  background-color: var(--accent-color, #6c5ce7);
+  color: white;
+}
+
+.submit-button:hover {
+  background-color: var(--accent-hover, #5649c0);
+}
+
+.submit-button:disabled {
+  background-color: var(--disabled-color, #4a4a6a);
+  cursor: not-allowed;
+}
+
+.bulk-json-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.bulk-json-textarea {
+  width: 100%;
+  min-height: 400px;
+  padding: 12px;
+  border-radius: 6px;
+  border: 1px solid var(--border-color, #3a3d4d);
+  background-color: var(--input-bg, #1e2030);
+  color: var(--text-primary, #e1e2ea);
+  font-family: monospace;
+  font-size: 14px;
+  resize: vertical;
+}
+
+.bulk-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.copy-button {
+  background-color: #2ecc71;
+  color: white;
+  flex: 1;
+}
+
+.copy-button:hover {
+  background-color: #27ae60;
+}
+
+.clear-button {
+  background-color: #e74c3c;
+  color: white;
+}
+
+.clear-button:hover {
+  background-color: #c0392b;
+}
+
+.message {
+  margin-top: 20px;
+  padding: 15px;
+  border-radius: 6px;
+  text-align: center;
+  font-weight: 500;
+}
+
+.message.success {
+  background-color: rgba(46, 213, 115, 0.2);
+  color: #2ed573;
+}
+
+.message.error {
+  background-color: rgba(255, 71, 87, 0.2);
+  color: #ff4757;
+}
+
+@media (max-width: 768px) {
+  .add-game-container {
+    flex-direction: column;
+  }
+  
+  .bulk-actions {
+    flex-direction: column;
+  }
+}

@@ -1,0 +1,29 @@
+.virtual-list-container {
+  width: 100%;
+  overflow-y: auto;
+  position: relative;
+  /* 添加硬件加速 */
+  transform: translateZ(0);
+  will-change: transform;
+  /* 平滑滚动 */
+  scroll-behavior: smooth;
+}
+
+.virtual-list-content {
+  position: relative;
+  width: 100%;
+}
+
+.virtual-list-items {
+  width: 100%;
+  /* 使用transform代替top定位，减少回流 */
+  transform: translateY(0);
+  will-change: transform;
+}
+
+.virtual-list-item {
+  box-sizing: border-box;
+  width: 100%;
+  /* 防止子元素引起容器回流 */
+  contain: layout;
+}

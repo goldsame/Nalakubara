@@ -1,0 +1,9 @@
+{
+  "name": "nalakubara3.0",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "cd client && npm run build",
+    "start": "cd client && npm start",
+    "serve": "cd client && node src/server.js"
+  }
+}
