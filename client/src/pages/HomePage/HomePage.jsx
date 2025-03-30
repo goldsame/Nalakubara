@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import ReactGA from 'react-ga4'; // 导入Google Analytics
 import GameCard from '../../components/GameCard/GameCard';
 import CategoryCard from '../../components/CategoryCard/CategoryCard';
 import './HomePage.css';
@@ -52,6 +53,34 @@ const HomePage = () => {
     // 可以根据需要添加更多分类名称
   };
   
+  // 添加事件跟踪函数
+  const trackGameClick = (gameId, gameTitle, section) => {
+    ReactGA.event({
+      category: 'Game',
+      action: 'Click',
+      label: `${section} - ${gameTitle}`,
+      value: 1
+    });
+  };
+
+  const trackCategoryClick = (categoryId, categoryName) => {
+    ReactGA.event({
+      category: 'Category',
+      action: 'Click',
+      label: categoryName,
+      value: 1
+    });
+  };
+
+  const trackViewAllClick = (section) => {
+    ReactGA.event({
+      category: 'Navigation',
+      action: 'View All Click',
+      label: section,
+      value: 1
+    });
+  };
+  
   // 获取新游戏的函数，按添加日期倒序排序
   const getNewGames = () => {
     // 筛选出标记为新游戏的游戏
@@ -62,6 +91,11 @@ const HomePage = () => {
   };
   
   useEffect(() => {
+    // 初始化Google Analytics
+    ReactGA.initialize('G-WQQNBKTGRG');
+    // 发送页面浏览事件
+    ReactGA.send({ hitType: "pageview", page: "/home" });
+    
     // 直接处理导入的数据
     try {
       // 修改热门游戏的筛选逻辑：筛选出标记为热门的游戏
@@ -134,7 +168,13 @@ const HomePage = () => {
       <section className="game-section">
         <div className="section-header">
           <h2>Popular Games</h2>
-          <Link to="/popular" className="view-all">View All</Link>
+          <Link 
+            to="/popular" 
+            className="view-all" 
+            onClick={() => trackViewAllClick('Popular Games')}
+          >
+            View All
+          </Link>
         </div>
         
         {/* 使用单一容器并强制只渲染8个游戏 */}
@@ -147,10 +187,12 @@ const HomePage = () => {
           overflow: 'hidden'   // 隐藏多余内容
         }}>
           {popularGames.slice(0, 8).map((game, index) => (
-            <GameCard 
+            <div 
               key={game.id} 
-              game={game}
-            />
+              onClick={() => trackGameClick(game.id, game.title, 'Popular Games')}
+            >
+              <GameCard game={game} />
+            </div>
           ))}
         </div>
       </section>
@@ -173,7 +215,12 @@ const HomePage = () => {
         </div>
         <div className="categories-grid">
           {currentCategories.map(category => (
-            <CategoryCard key={category.id} category={category} />
+            <div 
+              key={category.id} 
+              onClick={() => trackCategoryClick(category.id, category.name)}
+            >
+              <CategoryCard category={category} />
+            </div>
           ))}
         </div>
       </section>
@@ -182,11 +229,22 @@ const HomePage = () => {
       <section className="new-games-section">
         <div className="section-header">
           <h2>New Games</h2>
-          <Link to="/new" className="view-all">View All</Link>
+          <Link 
+            to="/new" 
+            className="view-all" 
+            onClick={() => trackViewAllClick('New Games')}
+          >
+            View All
+          </Link>
         </div>
         <div className="games-grid">
           {newGames.map(game => (
-            <GameCard key={game.id} game={game} />
+            <div 
+              key={game.id} 
+              onClick={() => trackGameClick(game.id, game.title, 'New Games')}
+            >
+              <GameCard game={game} />
+            </div>
           ))}
         </div>
       </section>
