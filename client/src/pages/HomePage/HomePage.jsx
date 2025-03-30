@@ -7,7 +7,6 @@ import './HomePage.css';
 import gamesData from '../../data/games.json';
 
 const HomePage = () => {
-  const [featuredGames, setFeaturedGames] = useState([]);
   const [popularGames, setPopularGames] = useState([]);
   const [newGames, setNewGames] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -56,11 +55,16 @@ const HomePage = () => {
   useEffect(() => {
     // 直接处理导入的数据
     try {
-      // 过滤出精选游戏
-      const featured = gamesData.filter(game => game.isFeatured);
+      // 删除精选游戏的过滤
       
-      // 按照游玩次数排序获取热门游戏
-      const popular = [...gamesData].sort((a, b) => b.playCount - a.playCount);
+      // 修改排序逻辑：按照添加日期排序，最新的在前面
+      const popular = [...gamesData].sort((a, b) => {
+        // 将日期字符串转换为Date对象进行比较
+        const dateA = new Date(a.addedDate);
+        const dateB = new Date(b.addedDate);
+        // 降序排列，最新的日期在前
+        return dateB - dateA;
+      });
       
       // 过滤出新游戏
       const newGamesData = gamesData.filter(game => game.isNew);
@@ -75,13 +79,13 @@ const HomePage = () => {
         
         return {
           id: categoryId,
-          name: categoryNames[categoryId] || categoryId, // 使用映射的中文名称，如果没有则使用原始ID
+          name: categoryNames[categoryId] || categoryId, // 使用映射的英文名称，如果没有则使用原始ID
           color: categoryColors[categoryId] || "#607d8b", // 使用映射的颜色，如果没有则使用默认颜色
           gamesCount: gamesInCategory
         };
       });
       
-      setFeaturedGames(featured);
+      // 删除设置精选游戏
       setPopularGames(popular);
       setNewGames(newGamesData);
       setCategories(categoriesData);
@@ -95,10 +99,6 @@ const HomePage = () => {
   // 确保热门游戏只显示两行（8个游戏）
   // 假设每行显示4个游戏，两行最多显示8个
   const maxPopularGames = 8;
-  
-  useEffect(() => {
-    // ... 现有代码保持不变 ...
-  }, []);
   
   // 计算分类的总页数
   const categoriesPerPage = 10; // 每页显示10个分类（2行，每行5个）
@@ -121,43 +121,34 @@ const HomePage = () => {
   };
 
   if (loading) {
-    return <div className="loading">加载中...</div>;
+    return <div className="loading">Loading...</div>;
   }
 
   return (
     <div className="home-page">
-      {/* 精选游戏部分保持不变 */}
-      <section className="featured-games-section">
-        <div className="section-header">
-          <h2>精选游戏</h2>
-          <Link to="/featured" className="view-all">查看全部</Link>
-        </div>
-        <div className="games-grid">
-          {featuredGames.map(game => (
-            <GameCard key={game.id} game={game} />
-          ))}
-        </div>
-      </section>
+      {/* 删除精选游戏部分，直接显示热门游戏 */}
       
-      {/* 热门游戏部分 - 限制为两行（8个游戏） */}
-      <section className="popular-games-section">
+      {/* 热门游戏部分 - 使用两行布局并强制限制数量 */}
+      <section className="game-section">
         <div className="section-header">
-          <h2>热门游戏</h2>
-          <Link to="/popular" className="view-all">查看全部</Link>
+          <h2>Popular Games</h2>
+          <Link to="/popular" className="view-all">View All</Link>
         </div>
-        <div 
-          className="games-grid popular-games-container" 
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(4, 1fr)',
-            gridTemplateRows: 'repeat(2, auto)',
-            gap: '20px',
-            overflow: 'hidden',
-            maxHeight: '600px'
-          }}
-        >
-          {popularGames.slice(0, 8).map(game => (
-            <GameCard key={game.id} game={game} />
+        
+        {/* 使用单一容器并强制只渲染8个游戏 */}
+        <div className="games-grid" style={{ 
+          display: 'grid', 
+          gridTemplateColumns: 'repeat(4, 1fr)', 
+          gap: '20px', 
+          marginBottom: '30px',
+          maxHeight: '650px',  // 设置足够高度容纳两行游戏
+          overflow: 'hidden'   // 隐藏多余内容
+        }}>
+          {popularGames.slice(0, 8).map((game, index) => (
+            <GameCard 
+              key={game.id} 
+              game={game}
+            />
           ))}
         </div>
       </section>
@@ -165,7 +156,7 @@ const HomePage = () => {
       {/* 分类部分 - 添加左右切换功能，限制为两行（10个分类） */}
       <section className="categories-section">
         <div className="categories-header">
-          <h2>游戏分类</h2>
+          <h2>Game Categories</h2>
           {totalCategoryPages > 1 && (
             <div className="categories-navigation">
               <button className="nav-button prev" onClick={goToPrevCategoryPage}>
@@ -188,8 +179,8 @@ const HomePage = () => {
       {/* 新游戏部分保持不变 */}
       <section className="new-games-section">
         <div className="section-header">
-          <h2>新游戏</h2>
-          <Link to="/new" className="view-all">查看全部</Link>
+          <h2>New Games</h2>
+          <Link to="/new" className="view-all">View All</Link>
         </div>
         <div className="games-grid">
           {newGames.map(game => (

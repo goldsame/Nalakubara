@@ -77,7 +77,8 @@ const Sidebar = () => {
           <i className="fas fa-plus"></i>
           <span>New Games</span>
         </NavLink>
-        <NavLink to="/multiplayer" className="sidebar-item" activeClassName="active">
+        {/* 修改这里的链接，从/multiplayer改为/category/multiplayer */}
+        <NavLink to="/category/multiplayer" className="sidebar-item" activeClassName="active">
           <i className="fas fa-users"></i>
           <span>Multiplayer</span>
         </NavLink>

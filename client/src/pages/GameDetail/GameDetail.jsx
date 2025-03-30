@@ -15,10 +15,32 @@ const GameDetail = () => {
       try {
         // 查找对应ID的游戏
         const foundGame = gamesData.find(g => g.id.toString() === id);
-        setGame(foundGame);
+        
+        if (foundGame) {
+          // 从localStorage获取游戏计数数据
+          const gameCountsStr = localStorage.getItem('gameCounts') || '{}';
+          const gameCounts = JSON.parse(gameCountsStr);
+          
+          // 获取当前游戏的计数，如果不存在则使用JSON中的初始值
+          let currentCount = gameCounts[foundGame.id] || foundGame.playCount || 0;
+          
+          // 增加游玩次数
+          currentCount += 1;
+          
+          // 更新localStorage
+          gameCounts[foundGame.id] = currentCount;
+          localStorage.setItem('gameCounts', JSON.stringify(gameCounts));
+          
+          // 更新游戏对象
+          const updatedGame = { ...foundGame, playCount: currentCount };
+          setGame(updatedGame);
+        } else {
+          setGame(null);
+        }
+        
         setLoading(false);
       } catch (error) {
-        console.error('加载游戏详情失败:', error);
+        console.error('Failed to load game details:', error);
         setLoading(false);
       }
     };
@@ -30,13 +52,13 @@ const GameDetail = () => {
     return (
       <div className="game-detail-loading">
         <div className="loading-spinner"></div>
-        <p>加载中...</p>
+        <p>Loading...</p>
       </div>
     );
   }
 
   if (!game) {
-    return <div className="game-not-found">未找到游戏</div>;
+    return <div className="game-not-found">Game Not Found</div>;
   }
 
   return (
@@ -57,7 +79,7 @@ const GameDetail = () => {
             </div>
             <div className="game-plays">
               <span className="plays-icon">👁</span>
-              <span>{game.plays || '50,002'} 次游玩</span>
+              <span>{(game.playCount || 0).toLocaleString()} plays</span>
             </div>
           </div>
         </div>
@@ -77,18 +99,18 @@ const GameDetail = () => {
         {/* 删除了游戏封面图片 */}
         
         <div className="game-description">
-          <h2>游戏介绍</h2>
-          <p>{game.description || '这是一个精彩的游戏，快来体验吧！'}</p>
+          <h2>Game Description</h2>
+          <p>{game.description || 'This is an exciting game, come and experience it!'}</p>
         </div>
         
         <div className="game-instructions">
-          <h2>游戏说明</h2>
-          <p>{game.instructions || '使用键盘和鼠标控制游戏。'}</p>
+          <h2>Game Instructions</h2>
+          <p>{game.instructions || 'Use keyboard and mouse to control the game.'}</p>
         </div>
         
         {game.relatedGames && game.relatedGames.length > 0 && (
           <div className="related-games">
-            <h2>相关游戏</h2>
+            <h2>Related Games</h2>
             <div className="related-games-grid">
               {game.relatedGames.map(relatedGame => (
                 <div key={relatedGame.id} className="related-game-card">

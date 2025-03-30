@@ -10,14 +10,15 @@ import Footer from './components/Footer/Footer';
 import Sidebar from './components/Sidebar/Sidebar';
 
 // 直接导入组件
-import Home from './pages/Home/Home';
+// 移除Home导入，只使用HomePage
+// import Home from './pages/Home/Home';
 import GameDetail from './pages/GameDetail/GameDetail';
 import Category from './pages/Category/Category';
 import AddGamePage from './pages/AdminPage/AddGamePage';
 import HotPage from './pages/HotPage/HotPage';
 
 // 懒加载页面组件
-const HomePage = lazy(() => import('./pages/HomePage/HomePage'));
+const HomePage = lazy(() => import('./pages/HomePage/HomePage'));  
 const CategoryPage = lazy(() => import('./pages/CategoryPage/CategoryPage'));
 const GamePage = lazy(() => import('./pages/GamePage/GamePage'));
 const ContactPage = lazy(() => import('./pages/ContactPage/ContactPage'));
@@ -44,7 +45,8 @@ function App() {
             <main className="main-content">
               <Suspense fallback={<LoadingFallback />}>
                 <Routes>
-                  <Route path="/" element={<Home />} />
+                  {/* 将主页路由改为使用HomePage组件 */}
+                  <Route path="/" element={<HomePage />} />
                   <Route path="/game/:id" element={<GameDetail />} />
                   <Route path="/contact" element={<ContactPage />} />
                   <Route path="/games/:gameId" element={<GamePage />} />
