@@ -1,67 +1,56 @@
 import React, { useState } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './Header.css';
 
 const Header = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isDarkMode, setIsDarkMode] = useState(true);
+  const [searchTerm, setSearchTerm] = useState('');
+  const navigate = useNavigate();
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
+  // 搜索处理函数
+  const handleSearchChange = (e) => {
+    setSearchTerm(e.target.value);
   };
 
-  const toggleTheme = () => {
-    setIsDarkMode(!isDarkMode);
-    document.body.classList.toggle('light-theme');
+  // 键盘按键处理函数
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      handleSearch();
+    }
+  };
+
+  // 搜索处理函数
+  const handleSearch = () => {
+    if (searchTerm.trim()) {
+      navigate(`/search?q=${encodeURIComponent(searchTerm.trim())}`);
+    }
   };
 
   return (
     <header className="header">
-      <div className="container header-container">
-        <div className="logo-container">
-          <Link to="/" className="logo">
-            <img src="/images/logo.png" alt="CrazyGames" className="logo-image" />
-            <span className="logo-text">CrazyGames</span>
+      <div className="header-content">
+        <div className="logo">
+          <Link to="/">
+            <span>Nalakubara</span>
           </Link>
         </div>
         
         <div className="search-container">
-          <input type="text" className="search-input" placeholder="搜索游戏..." />
-          <button className="search-button">
+          <input
+            type="text"
+            placeholder="Search games..."
+            value={searchTerm}
+            onChange={handleSearchChange}
+            onKeyPress={handleKeyPress}
+          />
+          <button onClick={handleSearch}>
             <i className="fas fa-search"></i>
           </button>
         </div>
         
-        <nav className="nav-menu">
-          <NavLink to="/" className="nav-link" exact>首页</NavLink>
-          <NavLink to="/categories" className="nav-link">分类</NavLink>
-          <NavLink to="/new" className="nav-link">新游戏</NavLink>
-          <NavLink to="/popular" className="nav-link">热门</NavLink>
-          <NavLink to="/multiplayer" className="nav-link">多人</NavLink>
-        </nav>
-        
-        <div className="header-actions">
-          <button className="theme-toggle" onClick={toggleTheme}>
-            {isDarkMode ? <i className="fas fa-sun"></i> : <i className="fas fa-moon"></i>}
-          </button>
-          <Link to="/login" className="btn btn-sm btn-outline">登录</Link>
-          <Link to="/register" className="btn btn-sm btn-primary">注册</Link>
-        </div>
-        
-        <button className="mobile-menu-toggle" onClick={toggleMenu}>
-          <i className={isMenuOpen ? "fas fa-times" : "fas fa-bars"}></i>
-        </button>
-      </div>
-      
-      <div className={`mobile-menu ${isMenuOpen ? 'active' : ''}`}>
-        <NavLink to="/" className="mobile-nav-link" exact>首页</NavLink>
-        <NavLink to="/categories" className="mobile-nav-link">分类</NavLink>
-        <NavLink to="/new" className="mobile-nav-link">新游戏</NavLink>
-        <NavLink to="/popular" className="mobile-nav-link">热门</NavLink>
-        <NavLink to="/multiplayer" className="mobile-nav-link">多人</NavLink>
-        <div className="mobile-actions">
-          <Link to="/login" className="btn btn-sm btn-outline">登录</Link>
-          <Link to="/register" className="btn btn-sm btn-primary">注册</Link>
+        <div className="nav-buttons">
+          <Link to="/admin" className="admin-button">
+            Admin
+          </Link>
         </div>
       </div>
     </header>

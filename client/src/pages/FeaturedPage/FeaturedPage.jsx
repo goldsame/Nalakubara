@@ -1,26 +1,44 @@
 import React, { useState, useEffect } from 'react';
-import GameCard from '../../components/GameCard/GameCard';
-import './FeaturedPage.css';
+import { Link } from 'react-router-dom';
 import gamesData from '../../data/games.json';
+import './FeaturedPage.css';
 
 const FeaturedPage = () => {
   const [featuredGames, setFeaturedGames] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  // Define inline styles
+  const gameCardStyle = {
+    width: '100%',
+    height: 'auto',
+    minWidth: '0',
+    maxWidth: 'none'
+  };
+  
+  const gameImageContainerStyle = {
+    width: '100%',
+    height: 'auto'
+  };
+  
+  const gameImageStyle = {
+    width: '100%',
+    height: 'auto',
+    objectFit: 'cover'
+  };
+
   useEffect(() => {
-    // 加载精选游戏
+    // Load featured games
     const loadFeaturedGames = () => {
       setLoading(true);
       try {
-        // 反转数组，使最后添加的游戏排在最前面
-        const reversedGames = [...gamesData].reverse();
-        
-        // 筛选精选游戏
-        const featured = reversedGames.filter(game => game.isFeatured);
-        setFeaturedGames(featured);
+        // Filter featured games and reverse order
+        const games = [...gamesData]
+          .filter(game => game.isFeatured)
+          .reverse();
+        setFeaturedGames(games); // Make sure to use the correct setState function
         setLoading(false);
       } catch (error) {
-        console.error('加载精选游戏失败:', error);
+        console.error('Failed to load featured games:', error);
         setLoading(false);
       }
     };
@@ -28,7 +46,7 @@ const FeaturedPage = () => {
     loadFeaturedGames();
   }, []);
 
-  // 渲染骨架屏
+  // Render skeleton loading screens
   const renderSkeletons = (count) => {
     return Array(count).fill().map((_, index) => (
       <div key={index} className="loading-card">
@@ -43,13 +61,21 @@ const FeaturedPage = () => {
 
   return (
     <div className="featured-page">
-      <h1>精选游戏</h1>
+      <h1>Featured Games</h1>
       <div className="games-grid">
-        {loading ? renderSkeletons(12) : 
+        {loading ? renderSkeletons(12) :
           featuredGames.length > 0 ? featuredGames.map(game => (
-            <GameCard key={game.id} game={game} />
+            <Link to={`/game/${game.id}`} key={game.id} className="game-card" style={gameCardStyle}>
+              <div className="game-image-container" style={gameImageContainerStyle}>
+                <img src={game.thumbnailUrl} alt={game.title} style={gameImageStyle} />
+              </div>
+              <div className="game-info">
+                <h3 className="game-title">{game.title}</h3>
+                <p className="game-category">{game.category}</p>
+              </div>
+            </Link>
           )) : (
-            <div className="empty-message">暂无精选游戏</div>
+            <div className="empty-message">No featured games available</div>
           )
         }
       </div>

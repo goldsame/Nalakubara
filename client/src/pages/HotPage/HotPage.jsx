@@ -1,69 +1,62 @@
 import React, { useState, useEffect } from 'react';
 import GameCard from '../../components/GameCard/GameCard';
-import './HotPage.css';
 import gamesData from '../../data/games.json';
-import { getGamePlayCount } from '../../utils/gameUtils';
+import './HotPage.css'; // 如果有的话
 
 const HotPage = () => {
-  const [games, setGames] = useState([]);
+  const [hotGames, setHotGames] = useState([]); // 确保使用正确的状态变量名
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // 获取所有游戏并按游玩次数排序
-    const loadGames = () => {
+    const loadHotGames = () => {
       setLoading(true);
       try {
-        // 确保gamesData是一个数组
-        const allGames = Array.isArray(gamesData) ? gamesData : [];
-        
-        // 为每个游戏获取当前的游玩次数
-        const gamesWithPlayCount = allGames.map(game => {
-          // 获取游戏的当前游玩次数（不增加计数）
-          const currentPlayCount = getGamePlayCount(game, false);
-          return {
-            ...game,
-            currentPlayCount // 添加一个新属性存储当前游玩次数
-          };
-        });
-
-        // 按游玩次数从高到低排序
-        const sortedGames = gamesWithPlayCount.sort((a, b) => 
-          b.currentPlayCount - a.currentPlayCount
-        );
-        
-        // 不筛选isPopular，直接使用所有游戏
-        setGames(sortedGames);
+        // 筛选热门游戏并倒序排列
+        const hotGames = [...gamesData]
+          .filter(game => game.isPopular)
+          .reverse();
+        setHotGames(hotGames); // 使用setHotGames而不是setGames
+        setLoading(false);
       } catch (error) {
-        console.error('加载游戏数据失败:', error);
-      } finally {
+        console.error('加载热门游戏失败:', error);
         setLoading(false);
       }
     };
 
-    loadGames();
+    loadHotGames();
   }, []);
+
+  // 渲染骨架屏
+  const renderSkeletons = (count) => {
+    return Array(count).fill().map((_, index) => (
+      <div key={index} className="loading-card">
+        <div className="skeleton" style={{ height: '180px' }}></div>
+        <div style={{ padding: '15px' }}>
+          <div className="skeleton" style={{ height: '20px', width: '70%', marginBottom: '10px' }}></div>
+          <div className="skeleton" style={{ height: '15px', width: '50%' }}></div>
+        </div>
+      </div>
+    ));
+  };
 
   return (
     <div className="hot-page">
-      <h1 className="page-title">热门游戏</h1>
-      <p className="games-count">共 {games.length} 款游戏</p>
-      
-      {loading ? (
-        <div className="loading-container">
-          <div className="loading-spinner"></div>
-          <p>加载游戏中...</p>
-        </div>
-      ) : (
-        <div className="games-grid">
-          {games.length > 0 ? (
-            games.map(game => (
-              <GameCard key={game.id} game={game} />
-            ))
-          ) : (
-            <p className="no-games">暂无热门游戏</p>
-          )}
-        </div>
-      )}
+      <h1>Hot Games</h1>
+      <div className="games-grid" style={{ 
+        display: 'grid', 
+        gridTemplateColumns: 'repeat(4, 1fr)', 
+        gap: '20px', 
+        marginTop: '20px', 
+        width: '100%' 
+      }}>
+        {loading ? renderSkeletons(12) : 
+          hotGames.length > 0 ? hotGames.map(game => (
+            <GameCard key={game.id} game={game} />
+          )) : (
+            <div className="empty-message">No hot games available</div>
+          )
+        }
+      </div>
     </div>
   );
 };

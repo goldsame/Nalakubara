@@ -11,6 +11,40 @@ const GamePage = () => {
   const [playCount, setPlayCount] = useState(0);
   const [iframeLoaded, setIframeLoaded] = useState(false);
 
+  // 分类名称映射（中文到英文）
+  const categoryNames = {
+    'action': 'Action',
+    'adventure': 'Adventure',
+    'puzzle': 'Puzzle',
+    'shooting': 'Shooting',
+    'racing': 'Racing',
+    'strategy': 'Strategy',
+    'multiplayer': 'Multiplayer',
+    'io': 'IO',
+    'sports': 'Sports',
+    '2player': '2 Player',
+    'basketball': 'Basketball',
+    'beauty': 'Beauty',
+    'bike': 'Bike',
+    'car': 'Car',
+    'card': 'Card',
+    'casual': 'Casual',
+    'clicker': 'Clicker',
+    'controller': 'Controller',
+    'dressup': 'Dress Up',
+    'driving': 'Driving',
+    'escape': 'Escape',
+    'flash': 'Flash',
+    'fps': 'FPS',
+    'horror': 'Horror',
+    'mahjong': 'Mahjong',
+    'minecraft': 'Minecraft',
+    'pool': 'Pool',
+    'soccer': 'Soccer',
+    'stickman': 'Stickman',
+    'tower-defense': 'Tower Defense'
+  };
+
   useEffect(() => {
     // 从JSON数据中查找游戏
     const findGame = () => {
@@ -51,7 +85,7 @@ const GamePage = () => {
     return (
       <div className="game-page loading">
         <div className="loading-spinner"></div>
-        <p>加载游戏中...</p>
+        <p>Loading game...</p>
       </div>
     );
   }
@@ -59,52 +93,47 @@ const GamePage = () => {
   if (!game) {
     return (
       <div className="game-page not-found">
-        <h1>游戏未找到</h1>
-        <p>抱歉，我们找不到您请求的游戏。</p>
+        <h1>Game Not Found</h1>
+        <p>Sorry, we couldn't find the game you requested.</p>
       </div>
     );
   }
 
   return (
     <div className="game-page">
-      <h1 className="game-title">{game.title}</h1>
-      <div className="game-info">
-        <span className="game-category">{game.category}</span>
-        <span className="game-rating">★ {game.rating}</span>
-        <span className="game-plays">{playCount} 次游玩</span>
-      </div>
-      
-      <div className="game-container">
-        {!iframeLoaded && (
-          <div className="iframe-loading">
-            <div className="loading-spinner"></div>
-            <p>游戏加载中...</p>
+      <div className="game-details">
+        <div className="game-header">
+          <h1>{game.title}</h1>
+          <div className="game-meta">
+            <span className="game-category">{categoryNames[game.category] || game.category}</span>
+            <span className="game-rating">Rating: {game.rating}</span>
+            <span className="game-plays">Plays: {game.playCount.toLocaleString()}</span>
           </div>
-        )}
-        <iframe
-          src={game.gameUrl}
-          title={game.title}
-          className={`game-iframe ${iframeLoaded ? 'loaded' : ''}`}
-          allowFullScreen
-          allow="autoplay; fullscreen; microphone; camera; midi; monetization; xr-spatial-tracking; gamepad; gyroscope; accelerometer; magnetometer; clipboard-read; clipboard-write;"
-          frameBorder="0"
-          scrolling="no"
-          onLoad={handleIframeLoad}
-          onError={handleIframeError}
-        ></iframe>
-      </div>
-      
-      <div className="game-description">
-        <h2>游戏描述</h2>
-        <p>{game.description}</p>
-      </div>
-      
-      {game.instructions && (
-        <div className="game-instructions">
-          <h2>操作说明</h2>
-          <p>{game.instructions}</p>
         </div>
-      )}
+        
+        <div className="game-container">
+          <iframe
+            src={game.embedUrl}
+            title={game.title}
+            className="game-iframe"
+            allowFullScreen
+            onLoad={handleIframeLoad}
+            onError={handleIframeError}
+          ></iframe>
+        </div>
+        
+        <div className="game-info">
+          <div className="game-description">
+            <h2>Description</h2>
+            <p>{game.description}</p>
+          </div>
+          
+          <div className="game-instructions">
+            <h2>How to Play</h2>
+            <p>{game.instructions}</p>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

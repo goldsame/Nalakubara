@@ -6,6 +6,11 @@ echo ===================================
 :: 进入客户端目录
 cd /d e:\github\nalakubara3.0\client
 
+:: 确保public目录中有原始的games.json文件
+echo 正在复制原始游戏数据到public目录...
+if not exist "public" mkdir public
+copy /Y "e:\github\nalakubara3.0\client\src\data\games.json" "e:\github\nalakubara3.0\client\public\src\data\games.json" /B
+
 :: 强制重新构建
 echo 正在清除旧的构建文件...
 if exist "build" (
@@ -22,6 +27,12 @@ if %ERRORLEVEL% NEQ 0 (
 )
   
 echo 构建完成！
+
+:: 确保构建目录中有原始的games.json文件
+echo 正在复制原始游戏数据到构建目录...
+if not exist "build\src\data" mkdir "build\src\data"
+copy /Y "e:\github\nalakubara3.0\client\src\data\games.json" "e:\github\nalakubara3.0\client\build\src\data\games.json" /B
+copy /Y "e:\github\nalakubara3.0\client\src\data\games.json" "e:\github\nalakubara3.0\client\build\games.json" /B
 
 :: 关闭所有可能占用端口的进程
 echo 正在查找并关闭占用端口的进程...

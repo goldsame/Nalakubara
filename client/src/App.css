@@ -15,40 +15,69 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  background-color: #121212;
+}
+
+/* 主要布局容器 */
+.app-container {
+  display: flex;
+  flex: 1;
+  min-height: calc(100vh - 120px); /* 假设Header和Footer总高度为120px */
+}
+
+/* 内容区域样式 */
+.content-area {
+  margin-left: 200px; /* 与侧边栏宽度相同 */
+  width: calc(100% - 200px);
+  padding: 20px;
+  flex: 1;
   display: flex;
   flex-direction: column;
-  background-color: var(--bg-primary);
 }
 
-.main-layout {
-  display: flex;
-  flex: 1;
-  max-width: 1200px;
+/* 主内容区域 */
+.main-content {
+  max-width: 1400px;
   margin: 0 auto;
   width: 100%;
-  padding: 0 20px;
+  flex: 1;
 }
 
-.main-content {
-  flex: 1;
-  padding: 20px 0;
+/* 游戏网格 - 全局样式 */
+.games-grid {
+  display: grid !important;
+  grid-template-columns: repeat(4, 1fr) !important;
+  gap: 20px !important;
+  width: 100% !important;
+}
+
+/* 响应式调整 */
+@media (max-width: 1400px) {
+  .games-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+}
+
+@media (max-width: 992px) {
+  .games-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
 }
 
 @media (max-width: 768px) {
-  .main-layout {
-    flex-direction: column;
-    padding: 0 10px;
-  }
-  
-  .main-content {
-    padding: 10px 0;
+  .games-grid {
+    grid-template-columns: repeat(1, 1fr) !important;
   }
 }
 
-.App {
-  text-align: center;
+@media (max-width: 768px) {
+  .content-area {
+    margin-left: 0;
+    width: 100%;
+  }
 }
 
+/* 保留App-logo相关样式 */
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -60,21 +89,6 @@ body {
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
@@ -83,3 +97,66 @@ body {
     transform: rotate(360deg);
   }
 }
+
+/* 分类页面样式 */
+.category-page {
+  padding: 20px;
+}
+
+/* 移除这些重复的样式，从第95行到第145行 */
+/* 游戏卡片样式 
+.game-card {
+  background-color: #1e1f2e;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  margin: 0;
+}
+
+.game-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.game-image-container {
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%; 16:9 宽高比
+  overflow: hidden;
+}
+
+.game-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.game-info {
+  padding: 15px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.game-title {
+  font-size: 16px;
+  margin: 0 0 10px;
+  color: #e1e2ea;
+}
+
+.game-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: #8a8d98;
+  margin-top: auto;
+} */

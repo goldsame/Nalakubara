@@ -936,3 +936,28 @@ button {
     grid-template-columns: 1fr;
   }
 }
+
+/* 游戏详情页样式的最后部分 */
+@media (max-width: 576px) {
+  .game-detail-header {
+    height: 200px;
+  }
+  
+  .game-detail-title {
+    font-size: 24px;
+  }
+  
+  .similar-games-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* 删除这整段代码，不要保留注释 */
+.featured-page .game-card,
+.featured-page .game-image-container,
+.featured-page .game-image {
+  width: auto !important;
+  height: auto !important;
+  min-width: auto !important;
+  max-width: none !important;
+}

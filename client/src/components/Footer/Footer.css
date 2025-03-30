@@ -1,68 +1,67 @@
 .footer {
-  background-color: #1a1c2a;
-  color: #e1e2ea;
-  padding-top: 40px;
+  background-color: #1a1b26;
+  color: #fff;
+  padding: 30px 20px;
+  margin-left: 110px; /* 添加左边距，与左侧分类栏宽度一致 */
 }
 
-.footer-container {
+.footer-content {
   display: flex;
-  flex-wrap: wrap;
   justify-content: space-between;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 20px;
+  flex-wrap: wrap;
 }
 
 .footer-section {
-  flex: 1;
+  margin-bottom: 20px;
   min-width: 200px;
-  margin-bottom: 30px;
 }
 
-.footer-title {
+.footer-section h3 {
   font-size: 18px;
   margin-bottom: 15px;
   color: #fff;
 }
 
-.footer-text {
-  line-height: 1.6;
-  color: #8a8d9c;
-}
-
-.footer-links {
+.footer-section ul {
   list-style: none;
   padding: 0;
-  margin: 0;
 }
 
-.footer-links li {
-  margin-bottom: 10px;
+.footer-section ul li {
+  margin-bottom: 8px;
 }
 
-.footer-links a {
-  color: #8a8d9c;
+.footer-section ul li a {
+  color: #8a8b99;
   text-decoration: none;
   transition: color 0.2s;
 }
 
-.footer-links a:hover {
-  color: #6c5ce7;
+.footer-section ul li a:hover {
+  color: #fff;
 }
 
 .footer-bottom {
+  margin-top: 20px;
   text-align: center;
-  padding: 20px;
-  border-top: 1px solid #252736;
-  color: #8a8d9c;
+  padding-top: 20px;
+  border-top: 1px solid #2c2d3a;
+  color: #8a8b99;
 }
 
+/* 响应式调整 */
 @media (max-width: 768px) {
-  .footer-container {
+  .footer {
+    margin-left: 0;
+  }
+  
+  .footer-content {
     flex-direction: column;
   }
   
   .footer-section {
-    margin-bottom: 20px;
+    margin-bottom: 30px;
   }
 }

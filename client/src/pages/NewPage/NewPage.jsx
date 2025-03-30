@@ -1,23 +1,23 @@
+// 修改导入路径
 import React, { useState, useEffect } from 'react';
-import GameCard from '../../components/GameCard/GameCard';
-import './NewPage.css';
+import GameCard from '../../components/GameCard/GameCard'; // 使用src目录内的GameCard
 import gamesData from '../../data/games.json';
+import './NewPage.css'; // 如果有的话
 
 const NewPage = () => {
   const [newGames, setNewGames] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  // 在加载新游戏的地方
   useEffect(() => {
-    // 加载新游戏
     const loadNewGames = () => {
       setLoading(true);
       try {
-        // 反转数组，使最后添加的游戏排在最前面
-        const reversedGames = [...gamesData].reverse();
-        
-        // 筛选新游戏
-        const newG = reversedGames.filter(game => game.isNew);
-        setNewGames(newG);
+        // 筛选新游戏并倒序排列
+        const newGames = [...gamesData]
+          .filter(game => game.isNew)
+          .reverse();
+        setNewGames(newGames); // 修正这里：使用setNewGames而不是setGames
         setLoading(false);
       } catch (error) {
         console.error('加载新游戏失败:', error);
@@ -43,13 +43,13 @@ const NewPage = () => {
 
   return (
     <div className="new-page">
-      <h1>新游戏</h1>
+      <h1>New Games</h1>
       <div className="games-grid">
-        {loading ? renderSkeletons(12) : 
+        {loading ? renderSkeletons(12) :
           newGames.length > 0 ? newGames.map(game => (
             <GameCard key={game.id} game={game} />
           )) : (
-            <div className="empty-message">暂无新游戏</div>
+            <div className="empty-message">No new games available</div>
           )
         }
       </div>

@@ -1,45 +1,61 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import GameCard from '../../components/GameCard/GameCard';
-import './CategoryPage.css';
 import gamesData from '../../data/games.json';
+// 移除CSS导入
+// import './CategoryPage.css';
 
 const CategoryPage = () => {
   const { categoryId } = useParams();
   const [categoryGames, setCategoryGames] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [categoryName, setCategoryName] = useState('');
+  
+  // Category name mapping (Chinese to English)
+  const categoryNames = {
+    'action': 'Action',
+    'adventure': 'Adventure',
+    'puzzle': 'Puzzle',
+    'shooting': 'Shooting',
+    'racing': 'Racing',
+    'strategy': 'Strategy',
+    'multiplayer': 'Multiplayer',
+    'io': 'IO',
+    'sports': 'Sports',
+    '2player': '2 Player',
+    'basketball': 'Basketball',
+    'beauty': 'Beauty',
+    'bike': 'Bike',
+    'car': 'Car',
+    'card': 'Card',
+    'casual': 'Casual',
+    'clicker': 'Clicker',
+    'controller': 'Controller',
+    'dressup': 'Dress Up',
+    'driving': 'Driving',
+    'escape': 'Escape',
+    'flash': 'Flash',
+    'fps': 'FPS',
+    'horror': 'Horror',
+    'mahjong': 'Mahjong',
+    'minecraft': 'Minecraft',
+    'pool': 'Pool',
+    'soccer': 'Soccer',
+    'stickman': 'Stickman',
+    'tower-defense': 'Tower Defense'
+  };
 
   useEffect(() => {
-    // 加载分类游戏
     const loadCategoryGames = () => {
       setLoading(true);
       try {
-        // 反转数组，使最后添加的游戏排在最前面
-        const reversedGames = [...gamesData].reverse();
-        
-        // 筛选当前分类的游戏
-        const games = reversedGames.filter(game => game.category === categoryId);
+        // 筛选该分类的游戏并倒序排列
+        const games = [...gamesData]
+          .filter(game => game.category === categoryId)
+          .reverse();
         setCategoryGames(games);
-        
-        // 设置分类名称
-        const categories = {
-          'action': '动作',
-          'adventure': '冒险',
-          'arcade': '街机',
-          'io': 'IO游戏',
-          'multiplayer': '多人',
-          'puzzle': '益智',
-          'racing': '赛车',
-          'sports': '体育',
-          'shooting': '射击',
-          'strategy': '策略'
-        };
-        setCategoryName(categories[categoryId] || categoryId);
-        
         setLoading(false);
       } catch (error) {
-        console.error('加载分类游戏失败:', error);
+        console.error('Failed to load category games:', error);
         setLoading(false);
       }
     };
@@ -60,15 +76,41 @@ const CategoryPage = () => {
     ));
   };
 
+  // 页面样式
+  const pageStyle = {
+    padding: '20px',
+    maxWidth: '1200px',
+    margin: '0 auto'
+  };
+
+  const titleStyle = {
+    marginBottom: '20px',
+    fontSize: '28px',
+    color: '#333'
+  };
+
+  const gamesGridStyle = {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))',
+    gap: '20px'
+  };
+
+  const emptyMessageStyle = {
+    textAlign: 'center',
+    padding: '40px',
+    fontSize: '18px',
+    color: '#666'
+  };
+
   return (
-    <div className="category-page">
-      <h1>{categoryName}游戏</h1>
-      <div className="games-grid">
-        {loading ? renderSkeletons(12) : 
+    <div style={pageStyle}>
+      <h1 style={titleStyle}>{categoryNames[categoryId] || 'Category'} Games</h1>
+      <div style={gamesGridStyle}>
+        {loading ? renderSkeletons(12) :
           categoryGames.length > 0 ? categoryGames.map(game => (
             <GameCard key={game.id} game={game} />
           )) : (
-            <div className="empty-message">暂无{categoryName}游戏</div>
+            <div style={emptyMessageStyle}>No games in this category</div>
           )
         }
       </div>

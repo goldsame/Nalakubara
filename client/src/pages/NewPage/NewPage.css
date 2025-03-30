@@ -7,10 +7,12 @@
   color: #fff;
 }
 
-.games-grid {
+/* 修改选择器，限定在new-page类下，并使用4列布局 */
+.new-page .games-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-template-columns: repeat(4, 1fr);
   gap: 20px;
+  width: 100%;
 }
 
 .empty-message {
@@ -43,5 +45,24 @@
   }
   100% {
     background-position: -200% 0;
+  }
+}
+
+/* 响应式调整 */
+@media (max-width: 1400px) {
+  .new-page .games-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 992px) {
+  .new-page .games-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .new-page .games-grid {
+    grid-template-columns: repeat(1, 1fr);
   }
 }

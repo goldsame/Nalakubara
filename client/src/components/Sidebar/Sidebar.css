@@ -1,139 +1,128 @@
 .sidebar {
-  width: 220px;
-  background-color: #1a1c2a;
+  background-color: #1a1b26;
+  width: 180px; /* 保持宽度 */
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0; /* 修改这里，从60px改回0 */
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding-top: 60px; /* 添加顶部内边距，为顶部导航栏留出空间 */
+}
+
+/* 其余样式保持不变 */
+.sidebar-content {
+  display: flex;
+  flex-direction: column;
   height: 100%;
-  padding: 20px 0;
   overflow-y: auto;
-  flex-shrink: 0;
+  scrollbar-width: thin;
+  scrollbar-color: #444 #1a1b26;
 }
 
-.sidebar-section {
-  margin-bottom: 30px;
+/* 自定义滚动条样式 */
+.sidebar-content::-webkit-scrollbar {
+  width: 4px;
 }
 
-.sidebar-title {
-  font-size: 14px;
-  font-weight: 600;
-  color: #8a8d9c;
-  padding: 0 20px;
-  margin-bottom: 10px;
-  text-transform: uppercase;
+.sidebar-content::-webkit-scrollbar-track {
+  background: #1a1b26;
+}
+
+.sidebar-content::-webkit-scrollbar-thumb {
+  background-color: #444;
+  border-radius: 4px;
 }
 
 .sidebar-item {
   display: flex;
   align-items: center;
-  padding: 10px 20px;
-  color: #e1e2ea;
+  padding: 10px 15px;
+  color: #fff;
   text-decoration: none;
   transition: background-color 0.2s;
+  margin-bottom: 2px;
+  white-space: nowrap; /* 防止文字换行 */
 }
 
 .sidebar-item:hover {
-  background-color: #252736;
+  background-color: #2c2d3a;
 }
 
 .sidebar-item.active {
-  background-color: #2d2f40;
-  color: #6c5ce7;
-  font-weight: 500;
+  background-color: #7e57c2;
 }
 
 .sidebar-item i {
-  width: 20px;
-  height: 20px;
-  margin-right: 12px;
-  display: inline-block;
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
+  margin-right: 10px;
+  font-size: 18px;
+  width: 20px; /* 固定宽度确保对齐 */
+  text-align: center; /* 确保图标居中 */
 }
 
-/* 图标样式 */
-.icon-home:before { content: "🏠"; }
-.icon-fire:before { content: "🔥"; }
-.icon-new:before { content: "✨"; }
-.icon-star:before { content: "⭐"; }
-.icon-category:before { content: "📂"; }
-.icon-action:before { content: "⚡"; }
-.icon-adventure:before { content: "🌍"; }
-.icon-arcade:before { content: "🎮"; }
-.icon-io:before { content: "🌐"; }
-.icon-multiplayer:before { content: "👥"; }
-.icon-puzzle:before { content: "🧩"; }
-.icon-racing:before { content: "🏎️"; }
-.icon-sports:before { content: "⚽"; }
-.icon-shooting:before { content: "🎯"; }
-.icon-strategy:before { content: "♟️"; }
-
-@media (max-width: 768px) {
-  .sidebar {
-    width: 60px;
-    padding: 20px 0;
-  }
-  
-  .sidebar-title {
-    display: none;
-  }
-  
-  .sidebar-item {
-    padding: 15px 0;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .sidebar-item i {
-    margin-right: 0;
-    margin-bottom: 5px;
-  }
-  
-  .sidebar-item span {
-    font-size: 10px;
-  }
+.sidebar-category-title {
+  color: #8a8b99;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 15px 15px 5px;
+  margin-top: 5px;
 }
 
-.sidebar-nav {
-  display: flex;
-  flex-direction: column;
+.categories-container {
+  overflow-y: auto;
+  flex-grow: 1;
 }
 
-.sidebar-link {
+.sidebar-item .category-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
   display: flex;
   align-items: center;
-  padding: 10px 20px;
-  color: var(--text-primary);
-  transition: background-color 0.3s, color 0.3s;
-}
-
-.sidebar-link:hover, .sidebar-link.active {
-  background-color: var(--bg-tertiary);
-  color: var(--accent-color);
-}
-
-.sidebar-link i {
-  width: 24px;
+  justify-content: center;
   margin-right: 10px;
-  font-size: 16px;
+  position: relative;
 }
 
-.sidebar-divider {
-  height: 1px;
-  background-color: var(--border-color);
-  margin: 15px 0;
-}
-
-.sidebar-heading {
-  padding: 0 20px;
-  margin-bottom: 10px;
+.sidebar-item .category-icon i {
+  margin: 0; /* 重置图标的margin */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* 确保图标完全居中 */
   font-size: 14px;
-  color: var(--text-secondary);
-  text-transform: uppercase;
-  letter-spacing: 1px;
 }
 
-@media (max-width: 992px) {
-  .sidebar {
-    display: none;
-  }
-}
+/* 保留原有的分类图标颜色 */
+.action-icon { background-color: #ff9800; }
+.adventure-icon { background-color: #4caf50; }
+.puzzle-icon { background-color: #9c27b0; }
+.shooting-icon { background-color: #f44336; }
+.racing-icon { background-color: #e91e63; }
+.strategy-icon { background-color: #795548; }
+.multiplayer-icon { background-color: #5c6bc0; }
+.io-icon { background-color: #00bcd4; }
+.sports-icon { background-color: #4caf50; }
+.player2-icon { background-color: #673ab7; }
+.basketball-icon { background-color: #ff5722; }
+.beauty-icon { background-color: #9c27b0; }
+.bike-icon { background-color: #2196f3; }
+.car-icon { background-color: #607d8b; }
+.card-icon { background-color: #ff5722; }
+.casual-icon { background-color: #8bc34a; }
+.clicker-icon { background-color: #ffc107; }
+.controller-icon { background-color: #3f51b5; }
+.dressup-icon { background-color: #e91e63; }
+.driving-icon { background-color: #795548; }
+.escape-icon { background-color: #009688; }
+.flash-icon { background-color: #ff9800; }
+.fps-icon { background-color: #f44336; }
+.horror-icon { background-color: #212121; }
+.mahjong-icon { background-color: #4caf50; }
+.minecraft-icon { background-color: #8bc34a; }
+.pool-icon { background-color: #2196f3; }
+.soccer-icon { background-color: #4caf50; }
+.stickman-icon { background-color: #607d8b; }
+.tower-defense-icon { background-color: #795548; }
