@@ -65,20 +65,19 @@ const Sidebar = () => {
   return (
     <div className="sidebar">
       <div className="sidebar-content">
-        <NavLink to="/" exact className="sidebar-item" activeClassName="active">
+        <NavLink to="/" className={({isActive}) => isActive ? "sidebar-item active" : "sidebar-item"}>
           <i className="fas fa-home"></i>
           <span>Home</span>
         </NavLink>
-        <NavLink to="/hot" className="sidebar-item" activeClassName="active">
+        <NavLink to="/hot" className={({isActive}) => isActive ? "sidebar-item active" : "sidebar-item"}>
           <i className="fas fa-fire"></i>
           <span>Hot</span>
         </NavLink>
-        <NavLink to="/new" className="sidebar-item" activeClassName="active">
+        <NavLink to="/new" className={({isActive}) => isActive ? "sidebar-item active" : "sidebar-item"}>
           <i className="fas fa-plus"></i>
           <span>New Games</span>
         </NavLink>
-        {/* 修改这里的链接，从/multiplayer改为/category/multiplayer */}
-        <NavLink to="/category/multiplayer" className="sidebar-item" activeClassName="active">
+        <NavLink to="/category/multiplayer" className={({isActive}) => isActive ? "sidebar-item active" : "sidebar-item"}>
           <i className="fas fa-users"></i>
           <span>Multiplayer</span>
         </NavLink>
@@ -94,8 +93,7 @@ const Sidebar = () => {
               <NavLink 
                 key={category}
                 to={`/category/${category}`}
-                className="sidebar-item"
-                activeClassName="active"
+                className={({isActive}) => isActive ? "sidebar-item active" : "sidebar-item"}
               >
                 <div className={`category-icon ${categoryInfo.className}`}>
                   <i className={categoryInfo.icon}></i>

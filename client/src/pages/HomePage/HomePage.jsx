@@ -33,41 +33,44 @@ const HomePage = () => {
     // 可以根据需要添加更多分类颜色
   };
   
-  // 分类名称映射（英文到中文）
+  // 分类名称映射（英文到英文，保持原样或使用更友好的显示名称）
   const categoryNames = {
-    action: "动作",
-    adventure: "冒险",
-    puzzle: "解谜",
-    shooting: "射击",
-    racing: "赛车",
-    strategy: "策略",
-    multiplayer: "多人",
+    action: "Action",
+    adventure: "Adventure",
+    puzzle: "Puzzle",
+    shooting: "Shooting",
+    racing: "Racing",
+    strategy: "Strategy",
+    multiplayer: "Multiplayer",
     io: "IO",
-    sports: "体育",
-    beauty: "美妆",
-    card: "卡牌",
-    driving: "驾驶",
-    escape: "密室逃脱",
-    pool: "台球"
+    sports: "Sports",
+    beauty: "Beauty",
+    card: "Card",
+    driving: "Driving",
+    escape: "Escape",
+    pool: "Pool"
     // 可以根据需要添加更多分类名称
+  };
+  
+  // 获取新游戏的函数，按添加日期倒序排序
+  const getNewGames = () => {
+    // 筛选出标记为新游戏的游戏
+    const newGamesData = gamesData.filter(game => game.isNew || game.addedDate);
+    
+    // 按添加日期倒序排序，确保最新添加的游戏显示在最前面
+    return newGamesData.sort((a, b) => new Date(b.addedDate || 0) - new Date(a.addedDate || 0));
   };
   
   useEffect(() => {
     // 直接处理导入的数据
     try {
-      // 删除精选游戏的过滤
+      // 修改热门游戏的筛选逻辑：筛选出标记为热门的游戏
+      const popular = gamesData
+        .filter(game => game.isPopular === true)
+        .sort((a, b) => (b.playCount || 0) - (a.playCount || 0)); // 按播放次数排序
       
-      // 修改排序逻辑：按照添加日期排序，最新的在前面
-      const popular = [...gamesData].sort((a, b) => {
-        // 将日期字符串转换为Date对象进行比较
-        const dateA = new Date(a.addedDate);
-        const dateB = new Date(b.addedDate);
-        // 降序排列，最新的日期在前
-        return dateB - dateA;
-      });
-      
-      // 过滤出新游戏
-      const newGamesData = gamesData.filter(game => game.isNew);
+      // 使用getNewGames函数获取新游戏，确保排序一致
+      const newGamesData = getNewGames();
       
       // 从游戏数据中提取所有唯一的分类
       const uniqueCategories = [...new Set(gamesData.map(game => game.category))];
@@ -85,7 +88,6 @@ const HomePage = () => {
         };
       });
       
-      // 删除设置精选游戏
       setPopularGames(popular);
       setNewGames(newGamesData);
       setCategories(categoriesData);
@@ -176,7 +178,7 @@ const HomePage = () => {
         </div>
       </section>
       
-      {/* 新游戏部分保持不变 */}
+      {/* 新游戏部分 - 使用getNewGames函数获取排序后的新游戏 */}
       <section className="new-games-section">
         <div className="section-header">
           <h2>New Games</h2>
