@@ -5,7 +5,7 @@
   position: fixed;
   left: 0;
   top: 0;
-  z-index: 100;
+  z-index: 1000;
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -20,7 +20,7 @@
   }
   
   /* 当父容器有mobile-sidebar-visible类时显示 */
-  .sidebar-container.mobile-sidebar-visible .sidebar {
+  .mobile-sidebar-visible .sidebar {
     transform: translateX(0); /* 显示 */
   }
 }

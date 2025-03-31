@@ -3,16 +3,29 @@
   padding: 10px 20px;
   position: sticky;
   top: 0;
-  z-index: 1001; /* 确保比侧边栏的z-index高 */
+  z-index: 1001;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .header-content {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
   max-width: 1200px;
   margin: 0 auto;
+}
+
+/* 顶部行样式 */
+.top-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+/* 底部行样式 */
+.bottom-row {
+  display: flex;
+  align-items: center;
 }
 
 .logo a {
@@ -34,7 +47,8 @@
   background-color: #2c2d3a;
   border-radius: 20px;
   padding: 5px 15px;
-  width: 300px;
+  width: 100%;
+  margin-left: 10px;
 }
 
 .search-container input {
@@ -67,7 +81,8 @@
   align-items: center;
 }
 
-.admin-button {
+/* 将admin-button改为login-button */
+.login-button {
   background-color: #7e57c2;
   border-radius: 4px;
   color: white;
@@ -77,25 +92,24 @@
   transition: background-color 0.2s;
 }
 
-.admin-button:hover {
+.login-button:hover {
   background-color: #6a45b6;
 }
 
 /* 汉堡菜单按钮样式 */
 .menu-toggle {
-  display: none;
+  display: block;
   background: none;
   border: none;
   cursor: pointer;
   padding: 10px;
-  margin-right: 10px;
 }
 
 .menu-icon {
   display: block;
   width: 25px;
   height: 3px;
-  background-color: #fff; /* 改为白色以匹配深色背景 */
+  background-color: #fff;
   position: relative;
 }
 
@@ -105,7 +119,7 @@
   position: absolute;
   width: 100%;
   height: 100%;
-  background-color: #fff; /* 改为白色以匹配深色背景 */
+  background-color: #fff;
   left: 0;
 }
 
@@ -117,38 +131,13 @@
   top: 8px;
 }
 
-/* 响应式设计 */
+/* 响应式设计 - 保持两行布局 */
 @media (max-width: 768px) {
-  .menu-toggle {
-    display: block;
-    order: 1;
-  }
-  
-  .logo {
-    order: 2;
-  }
-  
-  .search-container {
-    order: 3;
+  .top-row, .bottom-row {
     width: 100%;
-    margin: 10px 0;
-  }
-  
-  .nav-buttons {
-    order: 4;
-  }
-  
-  .header-content {
-    flex-wrap: wrap;
-    justify-content: space-between;
-  }
-  
-  /* 在移动设备上调整布局 */
-  .logo, .menu-toggle, .nav-buttons {
-    flex: 0 0 auto;
   }
   
   .search-container {
-    flex: 1 0 100%;
+    width: 100%;
   }
 }
