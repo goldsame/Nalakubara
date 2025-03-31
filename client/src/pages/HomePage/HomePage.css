@@ -70,7 +70,23 @@
   background-color: #7e57c2 !important;
 }
 
-/* 添加分类图标样式 */
+/* 修改分类卡片样式 - 改为图标在左侧，文字在右侧 */
+.category-card {
+  display: flex !important;
+  align-items: center !important;
+  padding: 15px !important;
+  border-radius: 8px !important;
+  background-color: #1e1f2b !important; /* 深色背景 */
+  text-decoration: none !important;
+  transition: transform 0.2s, box-shadow 0.2s !important;
+}
+
+.category-card:hover {
+  transform: translateY(-5px) !important;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* 修改分类图标样式 */
 .category-icon {
   width: 40px !important;
   height: 40px !important;
@@ -78,18 +94,31 @@
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
-  margin-right: 10px !important;
-  position: relative !important;
+  margin-right: 15px !important;
+  flex-shrink: 0 !important;
 }
 
 .category-icon i {
-  margin: 0 !important; /* 重置图标的margin */
-  position: absolute !important;
-  top: 50% !important;
-  left: 50% !important;
-  transform: translate(-50%, -50%) !important; /* 确保图标完全居中 */
-  font-size: 18px !important;
+  font-size: 20px !important;
   color: white !important;
+}
+
+/* 修改分类信息样式 */
+.category-info {
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.category-info h3 {
+  margin: 0 !important;
+  font-size: 18px !important; /* 放大字体 */
+  color: #ffffff !important;
+  font-weight: 500 !important;
+}
+
+/* 隐藏游戏数量 */
+.category-info span {
+  display: none !important;
 }
 
 /* 保留原有的分类图标颜色 */

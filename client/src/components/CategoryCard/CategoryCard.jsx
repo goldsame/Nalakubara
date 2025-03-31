@@ -8,14 +8,12 @@ const CategoryCard = ({ category, onClick }) => {
       to={`/category/${category.id}`} 
       className="category-card"
       onClick={onClick}
-      style={{ backgroundColor: category.color }}
     >
-      <div className={`category-icon ${category.className}`}>
+      <div className={`category-icon ${category.className || category.id + '-icon'}`}>
         <i className={category.icon || 'fas fa-gamepad'}></i>
       </div>
       <div className="category-info">
         <h3>{category.name}</h3>
-        <span>{category.gamesCount} games</span>
       </div>
     </Link>
   );
