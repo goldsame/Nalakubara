@@ -7,6 +7,40 @@ import './HomePage.css';
 // 只保留游戏数据导入
 import gamesData from '../../data/games.json';
 
+// 导入所有分类信息
+const allCategories = [
+  { id: 'action', name: 'Action', icon: 'fas fa-bolt', className: 'action-icon' },
+  { id: 'adventure', name: 'Adventure', icon: 'fas fa-compass', className: 'adventure-icon' },
+  { id: 'puzzle', name: 'Puzzle', icon: 'fas fa-puzzle-piece', className: 'puzzle-icon' },
+  { id: 'shooting', name: 'Shooting', icon: 'fas fa-crosshairs', className: 'shooting-icon' },
+  { id: 'racing', name: 'Racing', icon: 'fas fa-car', className: 'racing-icon' },
+  { id: 'strategy', name: 'Strategy', icon: 'fas fa-chess', className: 'strategy-icon' },
+  { id: 'multiplayer', name: 'Multiplayer', icon: 'fas fa-users', className: 'multiplayer-icon' },
+  { id: 'io', name: 'IO', icon: 'fas fa-globe', className: 'io-icon' },
+  { id: 'sports', name: 'Sports', icon: 'fas fa-futbol', className: 'sports-icon' },
+  { id: '2player', name: '2 Player', icon: 'fas fa-user-friends', className: 'player2-icon' },
+  { id: 'basketball', name: 'Basketball', icon: 'fas fa-basketball-ball', className: 'basketball-icon' },
+  { id: 'beauty', name: 'Beauty', icon: 'fas fa-magic', className: 'beauty-icon' },
+  { id: 'bike', name: 'Bike', icon: 'fas fa-bicycle', className: 'bike-icon' },
+  { id: 'car', name: 'Car', icon: 'fas fa-car-side', className: 'car-icon' },
+  { id: 'card', name: 'Card', icon: 'fas fa-credit-card', className: 'card-icon' },
+  { id: 'casual', name: 'Casual', icon: 'fas fa-gamepad', className: 'casual-icon' },
+  { id: 'clicker', name: 'Clicker', icon: 'fas fa-mouse-pointer', className: 'clicker-icon' },
+  { id: 'controller', name: 'Controller', icon: 'fas fa-gamepad', className: 'controller-icon' },
+  { id: 'dressup', name: 'Dress Up', icon: 'fas fa-tshirt', className: 'dressup-icon' },
+  { id: 'driving', name: 'Driving', icon: 'fas fa-truck', className: 'driving-icon' },
+  { id: 'escape', name: 'Escape', icon: 'fas fa-door-open', className: 'escape-icon' },
+  { id: 'flash', name: 'Flash', icon: 'fas fa-bolt', className: 'flash-icon' },
+  { id: 'fps', name: 'FPS', icon: 'fas fa-crosshairs', className: 'fps-icon' },
+  { id: 'horror', name: 'Horror', icon: 'fas fa-ghost', className: 'horror-icon' },
+  { id: 'mahjong', name: 'Mahjong', icon: 'fas fa-th', className: 'mahjong-icon' },
+  { id: 'minecraft', name: 'Minecraft', icon: 'fas fa-cubes', className: 'minecraft-icon' },
+  { id: 'pool', name: 'Pool', icon: 'fas fa-circle', className: 'pool-icon' },
+  { id: 'soccer', name: 'Soccer', icon: 'fas fa-futbol', className: 'soccer-icon' },
+  { id: 'stickman', name: 'Stickman', icon: 'fas fa-running', className: 'stickman-icon' },
+  { id: 'tower-defense', name: 'Tower Defense', icon: 'fas fa-chess-rook', className: 'tower-defense-icon' }
+];
+
 const HomePage = () => {
   const [popularGames, setPopularGames] = useState([]);
   const [newGames, setNewGames] = useState([]);
@@ -112,16 +146,21 @@ const HomePage = () => {
       // 从游戏数据中提取所有唯一的分类
       const uniqueCategories = [...new Set(gamesData.map(game => game.category))];
       
-      // 创建分类对象数组
+      // 创建分类对象数组，使用allCategories中的图标信息
       const categoriesData = uniqueCategories.map(categoryId => {
         // 获取该分类下的游戏数量
         const gamesInCategory = gamesData.filter(game => game.category === categoryId).length;
+        
+        // 查找分类的图标信息
+        const categoryInfo = allCategories.find(c => c.id === categoryId);
         
         return {
           id: categoryId,
           name: categoryNames[categoryId] || categoryId, // 使用映射的英文名称，如果没有则使用原始ID
           color: categoryColors[categoryId] || "#607d8b", // 使用映射的颜色，如果没有则使用默认颜色
-          gamesCount: gamesInCategory
+          gamesCount: gamesInCategory,
+          icon: categoryInfo ? categoryInfo.icon : 'fas fa-gamepad', // 使用找到的图标或默认图标
+          className: categoryInfo ? categoryInfo.className : '' // 使用找到的类名或空字符串
         };
       });
       
@@ -233,7 +272,7 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* 新游戏部分 */}
+      {/* 新游戏部分 - 不限制显示数量 */}
       <section className="section new-games">
         <div className="section-header">
           <h2>New Games</h2>
@@ -256,7 +295,7 @@ const HomePage = () => {
               </div>
             ))
           ) : (
-            newGames.slice(0, 8).map(game => (
+            newGames.map(game => (
               <GameCard 
                 key={game.id} 
                 game={game} 

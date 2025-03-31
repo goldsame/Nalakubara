@@ -70,6 +70,60 @@
   background-color: #7e57c2 !important;
 }
 
+/* 添加分类图标样式 */
+.category-icon {
+  width: 40px !important;
+  height: 40px !important;
+  border-radius: 50% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin-right: 10px !important;
+  position: relative !important;
+}
+
+.category-icon i {
+  margin: 0 !important; /* 重置图标的margin */
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important; /* 确保图标完全居中 */
+  font-size: 18px !important;
+  color: white !important;
+}
+
+/* 保留原有的分类图标颜色 */
+.action-icon { background-color: #ff9800 !important; }
+.adventure-icon { background-color: #4caf50 !important; }
+.puzzle-icon { background-color: #9c27b0 !important; }
+.shooting-icon { background-color: #f44336 !important; }
+.racing-icon { background-color: #e91e63 !important; }
+.strategy-icon { background-color: #795548 !important; }
+.multiplayer-icon { background-color: #5c6bc0 !important; }
+.io-icon { background-color: #00bcd4 !important; }
+.sports-icon { background-color: #4caf50 !important; }
+.player2-icon { background-color: #673ab7 !important; }
+.basketball-icon { background-color: #ff5722 !important; }
+.beauty-icon { background-color: #9c27b0 !important; }
+.bike-icon { background-color: #2196f3 !important; }
+.car-icon { background-color: #607d8b !important; }
+.card-icon { background-color: #ff5722 !important; }
+.casual-icon { background-color: #8bc34a !important; }
+.clicker-icon { background-color: #ffc107 !important; }
+.controller-icon { background-color: #3f51b5 !important; }
+.dressup-icon { background-color: #e91e63 !important; }
+.driving-icon { background-color: #795548 !important; }
+.escape-icon { background-color: #009688 !important; }
+.flash-icon { background-color: #ff9800 !important; }
+.fps-icon { background-color: #f44336 !important; }
+.horror-icon { background-color: #212121 !important; }
+.mahjong-icon { background-color: #4caf50 !important; }
+.minecraft-icon { background-color: #8bc34a !important; }
+.pool-icon { background-color: #2196f3 !important; }
+.soccer-icon { background-color: #4caf50 !important; }
+.stickman-icon { background-color: #607d8b !important; }
+.tower-defense-icon { background-color: #795548 !important; }
+
 /* 响应式调整 */
 @media (max-width: 1200px) {
   .game-grid {
