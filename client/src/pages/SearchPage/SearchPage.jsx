@@ -8,33 +8,33 @@ const SearchPage = () => {
   const query = searchParams.get('q') || '';
   const [games, setGames] = useState([]);
   const [loading, setLoading] = useState(true);
-  
+
   useEffect(() => {
     const searchGames = async () => {
       setLoading(true);
       try {
-        // 这里应该是实际的API调用
-        // 模拟搜索结果
+        // This should be the actual API call
+        // Simulating search results
         const mockGames = Array(Math.floor(Math.random() * 8) + 1).fill().map((_, index) => ({
           id: `search-${index + 1}`,
-          title: `${query} 游戏 ${index + 1}`,
+          title: `${query} Game ${index + 1}`,
           image: `/game-${index + 1}.jpg`,
           category: index % 2 === 0 ? 'action' : 'adventure',
           rating: (4 + Math.random()).toFixed(1),
           plays: Math.floor(Math.random() * 10000)
         }));
-        
-        // 模拟网络延迟
+
+        // Simulating network delay
         setTimeout(() => {
           setGames(mockGames);
           setLoading(false);
         }, 500);
       } catch (error) {
-        console.error('搜索游戏失败:', error);
+        console.error('Failed to search games:', error);
         setLoading(false);
       }
     };
-    
+
     if (query) {
       searchGames();
     } else {
@@ -42,17 +42,17 @@ const SearchPage = () => {
       setLoading(false);
     }
   }, [query]);
-  
+
   return (
     <div className="search-page">
       <div className="search-header">
-        <h1>搜索结果: "{query}"</h1>
-        <p>找到 {games.length} 个游戏</p>
+        <h1>Search Results: "{query}"</h1>
+        <p>Found {games.length} games</p>
       </div>
-      
+
       <div className="game-grid">
         {loading ? (
-          // 使用骨架屏
+          // Using skeleton layout
           Array(4).fill().map((_, index) => (
             <div key={index} className="loading-card">
               <div className="skeleton" style={{ height: '180px' }}></div>
@@ -68,7 +68,7 @@ const SearchPage = () => {
           ))
         ) : (
           <div className="empty-message">
-            没有找到与 "{query}" 相关的游戏
+            No games found related to "{query}"
           </div>
         )}
       </div>
