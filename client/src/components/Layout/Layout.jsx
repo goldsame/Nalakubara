@@ -7,54 +7,28 @@ import './Layout.css';
 
 const Layout = ({ children }) => {
   const location = useLocation();
-  // eslint-disable-next-line no-unused-vars
-  const isHomePage = location.pathname === '/';
   
-  // 确保初始状态在移动设备上是隐藏的
-  const [sidebarVisible, setSidebarVisible] = useState(window.innerWidth > 768);
+  // 使用一个简单的状态变量
+  const [sidebarVisible, setSidebarVisible] = useState(false);
   
-  // 监听窗口大小变化
+  // 在组件挂载时根据屏幕宽度设置初始状态
   useEffect(() => {
-    const handleResize = () => {
-      setSidebarVisible(window.innerWidth > 768);
-    };
-    
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    setSidebarVisible(window.innerWidth > 768);
   }, []);
   
-  // 切换侧边栏显示状态的函数
+  // 简化的切换函数
   const toggleSidebar = () => {
-    console.log("Layout中的toggleSidebar被调用");
-    setSidebarVisible(prevState => !prevState);
-    // 使用alert显示状态变化，这样在手机上也能看到
-    alert(`侧边栏状态切换: ${sidebarVisible ? '显示->隐藏' : '隐藏->显示'}`);
-  };
-
-  // 添加一个简单的调试信息，直接显示在页面上
-  const debugStyle = {
-    position: 'fixed',
-    bottom: '10px',
-    right: '10px',
-    background: 'rgba(0,0,0,0.7)',
-    color: 'white',
-    padding: '10px',
-    zIndex: 9999,
-    fontSize: '12px'
+    setSidebarVisible(!sidebarVisible);
+    // 添加一个简单的调试提示
+    console.log("侧边栏状态:", !sidebarVisible ? "显示" : "隐藏");
   };
 
   return (
     <div className="layout">
-      {/* 确保正确传递toggleSidebar函数 */}
       <Header toggleSidebar={toggleSidebar} />
       
-      {/* 添加直接显示在页面上的调试信息 */}
-      <div style={debugStyle}>
-        侧边栏状态: {sidebarVisible ? '显示' : '隐藏'}<br/>
-        类名: sidebar-container {sidebarVisible ? 'mobile-sidebar-visible' : ''}
-      </div>
-      
       <div className="content-container">
+        {/* 使用mobile-sidebar-visible类控制显示 */}
         <div className={`sidebar-container ${sidebarVisible ? 'mobile-sidebar-visible' : ''}`}>
           <Sidebar />
         </div>

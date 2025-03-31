@@ -25,38 +25,13 @@ const Header = ({ toggleSidebar }) => {
     }
   };
 
-  // 添加汉堡菜单点击处理函数
-  const handleMenuToggle = (e) => {
-    console.log("汉堡菜单被点击");
-    console.log("toggleSidebar类型:", typeof toggleSidebar);
-    
-    // 移除preventDefault，可能会阻止事件冒泡
-    // e.preventDefault();
-    
-    if (typeof toggleSidebar === 'function') {
-      toggleSidebar();
-      // 添加一个临时的视觉反馈
-      const icon = e.currentTarget.querySelector('.menu-icon');
-      if (icon) {
-        icon.style.backgroundColor = '#7e57c2';
-        setTimeout(() => {
-          icon.style.backgroundColor = '#fff';
-        }, 300);
-      }
-    } else {
-      console.error("toggleSidebar 不是一个函数", toggleSidebar);
-      // 使用alert而不是console.log，这样在手机上也能看到
-      alert(`toggleSidebar 不是一个函数: ${typeof toggleSidebar}`);
-    }
-  };
-
   return (
     <header className="header">
       <div className="header-content">
-        {/* 确保汉堡菜单按钮正确绑定点击事件 */}
+        {/* 简化汉堡菜单按钮 */}
         <button 
           className="menu-toggle" 
-          onClick={handleMenuToggle} 
+          onClick={toggleSidebar} 
           aria-label="Toggle menu"
         >
           <span className="menu-icon"></span>

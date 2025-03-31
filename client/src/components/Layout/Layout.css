@@ -6,34 +6,23 @@
 
 .content-container {
   display: flex;
-  min-height: calc(100vh - 120px); /* 假设头部和底部总高度为120px */
-  position: relative; /* 添加相对定位 */
+  min-height: calc(100vh - 120px);
+  position: relative;
 }
 
 .sidebar-container {
-  width: 180px; /* 与Sidebar.css中的宽度保持一致 */
-  transition: all 0.3s ease;
-  background-color: #1f2029; /* 添加背景色，与主题匹配 */
+  width: 180px;
 }
 
 .main-content {
   flex: 1;
   padding: 20px;
   overflow-x: hidden;
-  margin-left: 180px; /* 为侧边栏留出空间，与sidebar宽度一致 */
+  margin-left: 180px; /* 为侧边栏留出空间 */
 }
 
 /* 响应式设计 */
 @media (max-width: 768px) {
-  .sidebar-container .sidebar {
-    transform: translateX(-100%); /* 默认隐藏 */
-    z-index: 999; /* 确保在移动设备上显示在内容之上 */
-  }
-  
-  .sidebar-container.mobile-sidebar-visible .sidebar {
-    transform: translateX(0); /* 显示时移回原位 */
-  }
-  
   .main-content {
     width: 100%;
     padding: 15px;
