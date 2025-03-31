@@ -171,20 +171,23 @@
 /* 响应式调整 */
 @media (max-width: 768px) {
   .game-detail-page {
-    padding: 0; /* 移除页面内边距 */
-    width: 100%;
+    padding: 0;
+    width: 100vw;
+    overflow-x: hidden;
   }
   
   .game-detail-container {
     padding: 10px;
-    border-radius: 0; /* 移除圆角 */
+    border-radius: 0;
     max-width: 100%;
     width: 100%;
+    box-shadow: none;
   }
   
   .game-content {
-    width: 100%;
-    margin: 0 0 15px 0;
+    width: 100vw;
+    margin-left: -10px;
+    margin-right: -10px;
     border-radius: 0;
   }
   

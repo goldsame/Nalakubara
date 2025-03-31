@@ -27,32 +27,56 @@ const Header = ({ toggleSidebar }) => {
 
   return (
     <header className="header">
-      {/* PC端显示 - 单行布局 */}
       <div className="header-content">
-        {/* 移动端显示 - 第一行：LOGO和登录按钮 */}
-        <div className="top-row">
+        {/* 移动端显示 */}
+        <div className="mobile-header">
+          {/* 第一行：LOGO和登录按钮 */}
+          <div className="top-row">
+            <div className="logo">
+              <Link to="/">
+                <span>Nalakubara</span>
+              </Link>
+            </div>
+            
+            <div className="nav-buttons">
+              <Link to="/admin" className="login-button">
+                Log in
+              </Link>
+            </div>
+          </div>
+          
+          {/* 第二行：汉堡菜单和搜索栏 */}
+          <div className="bottom-row">
+            <button 
+              className="menu-toggle" 
+              onClick={toggleSidebar} 
+              aria-label="Toggle menu"
+            >
+              <span className="menu-icon"></span>
+            </button>
+            
+            <div className="search-container">
+              <input
+                type="text"
+                placeholder="Search games..."
+                value={searchTerm}
+                onChange={handleSearchChange}
+                onKeyPress={handleKeyPress}
+              />
+              <button onClick={handleSearch}>
+                <i className="fas fa-search"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        {/* PC端显示 */}
+        <div className="desktop-header">
           <div className="logo">
             <Link to="/">
               <span>Nalakubara</span>
             </Link>
           </div>
-          
-          <div className="nav-buttons">
-            <Link to="/admin" className="login-button">
-              Log in
-            </Link>
-          </div>
-        </div>
-        
-        {/* 移动端显示 - 第二行：汉堡菜单和搜索栏 */}
-        <div className="bottom-row">
-          <button 
-            className="menu-toggle" 
-            onClick={toggleSidebar} 
-            aria-label="Toggle menu"
-          >
-            <span className="menu-icon"></span>
-          </button>
           
           <div className="search-container">
             <input
@@ -66,32 +90,12 @@ const Header = ({ toggleSidebar }) => {
               <i className="fas fa-search"></i>
             </button>
           </div>
-        </div>
-        
-        {/* PC端显示的元素 */}
-        <div className="logo">
-          <Link to="/">
-            <span>Nalakubara</span>
-          </Link>
-        </div>
-        
-        <div className="search-container">
-          <input
-            type="text"
-            placeholder="Search games..."
-            value={searchTerm}
-            onChange={handleSearchChange}
-            onKeyPress={handleKeyPress}
-          />
-          <button onClick={handleSearch}>
-            <i className="fas fa-search"></i>
-          </button>
-        </div>
-        
-        <div className="nav-buttons">
-          <Link to="/admin" className="login-button">
-            Log in
-          </Link>
+          
+          <div className="nav-buttons">
+            <Link to="/admin" className="login-button">
+              Log in
+            </Link>
+          </div>
         </div>
       </div>
     </header>

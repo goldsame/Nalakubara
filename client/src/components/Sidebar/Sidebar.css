@@ -5,7 +5,7 @@
   position: fixed;
   left: 0;
   top: 0;
-  z-index: 1000; /* 提高z-index */
+  z-index: 1000;
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -13,15 +13,18 @@
   transition: transform 0.3s ease;
 }
 
-/* 移动端样式 - 使用更高优先级的选择器 */
+/* 移动端样式 */
 @media (max-width: 768px) {
   .sidebar {
-    transform: translateX(-100%) !important; /* 使用!important确保优先级 */
+    transform: translateX(-100%);
+    width: 80%; /* 移动端侧边栏宽度 */
+    max-width: 250px;
   }
   
-  /* 直接针对.sidebar-container.mobile-sidebar-visible .sidebar */
+  /* 当有mobile-sidebar-visible类时显示 */
   .sidebar-container.mobile-sidebar-visible .sidebar {
-    transform: translateX(0) !important; /* 使用!important确保优先级 */
+    transform: translateX(0);
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
   }
 }
 
