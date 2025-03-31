@@ -81,7 +81,6 @@
   background-color: #6a45b6;
 }
 
-
 /* 汉堡菜单按钮样式 */
 .menu-toggle {
   display: none;
@@ -89,13 +88,14 @@
   border: none;
   cursor: pointer;
   padding: 10px;
+  margin-right: 10px;
 }
 
 .menu-icon {
   display: block;
   width: 25px;
   height: 3px;
-  background-color: #333;
+  background-color: #fff; /* 改为白色以匹配深色背景 */
   position: relative;
 }
 
@@ -105,7 +105,7 @@
   position: absolute;
   width: 100%;
   height: 100%;
-  background-color: #333;
+  background-color: #fff; /* 改为白色以匹配深色背景 */
   left: 0;
 }
 
@@ -121,5 +121,13 @@
 @media (max-width: 768px) {
   .menu-toggle {
     display: block;
+  }
+  
+  .search-container {
+    width: 200px; /* 在移动设备上减小搜索框宽度 */
+  }
+  
+  .header-content {
+    flex-wrap: wrap; /* 允许在小屏幕上换行 */
   }
 }

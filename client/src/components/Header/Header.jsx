@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './Header.css';
 
-const Header = () => {
+const Header = ({ toggleSidebar }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const navigate = useNavigate();
 
@@ -28,6 +28,11 @@ const Header = () => {
   return (
     <header className="header">
       <div className="header-content">
+        {/* 将汉堡菜单移到header-content内部 */}
+        <button className="menu-toggle" onClick={toggleSidebar}>
+          <span className="menu-icon"></span>
+        </button>
+        
         <div className="logo">
           <Link to="/">
             <span>Nalakubara</span>
