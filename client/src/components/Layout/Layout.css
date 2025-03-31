@@ -7,10 +7,11 @@
 .content-container {
   display: flex;
   min-height: calc(100vh - 120px); /* 假设头部和底部总高度为120px */
+  position: relative; /* 添加相对定位 */
 }
 
 .sidebar-container {
-  width: 250px;
+  width: 180px; /* 与Sidebar.css中的宽度保持一致 */
   transition: all 0.3s ease;
   background-color: #1f2029; /* 添加背景色，与主题匹配 */
 }
@@ -19,28 +20,22 @@
   flex: 1;
   padding: 20px;
   overflow-x: hidden;
+  margin-left: 180px; /* 为侧边栏留出空间，与sidebar宽度一致 */
 }
 
 /* 响应式设计 */
 @media (max-width: 768px) {
-  .sidebar-container {
-    position: fixed;
-    top: 60px; /* 假设头部高度为60px */
-    left: 0;
-    height: calc(100vh - 60px);
-    z-index: 1000;
-    background-color: #1f2029; /* 与主题匹配的背景色 */
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.3);
-    transform: translateX(0);
-    width: 250px; /* 确保宽度一致 */
+  .sidebar-container .sidebar {
+    transform: translateX(-100%); /* 默认隐藏 */
   }
   
-  .sidebar-container.hidden {
-    transform: translateX(-100%);
+  .sidebar-container.visible .sidebar {
+    transform: translateX(0); /* 显示时移回原位 */
   }
   
   .main-content {
     width: 100%;
     padding: 15px;
+    margin-left: 0; /* 在移动设备上不需要为侧边栏留出空间 */
   }
 }

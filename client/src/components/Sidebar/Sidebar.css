@@ -4,12 +4,13 @@
   height: 100vh;
   position: fixed;
   left: 0;
-  top: 0; /* 修改这里，从60px改回0 */
+  top: 0;
   z-index: 100;
   display: flex;
   flex-direction: column;
   overflow: hidden;
   padding-top: 60px; /* 添加顶部内边距，为顶部导航栏留出空间 */
+  transition: transform 0.3s ease; /* 添加过渡效果 */
 }
 
 /* 其余样式保持不变 */
@@ -36,6 +37,15 @@
   border-radius: 4px;
 }
 
+/* 添加响应式样式 */
+@media (max-width: 768px) {
+  .sidebar {
+    /* 在移动设备上，侧边栏应该遵循Layout.css中的显示/隐藏逻辑 */
+    /* 不需要在这里设置transform，因为这会被Layout.css中的类覆盖 */
+  }
+}
+
+/* 其余样式保持不变 */
 .sidebar-item {
   display: flex;
   align-items: center;

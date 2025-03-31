@@ -7,12 +7,13 @@ import './Layout.css';
 
 const Layout = ({ children }) => {
   const location = useLocation();
+  // eslint-disable-next-line no-unused-vars
   const isHomePage = location.pathname === '/';
   
-  // 添加一个状态来控制侧边栏的显示
+  // 确保初始状态在移动设备上是隐藏的
   const [sidebarVisible, setSidebarVisible] = useState(window.innerWidth > 768);
   
-  // 监听窗口大小变化，在移动设备上自动隐藏侧边栏
+  // 监听窗口大小变化
   useEffect(() => {
     const handleResize = () => {
       setSidebarVisible(window.innerWidth > 768);
@@ -24,15 +25,15 @@ const Layout = ({ children }) => {
   
   // 切换侧边栏显示状态的函数
   const toggleSidebar = () => {
-    setSidebarVisible(!sidebarVisible);
+    setSidebarVisible(prevState => !prevState);
   };
 
   return (
     <div className="layout">
       <Header toggleSidebar={toggleSidebar} />
       <div className="content-container">
-        {/* 添加条件类名，控制侧边栏显示 */}
-        <div className={`sidebar-container ${sidebarVisible ? 'visible' : 'hidden'}`}>
+        {/* 确保正确应用visible/hidden类名 */}
+        <div className={`sidebar-container ${sidebarVisible ? 'visible' : ''}`}>
           <Sidebar />
         </div>
         <main className="main-content">
