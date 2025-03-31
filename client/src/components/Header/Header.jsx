@@ -27,7 +27,12 @@ const Header = ({ toggleSidebar }) => {
 
   // 添加汉堡菜单点击处理函数
   const handleMenuToggle = (e) => {
-    e.preventDefault();
+    console.log("汉堡菜单被点击");
+    console.log("toggleSidebar类型:", typeof toggleSidebar);
+    
+    // 移除preventDefault，可能会阻止事件冒泡
+    // e.preventDefault();
+    
     if (typeof toggleSidebar === 'function') {
       toggleSidebar();
       // 添加一个临时的视觉反馈
@@ -39,7 +44,9 @@ const Header = ({ toggleSidebar }) => {
         }, 300);
       }
     } else {
-      alert('toggleSidebar 不是一个函数');
+      console.error("toggleSidebar 不是一个函数", toggleSidebar);
+      // 使用alert而不是console.log，这样在手机上也能看到
+      alert(`toggleSidebar 不是一个函数: ${typeof toggleSidebar}`);
     }
   };
 
@@ -51,7 +58,6 @@ const Header = ({ toggleSidebar }) => {
           className="menu-toggle" 
           onClick={handleMenuToggle} 
           aria-label="Toggle menu"
-          style={{display: 'block'}} // 强制显示，用于测试
         >
           <span className="menu-icon"></span>
         </button>
