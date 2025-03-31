@@ -29,7 +29,7 @@
 }
 
 /* 修改游戏网格样式，确保显示四列 */
-.home-page .games-grid {
+.game-grid {
   display: grid !important;
   grid-template-columns: repeat(4, 1fr) !important; /* 固定为4列 */
   gap: 20px !important;
@@ -37,60 +37,22 @@
   width: 100% !important;
 }
 
-/* 添加热门游戏网格样式，限制为两行 */
-.home-page .popular-games-section .games-grid.popular-games-container {
+/* 添加分类网格样式 */
+.category-grid {
   display: grid !important;
-  grid-template-columns: repeat(4, 1fr) !important; /* 每行4个游戏 */
-  grid-auto-rows: minmax(min-content, max-content) !important; /* 自动调整行高 */
-  grid-template-rows: repeat(2, auto) !important; /* 限制为2行 */
-  gap: 20px !important;
-  overflow: hidden !important; /* 防止超出的内容显示 */
-  max-height: 600px !important; /* 设置最大高度，确保只显示两行 */
-  margin-bottom: 30px !important; /* 添加底部间距 */
-}
-
-/* 确保GameCard在热门游戏区域不会超出容器 */
-.home-page .popular-games-section .games-grid.popular-games-container .game-card {
-  height: 100% !important;
-  max-height: 280px !important; /* 限制游戏卡片高度 */
-}
-
-/* 确保游戏图片在热门游戏区域正确显示 */
-.home-page .popular-games-section .games-grid.popular-games-container .game-image {
-  position: absolute !important;
-  top: 0 !important;
-  left: 0 !important;
-  width: 100% !important;
-  height: 100% !important;
-  object-fit: cover !important;
-}
-
-/* 确保分类网格只显示两行 */
-.home-page .categories-section .categories-grid {
-  display: grid !important;
-  grid-template-columns: repeat(5, 1fr) !important; /* 每行5个分类 */
-  grid-template-rows: repeat(2, auto) !important; /* 限制为2行 */
+  grid-template-columns: repeat(4, 1fr) !important; /* 每行4个分类 */
   gap: 15px !important;
-  overflow: hidden !important; /* 防止超出的内容显示 */
-  max-height: 300px !important; /* 设置最大高度，确保只显示两行 */
   margin-bottom: 20px !important;
 }
 
 /* 分类导航按钮样式 */
-.home-page .categories-header {
-  display: flex !important;
-  justify-content: space-between !important;
-  align-items: center !important;
-  margin-bottom: 15px !important;
-}
-
-.home-page .categories-navigation {
+.category-navigation {
   display: flex !important;
   align-items: center !important;
   gap: 10px !important;
 }
 
-.home-page .nav-button {
+.nav-button {
   background-color: #2c2d3a !important;
   color: white !important;
   border: none !important;
@@ -104,70 +66,47 @@
   transition: background-color 0.2s !important;
 }
 
-.home-page .nav-button:hover {
+.nav-button:hover {
   background-color: #7e57c2 !important;
-}
-
-.home-page .page-indicator {
-  font-size: 14px !important;
-  color: #8a8b99 !important;
 }
 
 /* 响应式调整 */
 @media (max-width: 1200px) {
-  .home-page .games-grid, 
-  .home-page .popular-games-section .games-grid,
-  .home-page .popular-games-section .popular-games-grid {
+  .game-grid {
     grid-template-columns: repeat(3, 1fr) !important;
   }
   
-  .home-page .popular-games-section .popular-games-container {
-    grid-template-columns: repeat(3, 1fr) !important;
-  }
-  
-  .home-page .categories-section .categories-grid {
+  .category-grid {
     grid-template-columns: repeat(4, 1fr) !important;
   }
 }
 
 @media (max-width: 992px) {
-  .home-page .games-grid, 
-  .home-page .popular-games-section .games-grid,
-  .home-page .popular-games-section .popular-games-grid {
+  .game-grid {
     grid-template-columns: repeat(2, 1fr) !important;
   }
   
-  .home-page .popular-games-section .popular-games-container {
-    grid-template-columns: repeat(2, 1fr) !important;
-  }
-  
-  .home-page .categories-section .categories-grid {
+  .category-grid {
     grid-template-columns: repeat(3, 1fr) !important;
   }
 }
 
 @media (max-width: 768px) {
-  .home-page .games-grid, 
-  .home-page .popular-games-section .games-grid,
-  .home-page .popular-games-section .popular-games-grid {
+  .game-grid {
     grid-template-columns: repeat(1, 1fr) !important;
   }
   
-  .home-page .popular-games-section .popular-games-container {
-    grid-template-columns: repeat(1, 1fr) !important;
-  }
-  
-  .home-page .categories-section .categories-grid {
+  .category-grid {
     grid-template-columns: repeat(2, 1fr) !important;
   }
   
-  .home-page .categories-header {
+  .section-header {
     flex-direction: column !important;
     align-items: flex-start !important;
     gap: 10px !important;
   }
   
-  .home-page .categories-navigation {
+  .category-navigation {
     align-self: center !important;
   }
 }

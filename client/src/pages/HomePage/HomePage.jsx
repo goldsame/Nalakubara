@@ -91,13 +91,13 @@ const HomePage = () => {
   };
   
   useEffect(() => {
-    // 设置页面标题
-    document.title = "Nalakubara - Free Online Gaming Platform";
-    
     // 初始化Google Analytics
     ReactGA.initialize('G-WQQNBKTGRG');
     // 发送页面浏览事件
     ReactGA.send({ hitType: "pageview", page: "/home" });
+    
+    // 设置页面标题
+    document.title = "Nalakubara - Free Online Gaming Platform";
     
     // 直接处理导入的数据
     try {
