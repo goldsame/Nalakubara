@@ -18,9 +18,10 @@ const Layout = ({ children }) => {
   
   // 简化的切换函数
   const toggleSidebar = () => {
-    setSidebarVisible(!sidebarVisible);
+    console.log("切换侧边栏");
+    setSidebarVisible(prevState => !prevState);
     // 添加一个简单的调试提示
-    console.log("侧边栏状态:", !sidebarVisible ? "显示" : "隐藏");
+    alert("侧边栏状态已切换"); // 添加alert以便在移动端确认函数被调用
   };
 
   return (

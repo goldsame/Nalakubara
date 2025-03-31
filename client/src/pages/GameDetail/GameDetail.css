@@ -172,8 +172,9 @@
 @media (max-width: 768px) {
   .game-detail-page {
     padding: 0;
-    width: 100vw;
+    width: 100%;
     overflow-x: hidden;
+    margin: 0;
   }
   
   .game-detail-container {
@@ -182,18 +183,30 @@
     max-width: 100%;
     width: 100%;
     box-shadow: none;
+    margin: 0;
   }
   
   .game-content {
-    width: 100vw;
-    margin-left: -10px;
-    margin-right: -10px;
+    width: 100%;
+    margin: 0 0 15px 0;
     border-radius: 0;
+    position: relative;
+    aspect-ratio: 16 / 9;
   }
   
   /* 确保iframe填满容器 */
   .game-iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
+    border: none;
+  }
+  
+  /* 移除可能导致偏移的边距 */
+  .game-description, 
+  .game-instructions {
+    padding: 0 5px;
   }
 }
