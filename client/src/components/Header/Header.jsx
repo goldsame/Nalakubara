@@ -25,11 +25,19 @@ const Header = ({ toggleSidebar }) => {
     }
   };
 
+  // 添加汉堡菜单点击处理函数
+  const handleMenuToggle = () => {
+    console.log("Menu toggle clicked");
+    if (toggleSidebar) {
+      toggleSidebar();
+    }
+  };
+
   return (
     <header className="header">
       <div className="header-content">
-        {/* 将汉堡菜单移到header-content内部 */}
-        <button className="menu-toggle" onClick={toggleSidebar}>
+        {/* 确保汉堡菜单按钮正确绑定点击事件 */}
+        <button className="menu-toggle" onClick={handleMenuToggle} aria-label="Toggle menu">
           <span className="menu-icon"></span>
         </button>
         

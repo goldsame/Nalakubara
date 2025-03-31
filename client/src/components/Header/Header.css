@@ -3,7 +3,7 @@
   padding: 10px 20px;
   position: sticky;
   top: 0;
-  z-index: 1000;
+  z-index: 1001; /* 确保比侧边栏的z-index高 */
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
@@ -121,13 +121,34 @@
 @media (max-width: 768px) {
   .menu-toggle {
     display: block;
+    order: 1;
+  }
+  
+  .logo {
+    order: 2;
   }
   
   .search-container {
-    width: 200px; /* 在移动设备上减小搜索框宽度 */
+    order: 3;
+    width: 100%;
+    margin: 10px 0;
+  }
+  
+  .nav-buttons {
+    order: 4;
   }
   
   .header-content {
-    flex-wrap: wrap; /* 允许在小屏幕上换行 */
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  
+  /* 在移动设备上调整布局 */
+  .logo, .menu-toggle, .nav-buttons {
+    flex: 0 0 auto;
+  }
+  
+  .search-container {
+    flex: 1 0 100%;
   }
 }

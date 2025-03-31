@@ -42,6 +42,8 @@
   .sidebar {
     /* 在移动设备上，侧边栏应该遵循Layout.css中的显示/隐藏逻辑 */
     /* 不需要在这里设置transform，因为这会被Layout.css中的类覆盖 */
+    width: 180px;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
   }
 }
 

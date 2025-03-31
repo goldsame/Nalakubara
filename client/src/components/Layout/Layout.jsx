@@ -25,6 +25,7 @@ const Layout = ({ children }) => {
   
   // 切换侧边栏显示状态的函数
   const toggleSidebar = () => {
+    console.log("Toggle sidebar called, current state:", sidebarVisible);
     setSidebarVisible(prevState => !prevState);
   };
 
@@ -32,8 +33,8 @@ const Layout = ({ children }) => {
     <div className="layout">
       <Header toggleSidebar={toggleSidebar} />
       <div className="content-container">
-        {/* 确保正确应用visible/hidden类名 */}
-        <div className={`sidebar-container ${sidebarVisible ? 'visible' : ''}`}>
+        {/* 使用mobile-sidebar-visible类名来控制移动端显示 */}
+        <div className={`sidebar-container ${sidebarVisible ? 'mobile-sidebar-visible' : ''}`}>
           <Sidebar />
         </div>
         <main className="main-content">

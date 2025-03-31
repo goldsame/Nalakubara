@@ -1,4 +1,4 @@
-.app-container {
+.layout {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -27,9 +27,10 @@
 @media (max-width: 768px) {
   .sidebar-container .sidebar {
     transform: translateX(-100%); /* 默认隐藏 */
+    z-index: 999; /* 确保在移动设备上显示在内容之上 */
   }
   
-  .sidebar-container.visible .sidebar {
+  .sidebar-container.mobile-sidebar-visible .sidebar {
     transform: translateX(0); /* 显示时移回原位 */
   }
   
