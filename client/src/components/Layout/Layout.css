@@ -12,6 +12,7 @@
 
 .sidebar-container {
   width: 180px;
+  z-index: 100; /* 确保z-index与sidebar一致 */
 }
 
 .main-content {
@@ -27,5 +28,10 @@
     width: 100%;
     padding: 15px;
     margin-left: 0; /* 在移动设备上不需要为侧边栏留出空间 */
+  }
+  
+  /* 移除可能冲突的样式 */
+  .sidebar-container {
+    width: 0; /* 在移动设备上不占用空间 */
   }
 }

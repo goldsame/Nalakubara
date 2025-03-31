@@ -5,7 +5,7 @@
   position: fixed;
   left: 0;
   top: 0;
-  z-index: 1000;
+  z-index: 100;
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -19,7 +19,7 @@
     transform: translateX(-100%); /* 默认隐藏 */
   }
   
-  /* 当父容器有mobile-sidebar-visible类时显示 */
+  /* 修正选择器，直接使用mobile-sidebar-visible类 */
   .mobile-sidebar-visible .sidebar {
     transform: translateX(0); /* 显示 */
   }

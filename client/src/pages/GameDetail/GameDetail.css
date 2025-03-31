@@ -149,20 +149,43 @@
   color: #e1e2ea;
 }
 
-
 .game-content {
   width: 100%;
-  height: 600px;
-  margin-bottom: 20px; /* 减少下方间距 */
+  position: relative;
+  aspect-ratio: 16 / 9; /* 保持16:9的宽高比 */
+  margin-bottom: 20px;
   border-radius: 8px;
   overflow: hidden;
   background-color: #000;
 }
 
 .game-iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   border: none;
 }
 
-/* 删除了.game-image-container和.game-detail-image相关样式的使用 */
+/* 响应式调整 */
+@media (max-width: 768px) {
+  .game-detail-container {
+    padding: 15px;
+  }
+  
+  .game-title {
+    font-size: 24px;
+  }
+  
+  .game-meta-info {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  
+  .game-content {
+    width: 100%;
+    height: auto;
+  }
+}
