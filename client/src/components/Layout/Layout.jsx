@@ -12,11 +12,14 @@ const Layout = ({ children }) => {
   
   // 确保初始状态在移动设备上是隐藏的
   const [sidebarVisible, setSidebarVisible] = useState(window.innerWidth > 768);
+  const [debugInfo, setDebugInfo] = useState('初始状态');
   
   // 监听窗口大小变化
   useEffect(() => {
     const handleResize = () => {
-      setSidebarVisible(window.innerWidth > 768);
+      const newState = window.innerWidth > 768;
+      setSidebarVisible(newState);
+      setDebugInfo(`窗口大小改变: ${window.innerWidth}px, 侧边栏: ${newState ? '显示' : '隐藏'}`);
     };
     
     window.addEventListener('resize', handleResize);
@@ -25,15 +28,35 @@ const Layout = ({ children }) => {
   
   // 切换侧边栏显示状态的函数
   const toggleSidebar = () => {
-    console.log("Toggle sidebar called, current state:", sidebarVisible);
-    setSidebarVisible(prevState => !prevState);
+    setSidebarVisible(prevState => {
+      const newState = !prevState;
+      setDebugInfo(`菜单点击: 侧边栏从${prevState ? '显示' : '隐藏'}变为${newState ? '显示' : '隐藏'}`);
+      return newState;
+    });
   };
 
   return (
     <div className="layout">
       <Header toggleSidebar={toggleSidebar} />
+      
+      {/* 添加调试信息显示 */}
+      <div style={{
+        position: 'fixed', 
+        bottom: '10px', 
+        right: '10px', 
+        background: 'rgba(0,0,0,0.7)', 
+        color: 'white', 
+        padding: '10px', 
+        zIndex: 9999,
+        fontSize: '12px'
+      }}>
+        调试: {debugInfo}<br/>
+        侧边栏状态: {sidebarVisible ? '显示' : '隐藏'}<br/>
+        类名: sidebar-container {sidebarVisible ? 'mobile-sidebar-visible' : ''}
+      </div>
+      
       <div className="content-container">
-        {/* 使用mobile-sidebar-visible类名来控制移动端显示 */}
+        {/* 确保正确应用visible/hidden类名 */}
         <div className={`sidebar-container ${sidebarVisible ? 'mobile-sidebar-visible' : ''}`}>
           <Sidebar />
         </div>
