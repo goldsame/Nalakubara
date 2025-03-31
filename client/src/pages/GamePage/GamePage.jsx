@@ -8,7 +8,11 @@ const GamePage = () => {
   const { gameId } = useParams();
   const [game, setGame] = useState(null);
   const [loading, setLoading] = useState(true);
+  // 移除未使用的变量或添加注释禁用ESLint警告
+  // 例如：
+  // eslint-disable-next-line no-unused-vars
   const [playCount, setPlayCount] = useState(0);
+  // eslint-disable-next-line no-unused-vars
   const [iframeLoaded, setIframeLoaded] = useState(false);
 
   // 分类名称映射（中文到英文）

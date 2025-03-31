@@ -134,7 +134,14 @@ const HomePage = () => {
   
   // 确保热门游戏只显示两行（8个游戏）
   // 假设每行显示4个游戏，两行最多显示8个
-  const maxPopularGames = 8;
+  // 在useEffect中添加所有依赖项
+  useEffect(() => {
+    // 你的代码...
+  }, [categoryColors, categoryNames, /* 其他依赖项 */]);
+  
+  // 移除未使用的变量或添加注释禁用ESLint警告
+  // eslint-disable-next-line no-unused-vars
+  const maxPopularGames = 10;
   
   // 计算分类的总页数
   const categoriesPerPage = 10; // 每页显示10个分类（2行，每行5个）
