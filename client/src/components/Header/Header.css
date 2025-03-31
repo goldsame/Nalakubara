@@ -9,25 +9,67 @@
 
 .header-content {
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
   max-width: 1200px;
   margin: 0 auto;
 }
 
-/* 顶部行样式 */
-.top-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 10px;
+/* PC端显示 */
+@media (min-width: 769px) {
+  .top-row, .bottom-row {
+    display: none; /* 隐藏移动端的两行布局 */
+  }
+  
+  .menu-toggle {
+    display: none; /* PC端不显示汉堡菜单 */
+  }
+  
+  .header-content {
+    flex-direction: row; /* 确保PC端是单行布局 */
+  }
+  
+  .logo, .search-container, .nav-buttons {
+    display: flex;
+  }
+  
+  .search-container {
+    flex: 1;
+    margin: 0 20px;
+  }
 }
 
-/* 底部行样式 */
-.bottom-row {
-  display: flex;
-  align-items: center;
+/* 移动端显示 */
+@media (max-width: 768px) {
+  .header-content {
+    flex-direction: column;
+  }
+  
+  .top-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  
+  .bottom-row {
+    display: flex;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .menu-toggle {
+    display: block;
+  }
+  
+  .search-container {
+    flex: 1;
+    margin-left: 10px;
+  }
 }
 
+/* 其他样式保持不变 */
 .logo a {
   display: flex;
   align-items: center;

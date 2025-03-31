@@ -5,7 +5,7 @@
   position: fixed;
   left: 0;
   top: 0;
-  z-index: 100;
+  z-index: 1000; /* 提高z-index */
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -13,15 +13,15 @@
   transition: transform 0.3s ease;
 }
 
-/* 添加移动端样式 */
+/* 移动端样式 - 使用更高优先级的选择器 */
 @media (max-width: 768px) {
   .sidebar {
-    transform: translateX(-100%); /* 默认隐藏 */
+    transform: translateX(-100%) !important; /* 使用!important确保优先级 */
   }
   
-  /* 修正选择器，直接使用mobile-sidebar-visible类 */
-  .mobile-sidebar-visible .sidebar {
-    transform: translateX(0); /* 显示 */
+  /* 直接针对.sidebar-container.mobile-sidebar-visible .sidebar */
+  .sidebar-container.mobile-sidebar-visible .sidebar {
+    transform: translateX(0) !important; /* 使用!important确保优先级 */
   }
 }
 
