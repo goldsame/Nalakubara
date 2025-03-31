@@ -26,7 +26,7 @@ const SearchPage = lazy(() => import('./pages/SearchPage/SearchPage'));
 const LoadingFallback = () => (
   <div className="page-loading">
     <div className="loading-spinner"></div>
-    <p>加载中...</p>
+    <p>Loading...</p>
   </div>
 );
 

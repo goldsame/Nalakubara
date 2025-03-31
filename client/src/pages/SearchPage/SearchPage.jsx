@@ -8,6 +8,11 @@ const SearchPage = () => {
   const query = searchParams.get('q') || '';
   const [games, setGames] = useState([]);
   const [loading, setLoading] = useState(true);
+  
+  // 设置页面标题
+  useEffect(() => {
+    document.title = "Search - Nalakubara";
+  }, []);
 
   useEffect(() => {
     const searchGames = async () => {
