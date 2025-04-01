@@ -174,8 +174,24 @@ const HomePage = () => {
     }
   }, []);
 
+  // 添加一个新的 useEffect 来修改分类网格为5列
+  useEffect(() => {
+    const style = document.createElement('style');
+    style.innerHTML = `
+      .category-grid {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr) !important;
+        gap: 20px;
+      }
+    `;
+    document.head.appendChild(style);
+    return () => {
+      document.head.removeChild(style);
+    };
+  }, []);
+
   // 计算当前显示的分类
-  const categoriesPerPage = 8;
+  const categoriesPerPage = 10; // 修改为10个，适应5列布局
   const displayedCategories = categories.slice(
     currentCategoryPage * categoriesPerPage,
     (currentCategoryPage + 1) * categoriesPerPage
