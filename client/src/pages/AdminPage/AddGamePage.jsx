@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './AddGamePage.css';
 import gamesData from '../../data/games.json'; // 导入games.json数据
+import { useNavigate } from 'react-router-dom';
 
 const AddGamePage = () => {
   const [gameTitle, setGameTitle] = useState('');
@@ -360,18 +361,20 @@ const AddGamePage = () => {
     }
   }, [gameTitle, gameDescription, categories]);
 
-  // 生成随机评分和游玩次数
+  // 生成随机评分和游玩次数 - 只在标题首次输入时生成
   useEffect(() => {
-    if (gameTitle) {
+    if (gameTitle && !rating) {
       // 生成4.0-5.0之间的随机评分
       const randomRating = (4 + Math.random()).toFixed(1);
       setRating(randomRating);
-      
+    }
+    
+    if (gameTitle && !playCount) {
       // 生成100以上的随机游玩次数
       const randomPlayCount = Math.floor(100 + Math.random() * 9900);
       setPlayCount(randomPlayCount);
     }
-  }, [gameTitle]);
+  }, [gameTitle, rating, playCount]);
 
   // 从iframe中提取游戏URL
   const extractGameUrl = (input) => {
@@ -383,7 +386,7 @@ const AddGamePage = () => {
     }
     return input;
   };
-
+  
   // 处理游戏URL输入变化
   const handleGameUrlChange = (e) => {
     const input = e.target.value;
@@ -392,12 +395,12 @@ const AddGamePage = () => {
     
     // 不再自动生成缩略图URL
   };
-
+  
   // 生成唯一ID
   const generateUniqueId = () => {
     return 'game_' + Date.now() + '_' + Math.floor(Math.random() * 1000);
   };
-
+  
   // 检查游戏是否重复
   const checkDuplicate = () => {
     // 检查标题重复
@@ -408,7 +411,7 @@ const AddGamePage = () => {
       alert(`标题重复: "${gameTitle}" 已存在于games.json中！`);
       return true;
     }
-
+  
     // 检查游戏URL重复
     const urlDuplicate = addedGames.find(game => 
       game.gameUrl === gameUrl || game.embedUrl === gameUrl
@@ -417,7 +420,7 @@ const AddGamePage = () => {
       alert(`游戏URL重复: "${gameUrl}" 已存在于games.json中！`);
       return true;
     }
-
+  
     // 检查图片URL重复
     const imageDuplicate = addedGames.find(game => 
       game.imageUrl === thumbnailUrl
@@ -426,25 +429,25 @@ const AddGamePage = () => {
       alert(`游戏图片URL重复: "${thumbnailUrl}" 已存在于games.json中！`);
       return true;
     }
-
+  
     return false;
   };
-
+  
   // 生成游戏JSON
   const generateGameJson = () => {
     if (!gameTitle || !gameDescription || !gameUrl || !thumbnailUrl) {
       setError('请填写游戏标题、描述、URL和图片URL');
       return;
     }
-
+  
     // 检查重复
     if (checkDuplicate()) {
       return;
     }
-
+  
     setLoading(true);
     setError('');
-
+  
     try {
       const gameData = {
         id: generateUniqueId(),
@@ -462,10 +465,10 @@ const AddGamePage = () => {
         playCount: playCount,
         addedDate: new Date().toISOString().split('T')[0]
       };
-
+  
       // 添加到已添加游戏列表中
       setAddedGames(prevGames => [...prevGames, gameData]);
-
+  
       // 添加到现有JSON输出
       const newJsonOutput = jsonOutput 
         ? jsonOutput + ',\n' + JSON.stringify(gameData, null, 2)
@@ -486,10 +489,10 @@ const AddGamePage = () => {
     } catch (err) {
       setError('生成JSON失败: ' + err.message);
     }
-
+  
     setLoading(false);
   };
-
+  
   // 复制JSON到剪贴板
   const copyJsonToClipboard = () => {
     navigator.clipboard.writeText(jsonOutput).then(() => {
@@ -498,13 +501,13 @@ const AddGamePage = () => {
       console.error('无法复制: ', err);
     });
   };
-
+  
   // 清空JSON输出
   const clearJsonOutput = () => {
     setJsonOutput('');
     // 不清空addedGames，因为它包含games.json中的数据
   };
-
+  
   return (
     <div className="add-game-page">
       <div className="game-input-section">
@@ -581,6 +584,35 @@ const AddGamePage = () => {
                 </option>
               ))}
             </select>
+            <small className="form-text">系统已自动识别分类，您可以手动修改</small>
+          </div>
+          
+          {/* 添加游戏评分输入框 */}
+          <div className="form-group">
+            <label>游戏评分 (4.0-5.0)</label>
+            <input
+              type="number"
+              min="4.0"
+              max="5.0"
+              step="0.1"
+              value={rating}
+              onChange={(e) => setRating(e.target.value)}
+              placeholder="游戏评分"
+            />
+            <small className="form-text">系统已随机生成评分，您可以手动修改</small>
+          </div>
+          
+          {/* 添加游玩次数输入框 */}
+          <div className="form-group">
+            <label>游玩次数</label>
+            <input
+              type="number"
+              min="0"
+              value={playCount}
+              onChange={(e) => setPlayCount(e.target.value)}
+              placeholder="游玩次数"
+            />
+            <small className="form-text">系统已随机生成游玩次数，您可以手动修改</small>
           </div>
           
           <div className="form-group checkbox-group">
