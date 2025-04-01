@@ -125,8 +125,84 @@ const AddGamePage = () => {
     return categoryMap[categoryId] || 'Game';
   };
 
-  // 其他现有的useEffect保持不变
-  // ...
+  // 检查游戏URL是否重复
+  useEffect(() => {
+    if (gameUrl) {
+      const urlDuplicate = addedGames.find(game => 
+        game.gameUrl === gameUrl || game.embedUrl === gameUrl
+      );
+      if (urlDuplicate) {
+        setUrlError(`URL重复: "${gameUrl}" 已存在于games.json中！`);
+      } else {
+        setUrlError('');
+      }
+    } else {
+      setUrlError('');
+    }
+  }, [gameUrl, addedGames]);
+
+  // 检查图片URL是否重复
+  useEffect(() => {
+    if (thumbnailUrl) {
+      const imageDuplicate = addedGames.find(game => 
+        game.imageUrl === thumbnailUrl
+      );
+      if (imageDuplicate) {
+        setImageError(`图片URL重复: "${thumbnailUrl}" 已存在于games.json中！`);
+      } else {
+        setImageError('');
+      }
+    } else {
+      setImageError('');
+    }
+  }, [thumbnailUrl, addedGames]);
+
+  // 从iframe中提取游戏URL
+  const extractGameUrl = (input) => {
+    const srcMatch = input.match(/src=["'](.*?)["']/);
+    return srcMatch ? srcMatch[1] : input;
+  };
+  
+  // 处理游戏URL输入变化
+  const handleGameUrlChange = (e) => {
+    const input = e.target.value;
+    if (input.includes('<iframe')) {
+      setGameUrl(extractGameUrl(input));
+    } else {
+      setGameUrl(input);
+    }
+  };
+  
+  // 生成唯一ID
+  const generateUniqueId = () => {
+    return 'game_' + Math.random().toString(36).substr(2, 9);
+  };
+  
+  // 检查游戏是否重复
+  const checkDuplicate = () => {
+    if (titleError || urlError || imageError) {
+      setError('请修复表单中的错误后再添加游戏');
+      return true;
+    }
+    return false;
+  };
+  
+  // 复制JSON到剪贴板
+  const copyJsonToClipboard = () => {
+    navigator.clipboard.writeText(jsonOutput)
+      .then(() => {
+        alert('JSON已复制到剪贴板');
+      })
+      .catch(err => {
+        console.error('复制失败: ', err);
+        alert('复制失败，请手动复制');
+      });
+  };
+  
+  // 清空JSON输出
+  const clearJsonOutput = () => {
+    setJsonOutput('');
+  };
 
   // 生成游戏JSON
   const generateGameJson = () => {
