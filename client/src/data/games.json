@@ -558,5 +558,37 @@
   "rating": "4.0",
   "playCount": 2087,
   "addedDate": "2025-04-01"
+},
+{
+  "id": "game_1743501831310_630",
+  "title": "WarStrike Unblocked",
+  "description": "WarStrike Unblocked is a premium 3D browser FPS game that offers both exciting multiplayer TD battles and an engaging campaign mode with 4 chapters, each with 6 missions. In WarStrike, you take the role of an MI-6 Special Soldier on a critical mission in the year 2012. Your goal is to capture the infamous international terrorist, TAL BRODY. He is known for orchestrating devastating terrorist attacks around the globe. And now TAL BRODY has unleashed a deadly virus capable of swiftly killing its victims. Those who survive face an even worse fate, transforming into relentless zombies. Will you be able to stop him before it's too late?\n\n",
+  "instructions": "Move: WASD keys\nJump: Spacebar\nLeft Shift: Run\nAim: Right Mouse Button\nShoot: Left Mouse Button\nReload: R key\nCrouch: C key\nChange Weapon: 1 and 2 keys\nMelee Attack: Q key or 3 key\nPick-up Weapon: E\nThrow Grenade: G key or 4 Key\nUse Medkit: H\nUse Pill: J\nUnlock Cursor: L\nPause Game: Tab key",
+  "category": "minecraft",
+  "imageUrl": "https://unblocked-games.s3.amazonaws.com/media/posts/614/responsive/warstrike-icon-lg.webp",
+  "gameUrl": "https://unblocked-games.s3.amazonaws.com/games/2024/unity3/warstrike/index.html",
+  "embedUrl": "https://unblocked-games.s3.amazonaws.com/games/2024/unity3/warstrike/index.html",
+  "isFeatured": false,
+  "isPopular": true,
+  "isNew": true,
+  "rating": "4.2",
+  "playCount": 2903,
+  "addedDate": "2025-04-01"
+},
+{
+  "id": "game_1743501939482_501",
+  "title": "Drift City",
+  "description": "Drift City is an unblocked drift game where you can perform particular tasks or freely wander in the city maps. You have many options regarding the game map and modes in this driving game. Choose whichever is best for you and remove dust from asphalt. Try to break your previous records every time!\n\nHow to Play Drift City\nStart with choosing which vehicle you want to drive in the beginning. At first, your car options are limited. But as you get money from drifting and other tasks, you can unlock new vehicles from the car selection menu. You can find both old but gold cars and incredibly futuristic cars here. Even a vast Hammer truck is at your disposal. You have three mode options to drive your chosen vehicle: Crash Mode, Career and Free Run. Try each one and enjoy the thrilling driving game!",
+  "instructions": "WASD or Arrow Keys: Steer\nSpace Key: Brake\nC Key: Camera View\nY Key: Telemetry",
+  "category": "racing",
+  "imageUrl": "https://unblocked-games.s3.amazonaws.com/media/posts/473/responsive/drift-city-unblocked-lg.jpg",
+  "gameUrl": "https://unblocked-games.s3.amazonaws.com/games/2024/gm/games2/drift-city/index.html",
+  "embedUrl": "https://unblocked-games.s3.amazonaws.com/games/2024/gm/games2/drift-city/index.html",
+  "isFeatured": false,
+  "isPopular": true,
+  "isNew": true,
+  "rating": "4.9",
+  "playCount": 4109,
+  "addedDate": "2025-04-01"
 }
 ]
