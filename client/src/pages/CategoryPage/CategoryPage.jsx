@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import gamesData from '../../data/games.json';
 import { Link } from 'react-router-dom';
+import './CategoryPage.css';
+import './CategoryCard.css'; // 导入新的CSS文件
 
 // 使用固定ID而不是动态生成的ID
 const CATEGORY_UNIQUE_ID = `category-page-container`;
@@ -221,22 +223,21 @@ const CategoryPage = ({ fixedCategory }) => {
         margin-bottom: 30px !important;
       }
       
-      #${CATEGORY_UNIQUE_ID} .category-card {
-        display: flex !important;
-        flex-direction: column !important;
-        background-color: #1e2130 !important;
-        border-radius: 8px !important;
+      #${CATEGORY_UNIQUE_ID} .category-image-container {
+        position: relative !important;
+        width: 100% !important;
+        padding-top: 75% !important; /* 4:3 比例 */
         overflow: hidden !important;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
-        transition: transform 0.3s ease, box-shadow 0.3s ease !important;
-        height: 100% !important;
-        text-decoration: none !important;
-        color: #fff !important;
-        cursor: pointer !important;
       }
       
-      /* 其余样式也添加 !important */
-      /* ... */
+      #${CATEGORY_UNIQUE_ID} .category-image {
+        position: absolute !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important;
+      }
     `;
     
     // 添加到文档头部
@@ -265,38 +266,39 @@ const CategoryPage = ({ fixedCategory }) => {
   };
 
   // 自定义游戏卡片渲染函数
+  // 修改renderGameCard函数，确保使用正确的类名
   const renderGameCard = (game) => {
-    // 处理图片URL
-    let imageSrc = '';
-    if (game.imageUrl && !game.imageUrl.includes('placeholder.com')) {
-      imageSrc = game.imageUrl.replace(/(\?|&)width=\d+/g, '');       
-      imageSrc = imageSrc.replace(/\?$/g, '');
-    } else {
-      imageSrc = '/images/placeholder-game.jpg';
-    }
+  // 处理图片URL
+  let imageSrc = '';
+  if (game.imageUrl && !game.imageUrl.includes('placeholder.com')) {
+    imageSrc = game.imageUrl.replace(/(\?|&)width=\d+/g, '');       
+    imageSrc = imageSrc.replace(/\?$/g, '');
+  } else {
+    imageSrc = '/images/placeholder-game.jpg';
+  }
 
-    return (
-      <Link to={`/game/${game.id}`} className="category-card" key={game.id}>
-        <div className="category-image-container">
-          <img 
-            src={imageSrc} 
-            alt={game.title} 
-            className="category-image"
-            onError={(e) => {
-              e.target.onerror = null;
-              e.target.src = '/images/placeholder-game.jpg';
-            }}
-          />
+  return (
+    <Link to={`/game/${game.id}`} className="category-card" key={game.id}>
+      <div className="category-image-container">
+        <img 
+          src={imageSrc} 
+          alt={game.title} 
+          className="category-image"
+          onError={(e) => {
+            e.target.onerror = null;
+            e.target.src = '/images/placeholder-game.jpg';
+          }}
+        />
+      </div>
+      <div className="category-info">
+        <h3 className="category-title">{game.title}</h3>
+        <div className="category-meta">
+          <span>{(game.playCount || 0).toLocaleString()} plays</span>
         </div>
-        <div className="category-info">
-          <h3 className="category-title">{game.title}</h3>
-          <div className="category-meta">
-            <span>{(game.playCount || 0).toLocaleString()} plays</span>
-          </div>
-        </div>
-      </Link>
-    );
-  };
+      </div>
+    </Link>
+  );
+};
 
   // 标题样式
   const headingStyle = {

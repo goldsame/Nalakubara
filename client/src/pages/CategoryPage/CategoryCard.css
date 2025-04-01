@@ -1,4 +1,5 @@
-.game-card {
+/* 分类页面游戏卡片样式 */
+.category-card {
   display: flex;
   flex-direction: column;
   background-color: #1e1f2b;
@@ -6,21 +7,23 @@
   overflow: hidden;
   transition: transform 0.2s, box-shadow 0.2s;
   height: 100%;
+  text-decoration: none;
+  color: inherit;
 }
 
-.game-card:hover {
+.category-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
-.game-thumbnail {
+.category-image-container {
   position: relative;
   width: 100%;
-  padding-top: 75%; /* 4:3 比例 */
+  padding-top: 75%; /* 4:3 比例，与首页保持一致 */
   overflow: hidden;
 }
 
-.game-thumbnail img {
+.category-image {
   position: absolute;
   top: 0;
   left: 0;
@@ -30,18 +33,18 @@
   transition: transform 0.3s;
 }
 
-.game-card:hover .game-thumbnail img {
+.category-card:hover .category-image {
   transform: scale(1.05);
 }
 
-.game-info {
+.category-info {
   padding: 15px;
   flex-grow: 1;
   display: flex;
   flex-direction: column;
 }
 
-.game-title {
+.category-title {
   font-size: 16px;
   margin: 0 0 10px;
   color: #e1e2ea;
@@ -50,7 +53,7 @@
   text-overflow: ellipsis;
 }
 
-.game-meta {
+.category-meta {
   display: flex;
   justify-content: space-between;
   font-size: 12px;
