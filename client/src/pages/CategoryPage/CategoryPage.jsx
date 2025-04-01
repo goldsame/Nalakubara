@@ -131,19 +131,10 @@ const CategoryPage = ({ fixedCategory }) => {
           games = games.filter(game => game.isPopular || (game.playCount && game.playCount > 10000))
                       .sort((a, b) => (b.playCount || 0) - (a.playCount || 0));
         } else if (currentCategory === 'new') {
-          // 新游戏 - 按添加日期排序
-          games = games.filter(game => game.isNew || game.addedDate)
-                      .sort((a, b) => {
-                        // 确保两个游戏都有添加日期
-                        if (a.addedDate && b.addedDate) {
-                          return new Date(b.addedDate) - new Date(a.addedDate);
-                        }
-                        // 如果只有一个游戏有添加日期，将有日期的排在前面
-                        if (a.addedDate) return -1;
-                        if (b.addedDate) return 1;
-                        // 如果都没有日期，保持原顺序
-                        return 0;
-                      });
+          // 新游戏 - 按照在games.json中的位置倒序排列（后面的排在前面）
+          const newGames = games.filter(game => game.isNew || game.addedDate);
+          // 反转数组顺序，使得在JSON文件中靠后的游戏（最新添加的）显示在前面
+          games = newGames.reverse();
         } else if (currentCategory === 'featured') {
           // 精选游戏
           games = games.filter(game => game.isFeatured);
