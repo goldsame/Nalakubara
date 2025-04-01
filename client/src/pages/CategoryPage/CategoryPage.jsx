@@ -133,7 +133,17 @@ const CategoryPage = ({ fixedCategory }) => {
         } else if (currentCategory === 'new') {
           // 新游戏 - 按添加日期排序
           games = games.filter(game => game.isNew || game.addedDate)
-                      .sort((a, b) => new Date(b.addedDate || 0) - new Date(a.addedDate || 0));
+                      .sort((a, b) => {
+                        // 确保两个游戏都有添加日期
+                        if (a.addedDate && b.addedDate) {
+                          return new Date(b.addedDate) - new Date(a.addedDate);
+                        }
+                        // 如果只有一个游戏有添加日期，将有日期的排在前面
+                        if (a.addedDate) return -1;
+                        if (b.addedDate) return 1;
+                        // 如果都没有日期，保持原顺序
+                        return 0;
+                      });
         } else if (currentCategory === 'featured') {
           // 精选游戏
           games = games.filter(game => game.isFeatured);
