@@ -9,6 +9,10 @@ import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import Sidebar from './components/Sidebar/Sidebar';
 
+// 导入管理员相关组件
+import LoginPage from './pages/AdminPage/LoginPage';
+import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
+
 // 直接导入组件
 import GameDetail from './pages/GameDetail/GameDetail';
 import AddGamePage from './pages/AdminPage/AddGamePage';
@@ -29,10 +33,6 @@ const LoadingFallback = () => (
     <p>Loading...</p>
   </div>
 );
-
-// 在现有导入下添加
-import LoginPage from './pages/AdminPage/LoginPage';
-import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 
 function App() {
   return (
