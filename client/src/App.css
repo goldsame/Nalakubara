@@ -26,21 +26,18 @@ body {
 }
 
 /* 内容区域样式 */
+/* 修改内容区域样式，确保左右对称 */
 .content-area {
-  margin-left: 200px; /* 与侧边栏宽度相同 */
-  width: calc(100% - 200px);
-  padding: 20px;
   flex: 1;
+  padding: 20px;
+  overflow-y: auto;
   display: flex;
-  flex-direction: column;
+  justify-content: center; /* 居中内容 */
 }
 
-/* 主内容区域 */
 .main-content {
-  max-width: 1400px;
-  margin: 0 auto;
   width: 100%;
-  flex: 1;
+  max-width: 1400px; /* 限制最大宽度 */
 }
 
 /* 游戏网格 - 全局样式 */
