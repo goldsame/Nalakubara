@@ -38,8 +38,8 @@
     "instructions": "1 Player Mode\nUse the left mouse button to control the archer.\nUse the space key to jump.\nPVP Mode\nPlayer 1 = Use WASD to control the archer and left shift to jump.\nPlayer 2 = Use arrow keys to control the archer and right shift to jump.\n2 Player Mode\nPlayer 1 = Use WASD to control the archer and left shift to jump.\nPlayer 2 = Use arrow keys to control the archer and right shift to jump.",
     "category": "action",
     "imageUrl": "https://imgs.crazygames.com/ragdoll-archers_16x9/20240205020743/ragdoll-archers_16x9-cover?metadata=none&quality=70&width=615",
-    "gameUrl": "https://www.crazygames.com/embed/ragdoll-archers",
-    "embedUrl": "https://www.crazygames.com/embed/ragdoll-archers",
+    "gameUrl": "https://games.crazygames.com/en_US/ragdoll-archers/index.html?v=1.328",
+    "embedUrl": "https://games.crazygames.com/en_US/ragdoll-archers/index.html?v=1.328",
     "isFeatured": true,
     "isPopular": false,
     "isNew": true,
@@ -526,5 +526,21 @@
   "rating": "4.0",
   "playCount": 2914,
   "addedDate": "2025-03-30"
+},
+{
+  "id": "game_1743493563514_9",
+  "title": "Super Utilizer",
+  "description": "Super Utilizer is a thrilling arcade space shooter blending fast-paced action with match-3 strategy. Embark on a daring mission to clean up space by battling bizarre monsters, sorting interstellar trash, and upgrading your spaceship. Protect trade routes, conquer challenging bosses, and dive into modes like \"Survival\" and \"Invasion.\" Adventure awaits beyond the stars—gear up and make your mark!\n\n",
+  "instructions": "WASD or arrow keys or drag the left mouse = move\nSpace = bomb\nP = pause",
+  "category": "horror",
+  "imageUrl": "https://imgs.crazygames.com/super-utilizer_16x9/20250326084546/super-utilizer_16x9-cover?metadata=none&quality=70&width=615",
+  "gameUrl": "https://games.crazygames.com/en_US/super-utilizer/index.html?v=1.328",
+  "embedUrl": "https://games.crazygames.com/en_US/super-utilizer/index.html?v=1.328",
+  "isFeatured": false,
+  "isPopular": true,
+  "isNew": true,
+  "rating": "4.1",
+  "playCount": 2425,
+  "addedDate": "2025-04-01"
 }
 ]
