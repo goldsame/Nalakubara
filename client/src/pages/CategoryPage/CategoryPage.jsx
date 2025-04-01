@@ -2,9 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import gamesData from '../../data/games.json';
 import { Link } from 'react-router-dom';
-import './CategoryPage.css';
 // 移除不存在的CSS文件导入
-// import './CategoryCard.css'; 
+// import './CategoryPage.css';
 
 // 使用固定ID而不是动态生成的ID
 const CATEGORY_UNIQUE_ID = `category-page-container`;
