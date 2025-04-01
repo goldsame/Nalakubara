@@ -121,7 +121,7 @@ const HomePage = () => {
   // 筛选新游戏
   const newGames = [...gamesData].filter(game => game.isNew || game.addedDate);
   // 反转数组顺序，使得在JSON文件中靠后的游戏（最新添加的）显示在前面
-  return newGames.reverse().slice(0, 12); // 只显示前12个
+  return newGames.reverse(); // 移除 slice(0, 12) 限制，显示所有新游戏
   };
   
   useEffect(() => {
