@@ -13,11 +13,18 @@ const NewPage = () => {
     const loadNewGames = () => {
       setLoading(true);
       try {
-        // 筛选新游戏并倒序排列
+        // 筛选新游戏并按添加日期倒序排列
         const newGames = [...gamesData]
           .filter(game => game.isNew)
-          .reverse();
-        setNewGames(newGames); // 修正这里：使用setNewGames而不是setGames
+          .sort((a, b) => {
+            // 首先尝试按照添加日期排序
+            if (a.addedDate && b.addedDate) {
+              return new Date(b.addedDate) - new Date(a.addedDate);
+            }
+            // 如果没有日期，则按照原来的顺序
+            return 0;
+          });
+        setNewGames(newGames);
         setLoading(false);
       } catch (error) {
         console.error('加载新游戏失败:', error);
