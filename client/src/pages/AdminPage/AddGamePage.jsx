@@ -15,12 +15,16 @@ const AddGamePage = () => {
   const [jsonOutput, setJsonOutput] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  // 添加新的状态变量
   const [isFeatured, setIsFeatured] = useState(false);
   const [isPopular, setIsPopular] = useState(false);
+  // 添加存储已添加游戏信息的状态
   const [addedGames, setAddedGames] = useState([]);
+  // 添加重复检测提示状态
   const [titleError, setTitleError] = useState('');
   const [urlError, setUrlError] = useState('');
   const [imageError, setImageError] = useState('');
+  // 添加SEO标题状态
   const [seoTitle, setSeoTitle] = useState('');
 
   // 修改游戏分类列表，保持中文显示
@@ -157,6 +161,70 @@ const AddGamePage = () => {
     }
   }, [thumbnailUrl, addedGames]);
 
+  // 更新自动判断分类的逻辑
+  useEffect(() => {
+    if (gameTitle || gameDescription) {
+      // 根据标题和描述自动判断游戏分类
+      const titleAndDesc = (gameTitle + ' ' + gameDescription).toLowerCase();
+      
+      // 定义关键词与分类的映射
+      const keywordMap = {
+        'action': ['action', 'fight', 'battle', '动作', '战斗'],
+        'adventure': ['adventure', 'explore', '冒险', '探索'],
+        'arcade': ['arcade', '街机'],
+        'io': ['io', '.io'],
+        'multiplayer': ['multiplayer', 'multi player', '多人'],
+        'puzzle': ['puzzle', 'brain', '解谜', '益智'],
+        'racing': ['racing', 'race', 'car', 'drive', '赛车', '驾驶'],
+        'sports': ['sports', 'sport', 'ball', '体育', '运动'],
+        'shooting': ['shooting', 'shoot', 'gun', '射击'],
+        'strategy': ['strategy', 'tower', 'defense', '策略', '塔防'],
+        '2player': ['2 player', 'two player', '双人'],
+        'basketball': ['basketball', '篮球'],
+        'beauty': ['beauty', 'makeup', 'dress', '美容', '化妆'],
+        'bike': ['bike', 'bicycle', '自行车'],
+        'car': ['car', 'vehicle', '汽车'],
+        'card': ['card', 'cards', '卡牌'],
+        'casual': ['casual', '休闲'],
+        'clicker': ['clicker', 'click', '点击'],
+        'controller': ['controller', 'control', '控制'],
+        'dressup': ['dress up', 'dressup', '装扮'],
+        'driving': ['driving', 'drive', '驾驶'],
+        'escape': ['escape', 'room', '逃脱', '密室'],
+        'flash': ['flash'],
+        'fps': ['fps', 'first person', '第一人称'],
+        'horror': ['horror', 'scary', 'zombie', '恐怖', '僵尸'],
+        'mahjong': ['mahjong', '麻将'],
+        'minecraft': ['minecraft', 'mine', 'craft', '我的世界', '挖矿'],
+        'pool': ['pool', 'billiards', '台球', '桌球'],
+        'soccer': ['soccer', 'football', '足球'],
+        'stickman': ['stickman', 'stick', '火柴人'],
+        'tower-defense': ['tower defense', 'tower-defense', '塔防']
+      };
+      
+      // 检查标题和描述中是否包含关键词
+      for (const [categoryId, keywords] of Object.entries(keywordMap)) {
+        if (keywords.some(keyword => titleAndDesc.includes(keyword))) {
+          setCategory(categoryId);
+          break;
+        }
+      }
+    }
+  }, [gameTitle, gameDescription]);
+
+  // 生成随机评分和游玩次数 - 只在标题首次输入时生成
+  useEffect(() => {
+    if (gameTitle && !rating) {
+      // 生成4.0-5.0之间的随机评分
+      setRating((4 + Math.random()).toFixed(1));
+    }
+    
+    if (gameTitle && !playCount) {
+      // 生成100-10000之间的随机游玩次数
+      setPlayCount(Math.floor(100 + Math.random() * 9900));
+    }
+  }, [gameTitle, rating, playCount]);
+
   // 从iframe中提取游戏URL
   const extractGameUrl = (input) => {
     const srcMatch = input.match(/src=["'](.*?)["']/);
@@ -187,23 +255,6 @@ const AddGamePage = () => {
     return false;
   };
   
-  // 复制JSON到剪贴板
-  const copyJsonToClipboard = () => {
-    navigator.clipboard.writeText(jsonOutput)
-      .then(() => {
-        alert('JSON已复制到剪贴板');
-      })
-      .catch(err => {
-        console.error('复制失败: ', err);
-        alert('复制失败，请手动复制');
-      });
-  };
-  
-  // 清空JSON输出
-  const clearJsonOutput = () => {
-    setJsonOutput('');
-  };
-
   // 生成游戏JSON
   const generateGameJson = () => {
     if (!gameTitle || !gameDescription || !gameUrl || !thumbnailUrl) {
@@ -254,6 +305,9 @@ const AddGamePage = () => {
       setGameInstructions('');
       setGameUrl('');
       setThumbnailUrl('');
+      setCategory('action');
+      setIsFeatured(false);
+      setIsPopular(false);
       setSeoTitle(''); // 重置SEO标题
       
       // 生成新的随机评分和游玩次数
@@ -266,15 +320,28 @@ const AddGamePage = () => {
     setLoading(false);
   };
   
-  // 其他现有函数保持不变
-  // ...
+  // 复制JSON到剪贴板
+  const copyJsonToClipboard = () => {
+    navigator.clipboard.writeText(jsonOutput)
+      .then(() => {
+        alert('JSON已复制到剪贴板');
+      })
+      .catch(err => {
+        console.error('复制失败: ', err);
+        alert('复制失败，请手动复制');
+      });
+  };
+  
+  // 清空JSON输出
+  const clearJsonOutput = () => {
+    setJsonOutput('');
+  };
   
   return (
     <div className="add-game-page">
       <div className="game-input-section">
         <h2>输入游戏信息</h2>
         <div className="game-form">
-          {/* 现有表单字段 */}
           <div className="form-group">
             <label>游戏图片URL</label>
             <input
@@ -323,7 +390,6 @@ const AddGamePage = () => {
             <small className="form-text">系统已自动生成英文SEO标题，您可以手动修改</small>
           </div>
           
-          {/* 其余表单字段保持不变 */}
           <div className="form-group">
             <label>游戏描述</label>
             <textarea
@@ -334,7 +400,73 @@ const AddGamePage = () => {
             />
           </div>
           
-          {/* 其他表单字段... */}
+          <div className="form-group">
+            <label>游戏指南</label>
+            <textarea
+              value={gameInstructions}
+              onChange={(e) => setGameInstructions(e.target.value)}
+              placeholder="如何玩这个游戏..."
+              rows="2"
+            />
+          </div>
+          
+          <div className="form-group">
+            <label>游戏分类</label>
+            <select
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+            >
+              {categories.map(cat => (
+                <option key={cat.id} value={cat.id}>
+                  {cat.name}
+                </option>
+              ))}
+            </select>
+          </div>
+          
+          <div className="form-group">
+            <label>评分 (4.0-5.0)</label>
+            <input
+              type="number"
+              value={rating}
+              onChange={(e) => setRating(e.target.value)}
+              step="0.1"
+              min="4.0"
+              max="5.0"
+            />
+          </div>
+          
+          <div className="form-group">
+            <label>游玩次数</label>
+            <input
+              type="number"
+              value={playCount}
+              onChange={(e) => setPlayCount(e.target.value)}
+              min="100"
+            />
+          </div>
+          
+          <div className="form-group checkbox-group">
+            <label>
+              <input
+                type="checkbox"
+                checked={isFeatured}
+                onChange={(e) => setIsFeatured(e.target.checked)}
+              />
+              设为推荐游戏
+            </label>
+          </div>
+          
+          <div className="form-group checkbox-group">
+            <label>
+              <input
+                type="checkbox"
+                checked={isPopular}
+                onChange={(e) => setIsPopular(e.target.checked)}
+              />
+              设为热门游戏
+            </label>
+          </div>
           
           <button 
             onClick={generateGameJson} 
