@@ -12,7 +12,7 @@
     "isPopular": true,
     "isNew": true,
     "rating": "4.8",
-    "playCount": 1200000,
+    "playCount": 120,
     "addedDate": "2025-01-01"
   },
   {
@@ -28,7 +28,7 @@
     "isPopular": true,
     "isNew": false,
     "rating": "4.5",
-    "playCount": 980000,
+    "playCount": 98,
     "addedDate": "2025-01-02"
   },
   {
@@ -44,7 +44,7 @@
     "isPopular": false,
     "isNew": true,
     "rating": "4.3",
-    "playCount": 50000,
+    "playCount": 5000,
     "addedDate": "2025-01-03"
   },
   {
@@ -60,7 +60,7 @@
     "isPopular": true,
     "isNew": true,
     "rating": "4.4",
-    "playCount": 75000,
+    "playCount": 75,
     "addedDate": "2025-01-04"
   },
   {
@@ -76,7 +76,7 @@
     "isPopular": true,
     "isNew": true,
     "rating": "4.7",
-    "playCount": 85000,
+    "playCount": 850,
     "addedDate": "2025-01-05"
   },
   {
@@ -92,7 +92,7 @@
     "isPopular": false,
     "isNew": true,
     "rating": "4.0",
-    "playCount": 39961,
+    "playCount": 961,
     "addedDate": "2025-01-06"
   },
   {
@@ -108,7 +108,7 @@
     "isPopular": false,
     "isNew": true,
     "rating": "4.0",
-    "playCount": 97473,
+    "playCount": 473,
     "addedDate": "2025-01-07"
   },
   {
@@ -124,7 +124,7 @@
     "isPopular": false,
     "isNew": true,
     "rating": "4.7",
-    "playCount": 21059,
+    "playCount": 210,
     "addedDate": "2025-01-08"
   },
   {
@@ -140,7 +140,7 @@
     "isPopular": false,
     "isNew": true,
     "rating": "4",
-    "playCount": 27631,
+    "playCount": 276,
     "addedDate": "2025-01-09"
   },
   {
@@ -156,7 +156,7 @@
     "isPopular": false,
     "isNew": true,
     "rating": "4.2",
-    "playCount": 18500,
+    "playCount": 185,
     "addedDate": "2025-01-10"
   },
   {
@@ -172,7 +172,7 @@
     "isPopular": false,
     "isNew": true,
     "rating": "4.1",
-    "playCount": 5399,
+    "playCount": 399,
     "addedDate": "2025-01-11"
   },
   {
@@ -204,7 +204,7 @@
     "isPopular": false,
     "isNew": true,
     "rating": "4.7",
-    "playCount": 3858,
+    "playCount": 858,
     "addedDate": "2025-03-26"
   },
 {
@@ -220,7 +220,7 @@
   "isPopular": false,
   "isNew": true,
   "rating": "4.4",
-  "playCount": 3110,
+  "playCount": 110,
   "addedDate": "2025-03-29"
 },
 {
@@ -236,7 +236,7 @@
   "isPopular": false,
   "isNew": true,
   "rating": "4.1",
-  "playCount": 9702,
+  "playCount": 702,
   "addedDate": "2025-03-29"
 },
 {
@@ -252,7 +252,7 @@
   "isPopular": false,
   "isNew": true,
   "rating": "4.5",
-  "playCount": 9062,
+  "playCount": 906,
   "addedDate": "2025-03-29"
 },
 {
@@ -268,7 +268,7 @@
   "isPopular": true,
   "isNew": true,
   "rating": "4.3",
-  "playCount": 6544,
+  "playCount": 544,
   "addedDate": "2025-03-29"
 },
 {
@@ -284,7 +284,7 @@
   "isPopular": true,
   "isNew": true,
   "rating": "4.2",
-  "playCount": 5724,
+  "playCount": 724,
   "addedDate": "2025-03-29"
 },
 {
@@ -300,7 +300,7 @@
   "isPopular": true,
   "isNew": true,
   "rating": "4.7",
-  "playCount": 7818,
+  "playCount": 818,
   "addedDate": "2025-03-29"
 },
 {
@@ -316,7 +316,7 @@
   "isPopular": true,
   "isNew": true,
   "rating": "4.3",
-  "playCount": 5811,
+  "playCount": 811,
   "addedDate": "2025-03-29"
 },
 {
@@ -332,7 +332,7 @@
   "isPopular": true,
   "isNew": true,
   "rating": "4.7",
-  "playCount": 2687,
+  "playCount": 687,
   "addedDate": "2025-03-29"
 },
 {
@@ -348,7 +348,7 @@
   "isPopular": true,
   "isNew": true,
   "rating": "4.1",
-  "playCount": 7328,
+  "playCount": 328,
   "addedDate": "2025-03-29"
 },
 {
@@ -380,7 +380,7 @@
   "isPopular": true,
   "isNew": true,
   "rating": "4.4",
-  "playCount": 8932,
+  "playCount": 132,
   "addedDate": "2025-03-30"
 },
 {
@@ -396,7 +396,7 @@
   "isPopular": true,
   "isNew": true,
   "rating": "4.9",
-  "playCount": 8061,
+  "playCount": 61,
   "addedDate": "2025-03-30"
 },
 {
@@ -412,7 +412,7 @@
   "isPopular": true,
   "isNew": true,
   "rating": "4.3",
-  "playCount": 8963,
+  "playCount": 963,
   "addedDate": "2025-03-30"
 },
 {
@@ -444,7 +444,7 @@
   "isPopular": true,
   "isNew": true,
   "rating": "4.3",
-  "playCount": 5699,
+  "playCount": 699,
   "addedDate": "2025-03-30"
 },
 {
@@ -476,7 +476,7 @@
   "isPopular": true,
   "isNew": true,
   "rating": "4.8",
-  "playCount": 6609,
+  "playCount": 609,
   "addedDate": "2025-03-30"
 },
 {
@@ -492,7 +492,7 @@
   "isPopular": false,
   "isNew": true,
   "rating": "4.2",
-  "playCount": 7268,
+  "playCount": 268,
   "addedDate": "2025-03-30"
 },
 {
@@ -541,6 +541,22 @@
   "isNew": true,
   "rating": "4.1",
   "playCount": 2425,
+  "addedDate": "2025-04-01"
+},
+{
+  "id": "game_1743496016945_415",
+  "title": "Stickman GTA City ",
+  "description": "Stickman GTA City is an unblocked 3D action game available to play directly on your web browser at Unblocked Games FreezeNova. The game offers an open-world experience where you take on the role of a member of the Dixie Mafia, completing missions, taking on challenges, and navigating a chaotic cityscape filled with opportunities for action and adventure. Whether it's stealing and driving fast cars, outsmarting the police, messing up with random pedestrians, or piloting a helicopter, Stickman GTA City is the unblocked game you need. As you play further, you might notice that Stickman GTA City draws inspiration from iconic games like GTA Vice City, offering similar mechanics with its unique twist. You play as a stickman entrenched in the world of organized crime, taking orders from the boss of the Dixie Mafia and carrying out missions ranging from vehicle challenges to intense combat. The game's expansive map and diverse activities will provide you with endless fun.\n\n",
+  "instructions": "W, A, S, D: Move your character.\nSpacebar: Jump.\nLMB: Look Around\nZ: Aim\nRMB or Ctrl: Attack\nShift: Sprint.\nC: Crouch\nF: Enter or exit vehicles.\n1-9 or Q key: Switch Weapons\nR: Reload your weapon.",
+  "category": "stickman",
+  "imageUrl": "https://unblocked-games.s3.amazonaws.com/media/posts/634/responsive/stickman-city-512-lg.webp",
+  "gameUrl": "https://unblocked-games.s3.amazonaws.com/games/2024/unity3/stickman-gta-city/index.html",
+  "embedUrl": "https://unblocked-games.s3.amazonaws.com/games/2024/unity3/stickman-gta-city/index.html",
+  "isFeatured": false,
+  "isPopular": false,
+  "isNew": true,
+  "rating": "4.0",
+  "playCount": 2087,
   "addedDate": "2025-04-01"
 }
 ]
