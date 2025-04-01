@@ -9,6 +9,9 @@ const GameDetail = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    // 确保页面滚动到顶部
+    window.scrollTo(0, 0);
+    
     // 加载游戏详情
     const loadGameDetail = () => {
       setLoading(true);
