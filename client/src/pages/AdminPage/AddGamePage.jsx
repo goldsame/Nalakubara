@@ -24,6 +24,8 @@ const AddGamePage = () => {
   const [titleError, setTitleError] = useState('');
   const [urlError, setUrlError] = useState('');
   const [imageError, setImageError] = useState('');
+  // 添加SEO标题状态
+  const [seoTitle, setSeoTitle] = useState('');
 
   // 修改游戏分类列表，保持中文显示
   const categories = [
@@ -78,10 +80,54 @@ const AddGamePage = () => {
       } else {
         setTitleError('');
       }
+      
+      // 自动生成英文SEO标题
+      const categoryEnglishName = getCategoryEnglishName(category);
+      const seoTitleText = `Play ${gameTitle} Online - Free ${categoryEnglishName} Game | Nalakubara`;
+      setSeoTitle(seoTitleText);
     } else {
       setTitleError('');
     }
-  }, [gameTitle, addedGames]);
+  }, [gameTitle, addedGames, category]);
+
+  // 获取分类的英文名称
+  const getCategoryEnglishName = (categoryId) => {
+    const categoryMap = {
+      'action': 'Action',
+      'adventure': 'Adventure',
+      'arcade': 'Arcade',
+      'io': 'IO',
+      'multiplayer': 'Multiplayer',
+      'puzzle': 'Puzzle',
+      'racing': 'Racing',
+      'sports': 'Sports',
+      'shooting': 'Shooting',
+      'strategy': 'Strategy',
+      '2player': '2 Player',
+      'basketball': 'Basketball',
+      'beauty': 'Beauty',
+      'bike': 'Bike',
+      'car': 'Car',
+      'card': 'Card',
+      'casual': 'Casual',
+      'clicker': 'Clicker',
+      'controller': 'Controller',
+      'dressup': 'Dress Up',
+      'driving': 'Driving',
+      'escape': 'Escape',
+      'flash': 'Flash',
+      'fps': 'FPS',
+      'horror': 'Horror',
+      'mahjong': 'Mahjong',
+      'minecraft': 'Minecraft',
+      'pool': 'Pool',
+      'soccer': 'Soccer',
+      'stickman': 'Stickman',
+      'tower-defense': 'Tower Defense'
+    };
+    
+    return categoryMap[categoryId] || 'Game';
+  };
 
   // 检查游戏URL是否重复
   useEffect(() => {
@@ -463,7 +509,8 @@ const AddGamePage = () => {
         isNew: true,
         rating: rating,
         playCount: playCount,
-        addedDate: new Date().toISOString().split('T')[0]
+        addedDate: new Date().toISOString().split('T')[0],
+        seoTitle: seoTitle // 添加SEO标题字段
       };
   
       // 添加到已添加游戏列表中
@@ -482,6 +529,7 @@ const AddGamePage = () => {
       setGameInstructions('');
       setGameUrl('');
       setThumbnailUrl('');
+      setSeoTitle(''); // 重置SEO标题
       
       // 生成新的随机评分和游玩次数
       setRating((4 + Math.random()).toFixed(1));
@@ -550,7 +598,17 @@ const AddGamePage = () => {
             {titleError && <div className="field-error-message">{titleError}</div>}
           </div>
           
-          {/* 其余表单字段保持不变 */}
+          {/* 添加SEO标题字段 */}
+          <div className="form-group">
+            <label>SEO标题 (用于搜索引擎优化)</label>
+            <input
+              type="text"
+              value={seoTitle}
+              onChange={(e) => setSeoTitle(e.target.value)}
+              placeholder="SEO标题，例如：Play Game Name Online - Free Game | Nalakubara"
+            />
+            <small className="form-text">系统已自动生成英文SEO标题，您可以手动修改</small>
+          </div>
           
           <div className="form-group">
             <label>游戏描述</label>
