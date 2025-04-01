@@ -116,12 +116,12 @@ const HomePage = () => {
   };
   
   // 获取新游戏的函数，按添加日期倒序排序
+  // 获取新游戏
   const getNewGames = () => {
-    // 筛选出标记为新游戏的游戏
-    const newGamesData = gamesData.filter(game => game.isNew || game.addedDate);
-    
-    // 按添加日期倒序排序，确保最新添加的游戏显示在最前面
-    return newGamesData.sort((a, b) => new Date(b.addedDate || 0) - new Date(a.addedDate || 0));
+  // 筛选新游戏
+  const newGames = [...gamesData].filter(game => game.isNew || game.addedDate);
+  // 反转数组顺序，使得在JSON文件中靠后的游戏（最新添加的）显示在前面
+  return newGames.reverse().slice(0, 12); // 只显示前12个
   };
   
   useEffect(() => {
