@@ -295,12 +295,14 @@ const HomePage = () => {
               </div>
             ))
           ) : (
+            // 添加样式确保所有游戏卡片高度一致
             newGames.map(game => (
-              <GameCard 
-                key={game.id} 
-                game={game} 
-                onClick={() => trackGameClick(game.id, game.title, 'New')}
-              />
+              <div key={game.id} className="game-card-wrapper" style={{ height: '100%' }}>
+                <GameCard 
+                  game={game} 
+                  onClick={() => trackGameClick(game.id, game.title, 'New')}
+                />
+              </div>
             ))
           )}
         </div>
