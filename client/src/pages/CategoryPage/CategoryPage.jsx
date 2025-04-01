@@ -3,7 +3,8 @@ import { useParams } from 'react-router-dom';
 import gamesData from '../../data/games.json';
 import { Link } from 'react-router-dom';
 import './CategoryPage.css';
-import './CategoryCard.css'; // 导入新的CSS文件
+// 移除不存在的CSS文件导入
+// import './CategoryCard.css'; 
 
 // 使用固定ID而不是动态生成的ID
 const CATEGORY_UNIQUE_ID = `category-page-container`;
@@ -202,7 +203,6 @@ const CategoryPage = ({ fixedCategory }) => {
   }, [categoryId, fixedCategory]);
 
   // 注入自定义样式到页面头部，确保我们的样式优先级最高
-  // 在useEffect中修改样式定义
   useEffect(() => {
     // 创建样式元素
     const styleEl = document.createElement('style');
@@ -223,10 +223,27 @@ const CategoryPage = ({ fixedCategory }) => {
         margin-bottom: 30px !important;
       }
       
+      #${CATEGORY_UNIQUE_ID} .category-card {
+        display: flex !important;
+        flex-direction: column !important;
+        background-color: #1e1f2b !important;
+        border-radius: 8px !important;
+        overflow: hidden !important;
+        transition: transform 0.2s, box-shadow 0.2s !important;
+        height: 100% !important;
+        text-decoration: none !important;
+        color: inherit !important;
+      }
+      
+      #${CATEGORY_UNIQUE_ID} .category-card:hover {
+        transform: translateY(-5px) !important;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3) !important;
+      }
+      
       #${CATEGORY_UNIQUE_ID} .category-image-container {
         position: relative !important;
         width: 100% !important;
-        padding-top: 75% !important; /* 4:3 比例 */
+        padding-top: 75% !important; /* 4:3 比例，与GameCard.css保持一致 */
         overflow: hidden !important;
       }
       
@@ -237,6 +254,35 @@ const CategoryPage = ({ fixedCategory }) => {
         width: 100% !important;
         height: 100% !important;
         object-fit: cover !important;
+        transition: transform 0.3s !important;
+      }
+      
+      #${CATEGORY_UNIQUE_ID} .category-card:hover .category-image {
+        transform: scale(1.05) !important;
+      }
+      
+      #${CATEGORY_UNIQUE_ID} .category-info {
+        padding: 15px !important;
+        flex-grow: 1 !important;
+        display: flex !important;
+        flex-direction: column !important;
+      }
+      
+      #${CATEGORY_UNIQUE_ID} .category-title {
+        font-size: 16px !important;
+        margin: 0 0 10px !important;
+        color: #e1e2ea !important;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+      }
+      
+      #${CATEGORY_UNIQUE_ID} .category-meta {
+        display: flex !important;
+        justify-content: space-between !important;
+        font-size: 12px !important;
+        color: #8a8d98 !important;
+        margin-top: auto !important;
       }
     `;
     
