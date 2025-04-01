@@ -30,6 +30,10 @@ const LoadingFallback = () => (
   </div>
 );
 
+// 在现有导入下添加
+import LoginPage from './pages/AdminPage/LoginPage';
+import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
+
 function App() {
   return (
     <Router>
@@ -45,7 +49,17 @@ function App() {
                   <Route path="/game/:id" element={<GameDetail />} />
                   <Route path="/contact" element={<ContactPage />} />
                   <Route path="/games/:gameId" element={<GamePage />} />
-                  <Route path="/admin/add-game" element={<AddGamePage />} />
+                  
+                  {/* 添加登录路由 */}
+                  <Route path="/admin/login" element={<LoginPage />} />
+                  
+                  {/* 保护管理页面路由 */}
+                  <Route path="/admin/add-game" element={
+                    <ProtectedRoute>
+                      <AddGamePage />
+                    </ProtectedRoute>
+                  } />
+                  
                   <Route path="/search" element={<SearchPage />} />
                   <Route path="/category/:categoryId" element={<CategoryPage />} />
                   <Route path="/hot" element={<CategoryPage fixedCategory="popular" />} />
