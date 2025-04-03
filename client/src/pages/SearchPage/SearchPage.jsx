@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import './SearchPage.css';
 import GameCard from '../../components/GameCard/GameCard';
+import gamesData from '../../data/games.json'; // 导入实际的游戏数据
 
 const SearchPage = () => {
   const [searchParams] = useSearchParams();
@@ -11,29 +12,28 @@ const SearchPage = () => {
   
   // 设置页面标题
   useEffect(() => {
-    document.title = "Search - Nalakubara";
-  }, []);
+    document.title = `Search: ${query} - Nalakubara`;
+  }, [query]);
 
   useEffect(() => {
     const searchGames = async () => {
       setLoading(true);
       try {
-        // This should be the actual API call
-        // Simulating search results
-        const mockGames = Array(Math.floor(Math.random() * 8) + 1).fill().map((_, index) => ({
-          id: `search-${index + 1}`,
-          title: `${query} Game ${index + 1}`,
-          image: `/game-${index + 1}.jpg`,
-          category: index % 2 === 0 ? 'action' : 'adventure',
-          rating: (4 + Math.random()).toFixed(1),
-          plays: Math.floor(Math.random() * 10000)
-        }));
+        // 使用实际的游戏数据进行搜索
+        const searchResults = gamesData.filter(game => {
+          const searchTerm = query.toLowerCase();
+          return (
+            game.title.toLowerCase().includes(searchTerm) ||
+            (game.description && game.description.toLowerCase().includes(searchTerm)) ||
+            (game.category && game.category.toLowerCase().includes(searchTerm))
+          );
+        });
 
-        // Simulating network delay
+        // 模拟网络延迟，可以移除
         setTimeout(() => {
-          setGames(mockGames);
+          setGames(searchResults);
           setLoading(false);
-        }, 500);
+        }, 300);
       } catch (error) {
         console.error('Failed to search games:', error);
         setLoading(false);
@@ -57,7 +57,7 @@ const SearchPage = () => {
 
       <div className="game-grid">
         {loading ? (
-          // Using skeleton layout
+          // 使用骨架布局
           Array(4).fill().map((_, index) => (
             <div key={index} className="loading-card">
               <div className="skeleton" style={{ height: '180px' }}></div>
