@@ -1,1 +1,6 @@
+# 强制HTTP到HTTPS的重定向
+http://nalakubara.com/* https://www.nalakubara.com/:splat 301!
+http://www.nalakubara.com/* https://www.nalakubara.com/:splat 301!
+
+# 处理SPA路由
 /* /index.html 200

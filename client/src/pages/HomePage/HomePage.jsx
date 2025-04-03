@@ -133,6 +133,39 @@ const HomePage = () => {
     // 设置页面标题
     document.title = "Nalakubara - Free Online Gaming Platform";
     
+    // 添加SEO元标签
+    const metaRobots = document.querySelector('meta[name="robots"]');
+    if (metaRobots) {
+      metaRobots.content = "index, follow";
+    } else {
+      const meta = document.createElement('meta');
+      meta.name = "robots";
+      meta.content = "index, follow";
+      document.head.appendChild(meta);
+    }
+    
+    // 添加描述meta标签
+    const metaDescription = document.querySelector('meta[name="description"]');
+    if (metaDescription) {
+      metaDescription.content = "Play free online games on Nalakubara. Enjoy a variety of action, adventure, puzzle, and multiplayer games without download.";
+    } else {
+      const meta = document.createElement('meta');
+      meta.name = "description";
+      meta.content = "Play free online games on Nalakubara. Enjoy a variety of action, adventure, puzzle, and multiplayer games without download.";
+      document.head.appendChild(meta);
+    }
+    
+    // 添加规范链接
+    const canonicalLink = document.querySelector('link[rel="canonical"]');
+    if (canonicalLink) {
+      canonicalLink.href = "https://www.nalakubara.com/";
+    } else {
+      const link = document.createElement('link');
+      link.rel = "canonical";
+      link.href = "https://www.nalakubara.com/";
+      document.head.appendChild(link);
+    }
+    
     // 直接处理导入的数据
     try {
       // 修改热门游戏的筛选逻辑：筛选出标记为热门的游戏
