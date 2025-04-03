@@ -87,7 +87,7 @@ const GameDetail = () => {
           </div>
         </div>
         
-        // 游戏内容区域 - 添加iframe来显示游戏
+        {/* 游戏内容区域 - 添加iframe来显示游戏 */}
         <div className="game-content">
           <iframe 
             src={game.gameUrl || game.url} 
