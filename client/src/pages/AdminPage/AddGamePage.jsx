@@ -495,11 +495,15 @@ const AddGamePage = () => {
     setError('');
   
     try {
+      // 保留描述和说明中的换行符，将其转换为 \n
+      const formattedDescription = gameDescription.replace(/\n/g, '\\n');
+      const formattedInstructions = gameInstructions ? gameInstructions.replace(/\n/g, '\\n') : '使用WASD或箭头键移动，空格键开始游戏';
+  
       const gameData = {
         id: generateUniqueId(),
         title: gameTitle,
-        description: gameDescription,
-        instructions: gameInstructions || '使用WASD或箭头键移动，空格键开始游戏',
+        description: formattedDescription,
+        instructions: formattedInstructions,
         category: category,
         imageUrl: thumbnailUrl,
         gameUrl: gameUrl,

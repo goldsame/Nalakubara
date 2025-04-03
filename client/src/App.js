@@ -26,6 +26,9 @@ const GamePage = lazy(() => import('./pages/GamePage/GamePage'));
 const ContactPage = lazy(() => import('./pages/ContactPage/ContactPage'));
 const SearchPage = lazy(() => import('./pages/SearchPage/SearchPage'));
 
+// 添加PrivacyPage懒加载导入
+const PrivacyPage = lazy(() => import('./pages/PrivacyPage/PrivacyPage'));
+
 // 加载中组件
 const LoadingFallback = () => (
   <div className="page-loading">
@@ -62,7 +65,10 @@ function App() {
                   <Route path="/contact" element={<ContactPage />} />
                   <Route path="/games/:gameId" element={<GamePage />} />
                   
-                  {/* 添加登录路由 */}
+                  {/* 添加隐私政策路由 */}
+                  <Route path="/privacy" element={<PrivacyPage />} />
+                  
+                  {/* 其他路由 */}
                   <Route path="/admin/login" element={<LoginPage />} />
                   
                   {/* 保护管理页面路由 */}
