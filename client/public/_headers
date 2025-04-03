@@ -1,8 +1,8 @@
 /*
-  X-Frame-Options: DENY
+  X-Frame-Options: SAMEORIGIN
   X-XSS-Protection: 1; mode=block
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
-  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; img-src 'self' data: https://imgs.crazygames.com; connect-src 'self' https://www.google-analytics.com; frame-src 'self' https://www.crazygames.com https://games.crazygames.com;
+  Content-Security-Policy: default-src 'self' https:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://*.crazygames.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; img-src 'self' data: https: https://imgs.crazygames.com; connect-src 'self' https://www.google-analytics.com; frame-src 'self' https: https://*.crazygames.com;
   Cache-Control: public, max-age=3600
   X-Robots-Tag: index, follow
