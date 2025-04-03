@@ -13,9 +13,11 @@
 }
 
 .game-title {
-  font-size: 32px;
-  margin-bottom: 15px;
+  font-size: 48px; /* 原来是16px或32px，放大到48px */
+  margin-bottom: 20px;
   color: #ffffff;
+  font-weight: 700;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .game-meta-info {
