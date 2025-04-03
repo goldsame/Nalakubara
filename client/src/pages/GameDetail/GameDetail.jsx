@@ -87,28 +87,35 @@ const GameDetail = () => {
           </div>
         </div>
         
-        {/* 游戏内容区域 - 添加iframe来显示游戏 */}
+        // 游戏内容区域 - 添加iframe来显示游戏
         <div className="game-content">
           <iframe 
             src={game.gameUrl || game.url} 
             title={game.title}
             className="game-iframe"
             allowFullScreen
-            allow="fullscreen; autoplay; encrypted-media"
-            frameBorder="0"
+            scrolling="no"
           ></iframe>
         </div>
         
-        {/* 删除了游戏封面图片 */}
-        
         <div className="game-description">
           <h2>Game Description</h2>
-          <p>{game.description || 'This is an exciting game, come and experience it!'}</p>
+          <p>{game.description ? game.description.split('\\n').map((line, index) => (
+            <React.Fragment key={index}>
+              {line}
+              {index < game.description.split('\\n').length - 1 && <br />}
+            </React.Fragment>
+          )) : 'This is an exciting game, come and experience it!'}</p>
         </div>
         
         <div className="game-instructions">
           <h2>Game Instructions</h2>
-          <p>{game.instructions || 'Use keyboard and mouse to control the game.'}</p>
+          <p>{game.instructions ? game.instructions.split('\\n').map((line, index) => (
+            <React.Fragment key={index}>
+              {line}
+              {index < game.instructions.split('\\n').length - 1 && <br />}
+            </React.Fragment>
+          )) : 'Use keyboard and mouse to control the game.'}</p>
         </div>
         
         {game.relatedGames && game.relatedGames.length > 0 && (
