@@ -13,11 +13,20 @@
 }
 
 .game-title {
-  font-size: 48px; /* 原来是16px或32px，放大到48px */
+  font-size: 42px; /* 调整为更合适的大小 */
   margin-bottom: 20px;
   color: #ffffff;
   font-weight: 700;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  transition: font-size 0.1s ease; /* 添加过渡效果确保样式变化平滑 */
+  will-change: font-size; /* 提示浏览器这个属性会改变，优化渲染 */
+}
+
+/* 移动设备上的标题大小 */
+@media (max-width: 768px) {
+  .game-title {
+    font-size: 32px;
+  }
 }
 
 .game-meta-info {
