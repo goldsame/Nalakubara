@@ -644,5 +644,56 @@
     "playCount": "96",
     "addedDate": "2025-04-01",
     "seoTitle": "Play Basketball Stars Online - Free Basketball Game | Nalakubara"
-  }
+  },
+{
+  "id": "game_1743670234863_330",
+  "title": "Monster Survivors",
+  "description": "Monster Survivors Unblocked is a roguelike action survival game that throws you onto a battlefield filled with waves of enemies. You're up against all sorts of monstrous creatures, from swarming bugs and flesh-eating plants to eerie pumpkins and crabs (yes, you read it right, very aggressive crabs!) And just when you think you've got a grip on things, evil bees swoop in to ruin your day. The goal is straightforward. Stay alive, level up, and take down massive bosses that won't go down without a fight.\\n\\n",
+  "instructions": "Move: Drag your mouse.\\n\\n",
+  "category": "horror",
+  "imageUrl": "https://unblocked-games.s3.amazonaws.com/media/posts/648/responsive/monster-survivors-lg.webp",
+  "gameUrl": "https://unblocked-games.s3.amazonaws.com/games/2025/unity/monster-survivors/index.html",
+  "embedUrl": "https://unblocked-games.s3.amazonaws.com/games/2025/unity/monster-survivors/index.html",
+  "isFeatured": false,
+  "isPopular": true,
+  "isNew": true,
+  "rating": "4.0",
+  "playCount": 3802,
+  "addedDate": "2025-04-03",
+  "seoTitle": "Play Monster Survivors Online - Free Horror Game | Nalakubara"
+},
+{
+  "id": "game_1743670323538_863",
+  "title": "Kingdom Battle 3D",
+  "description": "Knights, heroes, magic, and epic clashes await you in Kingdom Battle 3D Unblocked. In this 3D war strategy game, you will lead a mighty army toward victory in medieval battles. Your mission is to build the strongest force, manage troops, plan your tactics, and outsmart enemy forces. You start with the Campaign mode, where you fight through challenging levels to build your skills. Once you beat level 6, you’ll unlock Training mode, which is great for testing unit combos, and Online PvP mode if you want to prove your worth against players worldwide. Each victory brings you closer to becoming the ultimate commander, with stronger units and heroic leaders ready to charge into the next battle.\\n\\nSimilar to Warcraft, Kingdom Battle 3D is perfect for strategy fans who love the thrill of leading an army, collecting loot, and planning every move. Play it unblocked on FreezeNova now!",
+  "instructions": "Use your mouse to play\\nWASD or arrow keys to move camera",
+  "category": "strategy",
+  "imageUrl": "https://unblocked-games.s3.amazonaws.com/media/posts/674/responsive/kingdom-battle-3d-lg.webp",
+  "gameUrl": "https://unblocked-games.s3.amazonaws.com/games/2025/unity2/kingdom-battle-3d/index.html",
+  "embedUrl": "https://unblocked-games.s3.amazonaws.com/games/2025/unity2/kingdom-battle-3d/index.html",
+  "isFeatured": false,
+  "isPopular": true,
+  "isNew": true,
+  "rating": "4.9",
+  "playCount": 5560,
+  "addedDate": "2025-04-03",
+  "seoTitle": "Play Kingdom Battle 3D Online - Free Strategy Game | Nalakubara"
+},
+{
+  "id": "game_1743670626993_609",
+  "title": "Snake",
+  "description": "Snake is a classic arcade game where you move a snake on a grid to collect food and grow its tail. Each time the Snake eats a fruit, its tail grows by one unit. The challenge lies in avoiding collisions. If Snake touches walls or its own tail, the game ends. So, at first, even if it seems easy to play Snake, keeping the Snake away from borders or eating its own tail gets harder and harder as the Snake grows.\\n\\nThis classic game is a cultural icon in gaming. It has been created and enjoyed by millions over the years. This version, inspired by the wildly popular Google Snake, offers unblocked access so you can play it anywhere. Besides, you can play Snake Unblocked 2 players. Simply hit the \"2P\" button before starting, and a second snake will appear on the screen for your friend to control. The goal is to collect food first, grow your Snake, and survive as long as possible. Keep in mind, if one player collides with a wall, the other player wins the game. So grab a friend and enjoy some nostalgic fun with Snake Unblocked today!",
+  "instructions": "Single Player:\\nUse Arrow Keys or WASD to move.\\nHold Spacebar, Z, X, or C to boost speed.\\nTwo Players:\\nPlayer 1: Use WASD to move the left Snake (P1).\\nPlayer 2: Use Arrow Keys to move the right Snake (P2).\\nPress 'O' to toggle reduced speed by 25%.",
+  "category": "2player",
+  "imageUrl": "https://unblocked-games.s3.amazonaws.com/media/posts/635/responsive/snake-game-lg.webp",
+  "gameUrl": "https://unblocked-games.s3.amazonaws.com/games/2024/phaser/snake/index.html",
+  "embedUrl": "https://unblocked-games.s3.amazonaws.com/games/2024/phaser/snake/index.html",
+  "isFeatured": false,
+  "isPopular": true,
+  "isNew": true,
+  "rating": "4.0",
+  "playCount": 3377,
+  "addedDate": "2025-04-03",
+  "seoTitle": "Play Snake Online - Free 2 Player Game | Nalakubara"
+}
 ]
